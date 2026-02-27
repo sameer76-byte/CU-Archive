@@ -5,795 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEC Papers | Skill Enhancement Courses | CU Archive</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* CSS Variables for Light/Dark Mode */
-        :root {
-            --primary-color: #1A374D;
-            --secondary-color: #406882;
-            --accent-color: #FFD700;
-            --background-color: #F4F4F2;
-            --text-color: #333333;
-            --card-color: #FFFFFF;
-            --nav-color: #FFFFFF;
-            --footer-color: #1A374D;
-            --border-color: #E0E0E0;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --shadow-hover: rgba(0, 0, 0, 0.15);
-            
-            /* SEC Course Colors */
-            --excel-color: #1D6F42;      /* Excel Green */
-            --web-color: #E44D26;         /* HTML Orange/Red */
-            --app-color: #4285F4;         /* Google Blue */
-        }
-
-        .dark-mode {
-            --primary-color: #0d1c2a;
-            --secondary-color: #2a4a62;
-            --accent-color: #FFD700;
-            --background-color: #121212;
-            --text-color: #F4F4F2;
-            --card-color: #1e1e1e;
-            --nav-color: #1e1e1e;
-            --footer-color: #0d1c2a;
-            --border-color: #333333;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --shadow-hover: rgba(0, 0, 0, 0.4);
-            
-            /* Dark Mode SEC Colors */
-            --excel-color: #2D8C5A;
-            --web-color: #F16B4A;
-            --app-color: #6C9EF8;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            transition: all 0.3s ease;
-        }
-
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
-            color: var(--accent-color);
-        }
-
-        p {
-            margin-bottom: 1rem;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--secondary-color);
-            transition: color 0.2s;
-        }
-
-        a:hover {
-            color: var(--primary-color);
-        }
-
-        .dark-mode a:hover {
-            color: var(--accent-color);
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--nav-color);
-            box-shadow: 0 2px 10px var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .logo i {
-            margin-right: 10px;
-            color: var(--accent-color);
-        }
-
-        .dark-mode .logo {
-            color: var(--accent-color);
-        }
-
-        .desktop-nav {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .desktop-nav a {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--secondary-color);
-            padding: 0.5rem 0;
-        }
-
-        .desktop-nav a:hover {
-            color: var(--accent-color);
-        }
-
-        .desktop-nav a.active {
-            color: var(--accent-color);
-            border-bottom: 2px solid var(--accent-color);
-        }
-
-        .mobile-nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-        }
-
-        .dark-mode .mobile-nav-toggle {
-            color: var(--accent-color);
-        }
-
-        .mobile-nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: var(--nav-color);
-            box-shadow: 0 5px 10px var(--shadow);
-            flex-direction: column;
-            padding: 1rem 0;
-            z-index: 999;
-        }
-
-        .mobile-nav.active {
-            display: flex;
-        }
-
-        .mobile-nav li {
-            list-style: none;
-            padding: 0.8rem 1.5rem;
-        }
-
-        .mobile-nav a {
-            display: block;
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--secondary-color);
-        }
-
-        .mobile-nav a.active {
-            color: var(--accent-color);
-        }
-
-        .mode-toggle {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            margin-left: 1rem;
-        }
-
-        .dark-mode .mode-toggle {
-            color: var(--accent-color);
-        }
-
-        /* Breadcrumb */
-        .breadcrumb {
-            padding: 1.5rem 0;
-            background-color: var(--card-color);
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .breadcrumb ul {
-            display: flex;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        .breadcrumb li {
-            margin-right: 0.5rem;
-            display: flex;
-            align-items: center;
-            color: var(--secondary-color);
-        }
-
-        .breadcrumb li:not(:last-child)::after {
-            content: "/";
-            margin-left: 0.5rem;
-            color: var(--secondary-color);
-        }
-
-        .breadcrumb a {
-            color: var(--secondary-color);
-        }
-
-        .breadcrumb a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Page Header */
-        .page-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0 1rem;
-        }
-
-        .page-header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .dark-mode .page-header h1 {
-            background: linear-gradient(90deg, var(--accent-color), #FFED4E);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .page-header p {
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* SEC Info Banner */
-        .sec-banner {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 15px;
-            padding: 2.5rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            box-shadow: 0 10px 30px var(--shadow);
-        }
-
-        .sec-banner h2 {
-            color: var(--accent-color);
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .sec-banner p {
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0.95;
-        }
-
-        .sec-banner i {
-            color: var(--accent-color);
-            margin-right: 0.5rem;
-        }
-
-        /* SEC Cards Grid */
-        .sec-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .sec-card {
-            background-color: var(--card-color);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px var(--shadow);
-            transition: all 0.3s ease;
-            position: relative;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .sec-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px var(--shadow-hover);
-            border-color: var(--accent-color);
-        }
-
-        .sec-card.excel {
-            border-top: 5px solid var(--excel-color);
-        }
-
-        .sec-card.web {
-            border-top: 5px solid var(--web-color);
-        }
-
-        .sec-card.app {
-            border-top: 5px solid var(--app-color);
-        }
-
-        .sec-header {
-            padding: 2rem 2rem 1rem;
-            text-align: center;
-            background: linear-gradient(to bottom, var(--background-color), transparent);
-        }
-
-        .sec-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            color: white;
-        }
-
-        .sec-card.excel .sec-icon {
-            background: linear-gradient(135deg, var(--excel-color), #2D8C5A);
-        }
-
-        .sec-card.web .sec-icon {
-            background: linear-gradient(135deg, var(--web-color), #F16B4A);
-        }
-
-        .sec-card.app .sec-icon {
-            background: linear-gradient(135deg, var(--app-color), #6C9EF8);
-        }
-
-        .sec-code {
-            display: inline-block;
-            background-color: var(--background-color);
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-        }
-
-        .sec-card.excel .sec-code {
-            color: var(--excel-color);
-        }
-
-        .sec-card.web .sec-code {
-            color: var(--web-color);
-        }
-
-        .sec-card.app .sec-code {
-            color: var(--app-color);
-        }
-
-        .sec-card h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .sec-fullname {
-            color: var(--secondary-color);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .drive-badge {
-            display: inline-block;
-            background-color: rgba(66, 133, 244, 0.1);
-            color: #4285F4;
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-top: 0.5rem;
-        }
-
-        .drive-badge i {
-            margin-right: 0.3rem;
-        }
-
-        .sec-content {
-            padding: 1.5rem 2rem 2rem;
-        }
-
-        .paper-list {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .paper-list li {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .paper-list li:last-child {
-            border-bottom: none;
-        }
-
-        .paper-year {
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .paper-year i {
-            color: var(--accent-color);
-        }
-
-        .paper-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .paper-action {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background-color: var(--background-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .paper-action:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
-
-        .view-all-btn {
-            display: inline-block;
-            width: 100%;
-            padding: 0.8rem;
-            background-color: var(--background-color);
-            color: var(--secondary-color);
-            text-align: center;
-            border-radius: 8px;
-            font-weight: 600;
-            margin-top: 1rem;
-            transition: all 0.2s;
-            border: 1px solid var(--border-color);
-        }
-
-        .view-all-btn:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-        }
-
-        /* Stats Section */
-        .stats-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-            text-align: center;
-        }
-
-        .stat-card {
-            background-color: var(--card-color);
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--secondary-color);
-            font-size: 1rem;
-        }
-
-        /* Info Section */
-        .info-section {
-            background-color: var(--card-color);
-            border-radius: 15px;
-            padding: 2.5rem;
-            margin: 3rem 0;
-            box-shadow: 0 5px 20px var(--shadow);
-            border-left: 5px solid var(--accent-color);
-        }
-
-        .info-section h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .info-section h3 i {
-            color: var(--accent-color);
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 1.5rem;
-        }
-
-        .info-item {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
-        .info-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 215, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-color);
-            font-size: 1.2rem;
-        }
-
-        /* Share Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background-color: var(--card-color);
-            border-radius: 15px;
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 5px 30px var(--shadow);
-            animation: modalFade 0.3s;
-        }
-
-        @keyframes modalFade {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--accent-color);
-        }
-
-        .modal-header h3 {
-            margin-bottom: 0;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            cursor: pointer;
-        }
-
-        .modal-close:hover {
-            color: var(--accent-color);
-        }
-
-        .drive-link-info {
-            background-color: rgba(66, 133, 244, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #4285F4;
-        }
-
-        .share-link-container {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .share-link-container input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            font-size: 0.9rem;
-        }
-
-        .share-link-container button {
-            padding: 0.8rem 1.2rem;
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .share-link-container button:hover {
-            background-color: var(--primary-color);
-        }
-
-        .copy-success {
-            background-color: #D4EDDA;
-            color: #155724;
-            padding: 0.5rem;
-            border-radius: 5px;
-            text-align: center;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        .copy-success.show {
-            display: block;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--footer-color);
-            color: #F4F4F2;
-            padding: 3rem 0 1.5rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: #ddd;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .footer-links i {
-            margin-right: 0.5rem;
-            color: var(--accent-color);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-
-            .mobile-nav-toggle {
-                display: block;
-            }
-
-            .page-header h1 {
-                font-size: 2.2rem;
-            }
-
-            .sec-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .paper-list li {
-                flex-direction: column;
-                gap: 0.5rem;
-                align-items: flex-start;
-            }
-
-            .paper-actions {
-                width: 100%;
-                justify-content: flex-end;
-            }
-
-            .stats-section {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-section {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animations */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .sec-card {
-            animation: slideIn 0.5s ease forwards;
-        }
-    </style>
+    <link rel="stylesheet" href="../../../css/sec.css">  <!-- Go up 3 levels to root/css/ -->
 </head>
 <body>
     <header>
@@ -805,12 +17,12 @@
             
             <nav>
                 <ul class="desktop-nav">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="bsc.html">BSc</a></li>
-                    <li><a href="bcom.html">BCom</a></li>
-                    <li><a href="ba.html">BA</a></li>
-                    <li><a href="sec.html" class="active">SEC Papers</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="../../../index.html">Home</a></li>  <!-- Go up 3 levels -->
+                    <li><a href="../../../bsc.html">BSc</a></li>      <!-- Go up 3 levels -->
+                    <li><a href="../../../bcom.html">BCom</a></li>    <!-- Go up 3 levels -->
+                    <li><a href="../../../ba.html">BA</a></li>        <!-- Go up 3 levels -->
+                    <li><a href="sec.html" class="active">SEC Papers</a></li>  <!-- Same folder -->
+                    <li><a href="../../../contact.html">Contact</a></li>  <!-- Go up 3 levels -->
                 </ul>
             </nav>
             
@@ -825,20 +37,22 @@
         </div>
         
         <ul class="mobile-nav" id="mobileNav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="bsc.html">BSc</a></li>
-            <li><a href="bcom.html">BCom</a></li>
-            <li><a href="ba.html">BA</a></li>
+            <li><a href="../../../index.html">Home</a></li>
+            <li><a href="../../../bsc.html">BSc</a></li>
+            <li><a href="../../../bcom.html">BCom</a></li>
+            <li><a href="../../../ba.html">BA</a></li>
             <li><a href="sec.html" class="active">SEC Papers</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="#">Dark Mode</a></li>
+            <li><a href="../../../contact.html">Contact</a></li>
+            <li><a href="#" id="mobileDarkMode">Dark Mode</a></li>
         </ul>
     </header>
 
     <section class="breadcrumb">
         <div class="container">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../bsc.html">BSc</a></li>
+                <li><a href="../../../bsc/computer/computer.html">Computer Science</a></li>
                 <li><span>SEC Papers</span></li>
             </ul>
         </div>
@@ -864,13 +78,13 @@
             <!-- SEC Courses Grid -->
             <div class="sec-grid">
                 <!-- SEC 1: Data Analysis Using Excel -->
-                <div class="sec-card excel" onclick="window.location.href='bsc/computer/sec/data-visualization-spreadsheets.html'">
+                <div class="sec-card excel" onclick="window.location.href='data-visualization-spreadsheets.html'">  <!-- Same folder -->
                     <div class="sec-header">
                         <div class="sec-icon">
                             <i class="fas fa-table"></i>
                         </div>
                         <span class="sec-code">SEC-A1</span>
-                        <h2>Data Visualization using Spreadsheets</h2>
+                        <h2><Data></Data>ata-visualization-spreadsheets</h2>
                         <div class="sec-fullname">Skill Enhancement Course - 1</div>
                         <div class="drive-badge">
                             <i class="fab fa-google-drive"></i> 12 Papers
@@ -903,20 +117,20 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="view-all-btn" onclick="event.stopPropagation(); window.location.href='sec/data-analysis-excel.html'">
+                        <div class="view-all-btn" onclick="event.stopPropagation(); window.location.href='data-visualization-spreadsheets.html'">  <!-- Same folder -->
                             View All 12 Papers <i class="fas fa-arrow-right"></i>
                         </div>
                     </div>
                 </div>
 
                 <!-- SEC 2: Web Development -->
-                <div class="sec-card web" onclick="window.location.href='bsc/computer/sec/web-development.html'">
+                <div class="sec-card web" onclick="window.location.href='web-development.html'">  <!-- Same folder -->
                     <div class="sec-header">
                         <div class="sec-icon">
                             <i class="fas fa-code"></i>
                         </div>
                         <span class="sec-code">SEC-A2</span>
-                        <h2>Web Development (HTML, CSS)</h2>
+                        <h2>Web Development</h2>
                         <div class="sec-fullname">Skill Enhancement Course - 2</div>
                         <div class="drive-badge">
                             <i class="fab fa-google-drive"></i> 10 Papers
@@ -949,20 +163,20 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="view-all-btn" onclick="event.stopPropagation(); window.location.href='sec/web-development.html'">
+                        <div class="view-all-btn" onclick="event.stopPropagation(); window.location.href='web-development.html'">  <!-- Same folder -->
                             View All 10 Papers <i class="fas fa-arrow-right"></i>
                         </div>
                     </div>
                 </div>
 
                 <!-- SEC 3: App Development -->
-                <div class="sec-card app" onclick="window.location.href='sec/app-development.html'">
+                <div class="sec-card app" onclick="window.location.href='app-development.html'">  <!-- Same folder -->
                     <div class="sec-header">
                         <div class="sec-icon">
                             <i class="fas fa-mobile-alt"></i>
                         </div>
                         <span class="sec-code">SEC-A3</span>
-                        <h2>Mobile App Development (using Android Studio)</h2>
+                        <h2>App Development</h2>
                         <div class="sec-fullname">Skill Enhancement Course - 3</div>
                         <div class="drive-badge">
                             <i class="fab fa-google-drive"></i> 10 Papers
@@ -995,7 +209,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="view-all-btn" onclick="event.stopPropagation(); window.location.href='sec/app-development.html'">
+                        <div class="view-all-btn" onclick="event.stopPropagation(); window.location.href='app-development.html'">  <!-- Same folder -->
                             View All 10 Papers <i class="fas fa-arrow-right"></i>
                         </div>
                     </div>
@@ -1102,19 +316,20 @@
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="bsc.html">BSc</a></li>
-                        <li><a href="bcom.html">BCom</a></li>
-                        <li><a href="ba.html">BA</a></li>
+                        <li><a href="../../../index.html">Home</a></li>
+                        <li><a href="../../../disclaimer.html">Disclaimer</a></li>
+                        <li><a href="../../../developers.html">Dev Team</a></li>
+                        <li><a href="../../../contributr.html">Contribute</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>SEC Courses</h3>
+                    <h3>Support</h3>
                     <ul class="footer-links">
-                        <li><a href="sec/data-analysis-excel.html"><i class="fas fa-table"></i> Data Analysis (Excel)</a></li>
-                        <li><a href="sec/web-development.html"><i class="fas fa-code"></i> Web Development</a></li>
-                        <li><a href="sec/app-development.html"><i class="fas fa-mobile-alt"></i> App Development</a></li>
+                        <li><a href="../../../report.html"><i class="fas fa-table"></i> Report Missing Papers</a></li>
+                        <li><a href="../../../contact.html"><i class="fas fa-code"></i> Contact us</a></li>
+                        <li><a href="../../../guidelines/faq.html"><i class="fas fa-mobile-alt"></i> FAQ</a></li>
+                        <li><a href="../../../guidelines/privacy.html"><i class="fas fa-mobile-alt"></i>Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
@@ -1126,129 +341,6 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile Navigation Toggle
-        const mobileNavToggle = document.getElementById('mobileNavToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        
-        mobileNavToggle.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-            const icon = mobileNavToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-        
-        // Dark Mode Toggle
-        const modeToggle = document.getElementById('modeToggle');
-        const modeIcon = modeToggle.querySelector('i');
-        
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            modeIcon.classList.remove('fa-moon');
-            modeIcon.classList.add('fa-sun');
-        }
-        
-        modeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            if (document.body.classList.contains('dark-mode')) {
-                modeIcon.classList.remove('fa-moon');
-                modeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                modeIcon.classList.remove('fa-sun');
-                modeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-
-        // Close mobile menu
-        const mobileLinks = document.querySelectorAll('.mobile-nav a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-                const icon = mobileNavToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
-
-        // Google Drive Helper Functions
-        const DRIVE_FILE_ID = '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1';
-
-        function getDriveViewerUrl(fileId) {
-            return `https://drive.google.com/file/d/${fileId}/preview`;
-        }
-
-        function getDriveDownloadUrl(fileId) {
-            return `https://drive.google.com/uc?export=download&id=${fileId}`;
-        }
-
-        function getDriveShareUrl(fileId) {
-            return `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
-        }
-
-        // View Paper
-        function viewPaper(fileId) {
-            window.open(getDriveViewerUrl(fileId), '_blank');
-        }
-
-        // Download Paper
-        function downloadPaper(fileId) {
-            window.open(getDriveDownloadUrl(fileId), '_blank');
-        }
-
-        // Share Modal
-        const shareModal = document.getElementById('shareModal');
-        const shareLink = document.getElementById('shareLink');
-        const sharePaperInfo = document.getElementById('sharePaperInfo');
-        const copySuccess = document.getElementById('copySuccess');
-        let currentFileName = '';
-
-        function sharePaper(fileId, fileName) {
-            currentFileName = fileName;
-            sharePaperInfo.innerHTML = `<i class="fab fa-google-drive"></i> ${fileName}`;
-            shareLink.value = getDriveShareUrl(fileId);
-            shareModal.classList.add('active');
-        }
-
-        function closeShareModal() {
-            shareModal.classList.remove('active');
-            copySuccess.classList.remove('show');
-        }
-
-        function copyShareLink() {
-            shareLink.select();
-            shareLink.setSelectionRange(0, 99999);
-            document.execCommand('copy');
-            
-            copySuccess.classList.add('show');
-            setTimeout(() => {
-                copySuccess.classList.remove('show');
-            }, 2000);
-        }
-
-        // Prevent event bubbling on action buttons
-        const actionButtons = document.querySelectorAll('.paper-action');
-        actionButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        });
-
-        // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === shareModal) {
-                closeShareModal();
-            }
-        });
-
-        // Keyboard shortcut
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && shareModal.classList.contains('active')) {
-                closeShareModal();
-            }
-        });
-    </script>
+    <script src="../../../js/sec.js"></script>  <!-- Go up 3 levels to root/js/ -->
 </body>
 </html>
