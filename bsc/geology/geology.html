@@ -5,607 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geology Courses | CU Archive</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* CSS Variables for Light/Dark Mode */
-        :root {
-            --primary-color: #1A374D;
-            --secondary-color: #406882;
-            --accent-color: #FFD700;
-            --background-color: #F4F4F2;
-            --text-color: #333333;
-            --card-color: #FFFFFF;
-            --nav-color: #FFFFFF;
-            --footer-color: #1A374D;
-            --border-color: #E0E0E0;
-            --shadow: rgba(0, 0, 0, 0.05);
-            --hover-bg: #F8F8F8;
-        }
-
-        .dark-mode {
-            --primary-color: #0d1c2a;
-            --secondary-color: #2a4a62;
-            --accent-color: #FFD700;
-            --background-color: #121212;
-            --text-color: #F4F4F2;
-            --card-color: #1e1e1e;
-            --nav-color: #1e1e1e;
-            --footer-color: #0d1c2a;
-            --border-color: #333333;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --hover-bg: #2a2a2a;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            transition: all 0.3s ease;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--nav-color);
-            box-shadow: 0 2px 10px var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .logo i {
-            margin-right: 10px;
-            color: var(--accent-color);
-        }
-
-        .dark-mode .logo {
-            color: var(--accent-color);
-        }
-
-        .desktop-nav {
-            display: flex;
-            list-style: none;
-        }
-
-        .desktop-nav li {
-            margin-left: 1.5rem;
-        }
-
-        .desktop-nav a {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--secondary-color);
-        }
-
-        .desktop-nav a:hover {
-            color: var(--accent-color);
-        }
-
-        .mobile-nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-        }
-
-        .dark-mode .mobile-nav-toggle {
-            color: var(--accent-color);
-        }
-
-        .mobile-nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: var(--nav-color);
-            box-shadow: 0 5px 10px var(--shadow);
-            flex-direction: column;
-            padding: 1rem 0;
-        }
-
-        .mobile-nav.active {
-            display: flex;
-        }
-
-        .mobile-nav li {
-            list-style: none;
-            padding: 0.8rem 1.5rem;
-        }
-
-        .mobile-nav a {
-            display: block;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .mode-toggle {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            margin-left: 1rem;
-        }
-
-        .dark-mode .mode-toggle {
-            color: var(--accent-color);
-        }
-
-        /* Breadcrumb */
-        .breadcrumb {
-            padding: 1.5rem 0;
-            background-color: var(--card-color);
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .breadcrumb ul {
-            display: flex;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        .breadcrumb li {
-            margin-right: 0.5rem;
-            display: flex;
-            align-items: center;
-            color: var(--secondary-color);
-        }
-
-        .breadcrumb li:not(:last-child)::after {
-            content: "/";
-            margin-left: 0.5rem;
-            color: var(--secondary-color);
-        }
-
-        .breadcrumb a {
-            color: var(--secondary-color);
-        }
-
-        .breadcrumb a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Page Header */
-        .page-header {
-            margin-bottom: 2rem;
-            padding: 1rem 0;
-        }
-
-        .page-header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-
-        .dark-mode .page-header h1 {
-            color: var(--accent-color);
-        }
-
-        .page-header p {
-            color: var(--secondary-color);
-        }
-
-        /* Department Header */
-        .dept-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding: 0.5rem 0;
-            border-bottom: 2px solid var(--accent-color);
-        }
-
-        .dept-icon {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .dept-title h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .dept-title p {
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-        }
-
-        /* Course Strips - Exactly like the image */
-        .course-strips {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin: 2rem 0 3rem;
-        }
-
-        .course-strip {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: var(--card-color);
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px var(--shadow);
-            transition: all 0.2s ease;
-            border-left: 5px solid transparent;
-            cursor: pointer;
-        }
-
-        .course-strip:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px var(--shadow);
-            background-color: var(--hover-bg);
-        }
-
-        /* Individual course colors - left border */
-       /* Light Mode - Subject Strip Colors */
-/* Light Mode - Subject Strip Colors */
-.course-strip.syllabus { border-left-color: #E4A11B; } /* Syllabus */
-.course-strip.dscc1 { border-left-color: #4A90E2; } 
-.course-strip.dscc2 { border-left-color: #50E3C2; } 
-.course-strip.dscc3 { border-left-color: #FF7675; } 
-.course-strip.dscc4 { border-left-color: #6C5CE7; } 
-.course-strip.dscc5 { border-left-color: #F7B731; } 
-.course-strip.dscc6 { border-left-color: #A29BFE; } 
-.course-strip.dscc7 { border-left-color: #FD79A8; } 
-.course-strip.dscc8 { border-left-color: #00B894; } 
-.course-strip.dscc9 { border-left-color: #E17055; } 
-.course-strip.dscc10 { border-left-color: #0984E3; } 
-.course-strip.dscc11 { border-left-color: #636E72; } 
-.course-strip.dscc12 { border-left-color: #D63031; } 
-.course-strip.dscc13 { border-left-color: #B2BEC3; } 
-.course-strip.dscc14 { border-left-color: #2D3436; } 
-.course-strip.dscc15 { border-left-color: #FDCB6E; } 
-.course-strip.sec {  border-left-color: #1ABC9C; }/* Skill Enhancement Course */
-
-
-/* Dark Mode - Subject Strip Colors */
-.dark-mode .course-strip.dscc1 { border-left-color: #74B9FF; }
-.dark-mode .course-strip.dscc2 { border-left-color: #55EFC4; }
-.dark-mode .course-strip.dscc3 { border-left-color: #FAB1A0; }
-.dark-mode .course-strip.dscc4 { border-left-color: #A29BFE; }
-.dark-mode .course-strip.dscc5 { border-left-color: #FFEAA7; }
-.dark-mode .course-strip.dscc6 { border-left-color: #D1D1FF; }
-.dark-mode .course-strip.dscc7 { border-left-color: #FF85A2; }
-.dark-mode .course-strip.dscc8 { border-left-color: #55EFC4; }
-.dark-mode .course-strip.dscc9 { border-left-color: #FFB8B8; }
-.dark-mode .course-strip.dscc10 { border-left-color: #74B9FF; }
-.dark-mode .course-strip.dscc11 { border-left-color: #B2BEC3; }
-.dark-mode .course-strip.dscc12 { border-left-color: #FF7675; }
-.dark-mode .course-strip.dscc13 { border-left-color: #DFE6E9; }
-.dark-mode .course-strip.dscc14 { border-left-color: #636E72; }
-.dark-mode .course-strip.dscc15 { border-left-color: #FFEAA7; }
-.dark-mode .course-strip.sec {border-left-color: #16A085; } /* Skill Enhancement Course */
-/* Syllabus strip color */
-.dark-mode .course-strip.syllabus {
-    border-left-color: #FFC107; /* A brighter gold for visibility against dark backgrounds */
-}
-
-
-
-        /* Course Info Left Side */
-        .course-info {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex: 1;
-        }
-
-        .course-code {
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-            min-width: 100px;
-            font-weight: 500;
-        }
-
-        .course-name-short {
-            font-size: 1.5rem;
-            font-weight: 700;
-            min-width: 80px;
-            color: var(--primary-color);
-        }
-
-        .dark-mode .course-name-short {
-            color: var(--accent-color);
-        }
-
-        .course-name-full {
-            color: var(--secondary-color);
-            font-size: 0.95rem;
-        }
-
-        /* Action Icons - Exactly as in your image */
-        .course-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .action-icon {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background-color: var(--background-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--secondary-color);
-            font-size: 1rem;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .action-icon:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
-
-        /* Stats Badge */
-        .stats-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            background-color: var(--background-color);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--secondary-color);
-        }
-
-        .stats-badge i {
-            color: var(--accent-color);
-        }
-
-        /* Section Title */
-        .section-title {
-            font-size: 1.3rem;
-            margin: 2rem 0 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-color);
-            color: var(--primary-color);
-        }
-
-        .dark-mode .section-title {
-            color: var(--accent-color);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--footer-color);
-            color: #F4F4F2;
-            padding: 3rem 0 1.5rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: #ddd;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-
-            .mobile-nav-toggle {
-                display: block;
-            }
-
-            .course-info {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-
-            .course-code {
-                min-width: auto;
-                font-size: 0.8rem;
-            }
-
-            .course-name-short {
-                font-size: 1.2rem;
-                min-width: auto;
-            }
-
-            .course-name-full {
-                width: 100%;
-                font-size: 0.85rem;
-            }
-
-            .course-actions {
-                gap: 0.3rem;
-            }
-
-            .action-icon {
-                width: 30px;
-                height: 30px;
-                font-size: 0.9rem;
-            }
-
-            .stats-badge {
-                display: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .course-strip {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.8rem;
-            }
-
-            .course-info {
-                width: 100%;
-            }
-
-            .course-actions {
-                width: 100%;
-                justify-content: flex-end;
-            }
-        }
-
-/* General Modal Background */
-.modal {
-    display: none; 
-    position: fixed;
-    z-index: 9999;
-    left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.7);
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(3px);
-}
-
-.modal.active { display: flex; }
-
-/* Modal Content Box */
-.modal-content {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    width: 90%;
-    position: relative;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-}
-
-.share-modal { max-width: 450px; }
-.viewer-modal { max-width: 900px; }
-
-.modal-header h3 { margin: 0; font-family: sans-serif; color: #333; }
-
-.close-btn {
-    position: absolute;
-    right: 20px; top: 15px;
-    font-size: 28px;
-    cursor: pointer;
-    color: #666;
-}
-
-/* Share Elements */
-.share-paper-name {
-    margin: 10px 0;
-    font-weight: bold;
-    color: #444;
-    font-family: sans-serif;
-}
-
-.share-input-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-#shareLink {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: #f4f4f4;
-}
-
-.copy-btn {
-    padding: 10px 20px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.copy-success-msg {
-    display: none;
-    color: #28a745;
-    font-size: 13px;
-    margin-top: 8px;
-    font-weight: bold;
-}
-
-/* Social Icons */
-.social-share-icons {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-    font-size: 24px;
-}
-
-.fa-whatsapp { color: #25D366; cursor: pointer; }
-.fa-telegram { color: #0088cc; cursor: pointer; }
-.fa-envelope { color: #ea4335; cursor: pointer; }
-
-#pdfViewerFrame { width: 100%; height: 75vh; border-radius: 4px; }
-
-    </style>
+    <link rel="stylesheet" href="../../css/subjects.css">
 </head>
 <body>
     <header>
@@ -615,15 +15,15 @@
                 <span>CU Archive</span>
             </div>
             
-       <nav>
-    <ul class="desktop-nav">
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="../../disclaimer.html">Disclaimer</a></li>
-        <li><a href="../../developers.html">Dev Team</a></li>
-        <li><a href="../../contribute.html">Contribute</a></li>
-        <li><a href="../../report.html">Report</a></li>
-    </ul>
-</nav>
+            <nav>
+                <ul class="desktop-nav">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../disclaimer.html">Disclaimer</a></li>
+                    <li><a href="../../developers.html">Dev Team</a></li>
+                    <li><a href="../../contributr.html">Contribute</a></li>
+                    <li><a href="../../report.html">Report</a></li>
+                </ul>
+            </nav>
             
             <div class="nav-right">
                 <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
@@ -639,7 +39,7 @@
             <li><a href="../../index.html">Home</a></li>
             <li><a href="../../disclaimer.html">Disclaimer</a></li>
             <li><a href="../../developers.html">Dev Team</a></li>
-            <li><a href="../../contribute.html">Contribute</a></li>
+            <li><a href="../../contributr.html">Contribute</a></li>
             <li><a href="../../report.html">Report</a></li>
         </ul>
     </header>
@@ -648,7 +48,7 @@
         <div class="container">
             <ul>
                 <li><a href="../../index.html">Home</a></li>
-                 <li><a href="../../bsc.html">BSc</a></li>
+                <li><a href="../../bsc.html">BSc</a></li>
                 <li><span>Geology</span></li>
             </ul>
         </div>
@@ -656,16 +56,14 @@
 
     <main>
         <div class="container">
-            <!-- Page Header -->
             <div class="page-header">
                 <h1>Geology</h1>
                 <p>ALL Semester • 15 Courses • 75 Question Papers</p>
             </div>
 
-            <!-- Department Header -->
             <div class="dept-header">
                 <div class="dept-icon">
-                    <i class="fas fa-calculator"></i>
+                    <i class="fas fa-mountain"></i>
                 </div>
                 <div class="dept-title">
                     <h2>Geology Courses</h2>
@@ -673,98 +71,27 @@
                 </div>
             </div>
 
-<div class="course-strip syllabus" style="cursor: default;">
-    <div class="course-info">
-        <span class="course-code">SYLLABUS</span>
-        <span class="course-name-short"><i class="fas fa-book-open"></i></span>
-        <span class="course-name-full">Complete Course Syllabus</span>
-        <span class="stats-badge"><i class="fas fa-file-pdf"></i> PDF Document</span>
-    </div>
-    <div class="course-actions">
-        <span class="action-icon" 
-              onclick="viewPaper('Complete Course Syllabus', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" 
-              title="View Syllabus">
-            <i class="fas fa-eye"></i>
-        </span>
+            <div class="course-strips">
+                <div class="course-strip syllabus" style="cursor: default;">
+                    <div class="course-info">
+                        <span class="course-code">SYLLABUS</span>
+                        <span class="course-name-short"><i class="fas fa-book-open"></i></span>
+                        <span class="course-name-full">Complete Course Syllabus</span>
+                        <span class="stats-badge"><i class="fas fa-file-pdf"></i> PDF Document</span>
+                    </div>
+                    <div class="course-actions">
+                        <span class="action-icon" onclick="viewPaper('Complete Course Syllabus', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="View Syllabus">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                        <span class="action-icon" onclick="downloadPaper('Complete Course Syllabus', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Download Syllabus">
+                            <i class="fas fa-download"></i>
+                        </span>
+                        <span class="action-icon" onclick="sharePaper('Complete Course Syllabus', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Share Syllabus">
+                            <i class="fas fa-share-alt"></i>
+                        </span>
+                    </div>
+                </div>
 
-        <span class="action-icon" 
-              onclick="downloadPaper('Complete Course Syllabus', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" 
-              title="Download Syllabus">
-            <i class="fas fa-download"></i>
-        </span>
-
-        <span class="action-icon" 
-              onclick="sharePaper('Complete Course Syllabus', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" 
-              title="Share Syllabus">
-            <i class="fas fa-share-alt"></i>
-        </span>
-    </div>
-</div>
-
-<div id="pdfViewerModal" class="modal">
-    <div class="modal-content viewer-modal">
-        <div class="modal-header">
-            <h3 id="pdfViewerTitle">Document Viewer</h3>
-            <span class="close-btn" onclick="closePdfViewer()">&times;</span>
-        </div>
-        <iframe id="pdfViewerFrame" src="17p46iWoyDBGReFI6JBW9rs0FyDpKNba1" frameborder="0"></iframe>
-    </div>
-</div>
-
-<div id="shareModal" class="modal">
-    <div class="modal-content share-modal">
-        <span class="close-btn" onclick="closeShareModal()">&times;</span>
-        <div class="modal-header">
-            <h3>Share Document</h3>
-        </div>
-        <div id="sharePaperInfo" class="share-paper-name"></div>
-        
-        <div class="share-input-group">
-            <input type="text" id="shareLink" readonly>
-            <button onclick="copyShareLink()" class="copy-btn">Copy</button>
-        </div>
-        
-        <div id="copySuccess" class="copy-success-msg">Link Copied!</div>
-        
-        <div class="social-share-icons">
-            <i class="fab fa-whatsapp" onclick="shareViaWhatsApp()" title="Share on WhatsApp"></i>
-            <i class="fab fa-telegram" onclick="shareViaTelegram()" title="Share on Telegram"></i>
-            <i class="fas fa-envelope" onclick="shareViaEmail()" title="Share via Email"></i>
-        </div>
-    </div>
-</div>
-<div id="pdfViewerModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3 id="pdfViewerTitle">Document</h3>
-            <span class="close-btn" onclick="closePdfViewer()">&times;</span>
-        </div>
-        <iframe id="pdfViewerFrame" src="" frameborder="0"></iframe>
-    </div>
-</div>
-
-<div id="shareModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Share Document</h3>
-            <span class="close-btn" onclick="closeShareModal()">&times;</span>
-        </div>
-        <div id="sharePaperInfo"></div>
-        <div class="share-input-group">
-            <input type="text" id="shareLink" readonly>
-            <button onclick="copyShareLink()" class="copy-btn">Copy</button>
-        </div>
-        <div id="copySuccess" class="copy-success-msg">Link Copied!</div>
-        <div class="social-share-icons">
-            <i class="fab fa-whatsapp" onclick="shareViaWhatsApp()" title="Share on WhatsApp"></i>
-            <i class="fab fa-telegram" onclick="shareViaTelegram()" title="Share on Telegram"></i>
-            <i class="fas fa-envelope" onclick="shareViaEmail()" title="Share via Email"></i>
-        </div>
-    </div>
-</div>
-
-
-            <!-- Course Strips - Exactly like your image -->
             <div class="course-strips">
 
 
@@ -1011,27 +338,26 @@
 
 <div style="height:20px;"></div>
 
-<!-- Skill Enhancement Course -->
-<a href="sec.html" style="text-decoration: none; color: inherit;">
-    <div class="course-strip sec" onclick="window.location.href='sec-papers.html'">
-        <div class="course-info">
-            <span class="course-code">SEC</span>
-            <span class="course-name-short">SEC-M</span>
-            <span class="course-name-full">Skill Enhancement Course</span>
-            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
-        </div>
-        <div class="course-actions">
-            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Skill Enhancement Course')" title="View Papers"><i class="fas fa-eye"></i></span>
-            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Skill Enhancement Course')" title="Download All"><i class="fas fa-download"></i></span>
-            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Skill Enhancement Course')" title="Share"><i class="fas fa-share-alt"></i></span>
-        </div>
-    </div>
-</a>
- </div>
-            <!-- Semester Info -->
-            <div style="background-color: var(--card-color); border-radius: 8px; padding: 1.5rem; margin: 2rem 0; box-shadow: 0 2px 5px var(--shadow);">
-                <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-                    <span style="background-color: var(--accent-color); color: var(--primary-color); padding: 0.5rem 1rem; border-radius: 5px; font-weight: 600;">
+                <a href="../../sec.html" style="text-decoration: none; color: inherit;">
+                    <div class="course-strip sec">
+                        <div class="course-info">
+                            <span class="course-code">SEC</span>
+                            <span class="course-name-short">SEC-A/B</span>
+                            <span class="course-name-full">Skill Enhancement Course</span>
+                            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+                        </div>
+                        <div class="course-actions">
+                            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Skill Enhancement Course')" title="View Papers"><i class="fas fa-eye"></i></span>
+                            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Skill Enhancement Course')" title="Download All"><i class="fas fa-download"></i></span>
+                            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Skill Enhancement Course')" title="Share"><i class="fas fa-share-alt"></i></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="info-box">
+                <div class="info-box-content">
+                    <span class="badge">
                         <i class="fas fa-calendar-alt"></i> ALL Semester
                     </span>
                     <span style="color: var(--secondary-color);">
@@ -1060,16 +386,16 @@
                         <li><a href="../../developers.html">Dev Team</a></li>
                     </ul>
                 </div>
-                 <div class="footer-section">
+                
+                <div class="footer-section">
                     <h3>Support</h3>
                     <ul class="footer-links">
-                        <li><a href="report.html">Report Missing Paper</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="guidelines/faq.html">FAQ</a></li>
-                        <li><a href="guidelines/privacy.html">Privacy Policy</a></li>
+                        <li><a href="../../report.html">Report Missing Paper</a></li>
+                        <li><a href="../../contact.html">Contact Us</a></li>
+                        <li><a href="../../guidelines/faq.html">FAQ</a></li>
+                        <li><a href="../../guidelines/privacy.html">Privacy Policy</a></li>
                     </ul>
                 </div>
-    
             </div>
             
             <div class="copyright">
@@ -1077,148 +403,40 @@
             </div>
         </div>
     </footer>
+  <!-- Modals -->
+    <div id="pdfViewerModal" class="modal">
+        <div class="modal-content viewer-modal">
+            <div class="modal-header">
+                <h3 id="pdfViewerTitle">Document Viewer</h3>
+                <span class="close-btn" onclick="closePdfViewer()">&times;</span>
+            </div>
+            <iframe id="pdfViewerFrame" src="" frameborder="0"></iframe>
+        </div>
+    </div>
 
-    <script>
-        // Mobile Navigation Toggle
-        const mobileNavToggle = document.getElementById('mobileNavToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        
-        mobileNavToggle.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-            const icon = mobileNavToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-        
-        // Dark Mode Toggle
-        const modeToggle = document.getElementById('modeToggle');
-        const modeIcon = modeToggle.querySelector('i');
-        
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            modeIcon.classList.remove('fa-moon');
-            modeIcon.classList.add('fa-sun');
-        }
-        
-        modeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            if (document.body.classList.contains('dark-mode')) {
-                modeIcon.classList.remove('fa-moon');
-                modeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                modeIcon.classList.remove('fa-sun');
-                modeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
+    <div id="shareModal" class="modal">
+        <div class="modal-content share-modal">
+            <span class="close-btn" onclick="closeShareModal()">&times;</span>
+            <div class="modal-header">
+                <h3>Share Document</h3>
+            </div>
+            <div id="sharePaperInfo" class="share-paper-name"></div>
+            
+            <div class="share-input-group">
+                <input type="text" id="shareLink" readonly>
+                <button onclick="copyShareLink()" class="copy-btn">Copy</button>
+            </div>
+            
+            <div id="copySuccess" class="copy-success-msg">Link Copied!</div>
+            
+            <div class="social-share-icons">
+                <i class="fab fa-whatsapp" onclick="shareViaWhatsApp()" title="Share on WhatsApp"></i>
+                <i class="fab fa-telegram" onclick="shareViaTelegram()" title="Share on Telegram"></i>
+                <i class="fas fa-envelope" onclick="shareViaEmail()" title="Share via Email"></i>
+            </div>
+        </div>
+    </div>
 
-        // Close mobile menu
-        const mobileLinks = document.querySelectorAll('.mobile-nav a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-                const icon = mobileNavToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
-
-        // Action functions
-        function viewPapers(course) {
-            alert(`Viewing papers for ${course}`);
-            // In production: window.location.href = `${course.toLowerCase()}-papers.html`;
-        }
-
-        function downloadPapers(course) {
-            alert(`Downloading all papers for ${course}`);
-            // In production: window.location.href = `/api/download/${course}`;
-        }
-
-        function shareCourse(course) {
-            const url = window.location.href;
-            navigator.clipboard?.writeText(url).then(() => {
-                alert(`Link copied to clipboard!`);
-            }).catch(() => {
-                prompt(`Share this course:`, url);
-            });
-        }
-
-        // Prevent event bubbling
-        const actionIcons = document.querySelectorAll('.action-icon');
-        actionIcons.forEach(icon => {
-            icon.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        });
-
-    // Drive URL Helpers
-    const getDriveViewerUrl = (id) => `https://drive.google.com/file/d/${id}/preview`;
-    const getDriveDownloadUrl = (id) => `https://drive.google.com/uc?export=download&id=${id}`;
-    const getDriveShareUrl = (id) => `https://drive.google.com/file/d/${id}/view?usp=sharing`;
-
-    // View Modal
-    function viewPaper(name, id) {
-        document.getElementById('pdfViewerTitle').textContent = name;
-        document.getElementById('pdfViewerFrame').src = getDriveViewerUrl(id);
-        document.getElementById('pdfViewerModal').classList.add('active');
-    }
-
-    function closePdfViewer() {
-        document.getElementById('pdfViewerModal').classList.remove('active');
-        document.getElementById('pdfViewerFrame').src = '';
-    }
-
-    // Download
-    function downloadPaper(name, id) {
-        window.open(getDriveDownloadUrl(id), '_blank');
-    }
-
-    // Share Modal
-    function sharePaper(name, id) {
-        document.getElementById('sharePaperInfo').textContent = name;
-        document.getElementById('shareLink').value = getDriveShareUrl(id);
-        document.getElementById('shareModal').classList.add('active');
-    }
-
-    function closeShareModal() {
-        document.getElementById('shareModal').classList.remove('active');
-        document.getElementById('copySuccess').style.display = 'none';
-    }
-
-    function copyShareLink() {
-        const linkInput = document.getElementById('shareLink');
-        linkInput.select();
-        document.execCommand('copy');
-        const msg = document.getElementById('copySuccess');
-        msg.style.display = 'block';
-        setTimeout(() => msg.style.display = 'none', 2000);
-    }
-
-    // Social Links
-    function shareViaWhatsApp() {
-        const url = encodeURIComponent(document.getElementById('shareLink').value);
-        window.open(`https://wa.me/?text=Check this syllabus: ${url}`, '_blank');
-    }
-
-    function shareViaTelegram() {
-        const url = encodeURIComponent(document.getElementById('shareLink').value);
-        window.open(`https://t.me/share/url?url=${url}&text=CU Archive`, '_blank');
-    }
-
-    function shareViaEmail() {
-        const url = document.getElementById('shareLink').value;
-        window.open(`mailto:?subject=Syllabus&body=Link: ${url}`);
-    }
-
-    // Close on Background click
-    window.onclick = function(e) {
-        if (e.target.classList.contains('modal')) {
-            closePdfViewer();
-            closeShareModal();
-        }
-    }
-</script>
+    <script src="../../js/subjects.js"></script>
 </body>
 </html>
