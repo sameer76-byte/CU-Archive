@@ -18,7 +18,6 @@ The platform currently supports:
 
 Each stream contains 30+ subjects, and every subject is structured in a consistent and scalable way.
 
-🧩 Project Structure
 QUESTION BANK/
 │
 ├── index.html
