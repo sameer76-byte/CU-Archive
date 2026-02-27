@@ -109,9 +109,9 @@
                         </div>
                     </div>
                     <div class="paper-actions">
-                        <button class="action-btn view-btn" onclick="viewPaper('DAA Theory 2023', 'DriveID_Here')" title="View"><i class="fas fa-eye"></i></button>
-                        <button class="action-btn download-btn" onclick="downloadPaper('DAA Theory 2023', 'DriveID_Here')" title="Download"><i class="fas fa-download"></i></button>
-                        <button class="action-btn share-btn" onclick="sharePaper('DAA Theory 2023', 'DriveID_Here')" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="action-btn view-btn" onclick="viewPaper('DAA Theory 2023', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="View"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn download-btn" onclick="downloadPaper('DAA Theory 2023', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Download"><i class="fas fa-download"></i></button>
+                        <button class="action-btn share-btn" onclick="sharePaper('DAA Theory 2023', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Share"><i class="fas fa-share-alt"></i></button>
                     </div>
                 </div>
 
@@ -129,9 +129,9 @@
                         </div>
                     </div>
                     <div class="paper-actions">
-                        <button class="action-btn view-btn" onclick="viewPaper('DAA Practical 2023', 'DriveID_Here')" title="View"><i class="fas fa-eye"></i></button>
-                        <button class="action-btn download-btn" onclick="downloadPaper('DAA Practical 2023', 'DriveID_Here')" title="Download"><i class="fas fa-download"></i></button>
-                        <button class="action-btn share-btn" onclick="sharePaper('DAA Practical 2023', 'DriveID_Here')" title="Share"><i class="fas fa-share-alt"></i></button>
+                        <button class="action-btn view-btn" onclick="viewPaper('DAA Practical 2023', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="View"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn download-btn" onclick="downloadPaper('DAA Practical 2023', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Download"><i class="fas fa-download"></i></button>
+                        <button class="action-btn share-btn" onclick="sharePaper('DAA Practical 2023', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Share"><i class="fas fa-share-alt"></i></button>
                     </div>
                 </div>
             </div>
@@ -146,33 +146,84 @@
                     <p>An unofficial student-led initiative providing educational resources to help students succeed.</p>
                 </div>
                 
-                 <div class="footer-section">
+                <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="../../index.html"><i class="fas fa-home"></i>Home</a></li>
-                        <li><a href="../../disclaimer.html"><i class="fas fa-file-alt"></i>Disclaimer</a></li>
-                        <li><a href="../../developers.html"><i class="fas fa-users"></i>Dev Team</a></li>
-                        <li><a href="../../contributr.html"><i class="fas fa-hand-holding-heart"></i>Contribute</a></li>
-                        <li><a href="../../report.html"><i class="fas fa-exclamation-circle"></i>Report Missing Paper</a></li>
+                        <li><a href="../../index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="../../disclaimer.html"><i class="fas fa-file-alt"></i> Disclaimer</a></li>
+                        <li><a href="../../developers.html"><i class="fas fa-users"></i> Dev Team</a></li>
+                        <li><a href="../../contributr.html"><i class="fas fa-hand-holding-heart"></i> Contribute</a></li>
+                        <li><a href="../../report.html"><i class="fas fa-exclamation-circle"></i> Report Missing Paper</a></li>
                     </ul>
                 </div>
                 
-               <div class="footer-section">
+                <div class="footer-section">
                     <h3>Support</h3>
                     <ul class="footer-links">
                         <li><a href="../../report.html"><i class="fas fa-exclamation-triangle"></i> Report Missing Papers</a></li>
-                        <li><a href="../../contact.html"> <i class="fas fa-envelope"></i>Contact us</a></li>
+                        <li><a href="../../contact.html"><i class="fas fa-envelope"></i> Contact us</a></li>
                         <li><a href="../../guidelines/faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
-                        <li><a href="../../guidelines/privacy.html"><i class="fas fa-shield-alt"></i>Privacy Policy</a></li>
+                        <li><a href="../../guidelines/privacy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
                 <p>&copy; 2025 CU Archive. An unofficial, student-led initiative.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">Papers hosted on <i class="fab fa-google-drive"></i> Google Drive</p>
             </div>
         </div>
     </footer>
+
+    <!-- Share Modal -->
+    <div class="modal" id="shareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-share-alt"></i> Share Paper</h3>
+                <button class="modal-close" onclick="closeShareModal()">&times;</button>
+            </div>
+            <div class="paper-info-modal" id="sharePaperInfo">
+                <strong>DAA Theory 2023</strong>
+                <div class="drive-link-info">
+                    <i class="fab fa-google-drive"></i> Stored in Google Drive
+                </div>
+            </div>
+            <div class="share-link-container">
+                <input type="text" id="shareLink" value="" readonly>
+                <button onclick="copyShareLink()"><i class="fas fa-copy"></i> Copy</button>
+            </div>
+            <div class="copy-success" id="copySuccess">
+                Link copied to clipboard!
+            </div>
+            <div class="share-options">
+                <div class="share-option whatsapp" onclick="shareViaWhatsApp()">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="share-option telegram" onclick="shareViaTelegram()">
+                    <i class="fab fa-telegram-plane"></i>
+                </div>
+                <div class="share-option email" onclick="shareViaEmail()">
+                    <i class="fas fa-envelope"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Viewer Modal -->
+    <div class="modal pdf-viewer-modal" id="pdfViewerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-file-pdf"></i> <span id="pdfViewerTitle">DAA Theory 2023</span></h3>
+                <button class="modal-close" onclick="closePdfViewer()">&times;</button>
+            </div>
+            <div class="drive-viewer-note">
+                <i class="fab fa-google-drive"></i> Viewing PDF from Google Drive
+            </div>
+            <div class="pdf-viewer-container">
+                <iframe id="pdfViewerFrame" src="about:blank" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
     <script src="../../js/topic.js"></script>
 </body>

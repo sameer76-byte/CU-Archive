@@ -7,527 +7,7 @@
     <title>BA Subject Catalog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        /* CSS Variables - Using your specified colors */
-        :root {
-            --primary-color: #1A374D;      /* Oxford Blue */
-            --secondary-color: #406882;    /* Steel Blue */
-            --accent-color: #FFD700;       /* Goldenrod */
-            --background-color: #F4F4F2;   /* Soft Grey/White */
-            --text-color: #333333;
-            --card-color: #FFFFFF;
-            --nav-color: #FFFFFF;
-            --footer-color: #1A374D;
-            --input-bg: #FFFFFF;
-            --shadow: rgba(26, 55, 77, 0.1);
-            --section-spacing: 80px;
-        }
-
-        .dark-mode {
-            --primary-color: #0d1c2a;
-            --secondary-color: #2a4a62;
-            --accent-color: #FFD700;
-            --background-color: #121212;
-            --text-color: #F4F4F2;
-            --card-color: #1e1e1e;
-            --nav-color: #1e1e1e;
-            --footer-color: #0d1c2a;
-            --input-bg: #2a2a2a;
-            --shadow: rgba(0, 0, 0, 0.4);
-        }
-
-        /* Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px;
-        }
-
-        body {
-            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            transition: all 0.3s ease;
-        }
-
-        h1, h2, h3, h4, h5 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .dark-mode h1, 
-        .dark-mode h2, 
-        .dark-mode h3, 
-        .dark-mode h4, 
-        .dark-mode h5 {
-            color: var(--accent-color);
-        }
-
-        /* Accessibility */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        :focus {
-            outline: 3px solid var(--accent-color);
-            outline-offset: 2px;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--nav-color);
-            box-shadow: 0 2px 15px var(--shadow);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 20px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .logo i {
-            margin-right: 10px;
-            color: var(--accent-color);
-            font-size: 1.8rem;
-        }
-
-        .dark-mode .logo {
-            color: var(--accent-color);
-        }
-
-        /* Subject Navigation Bar */
-        .subject-nav {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .subject-nav-btn {
-            padding: 0.6rem 1.2rem;
-            background-color: var(--input-bg);
-            border: 2px solid var(--secondary-color);
-            border-radius: 25px;
-            font-weight: 500;
-            color: var(--primary-color);
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-            font-size: 0.9rem;
-        }
-
-        .subject-nav-btn:hover {
-            background-color: var(--secondary-color);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .subject-nav-btn.active {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        /* Mobile Navigation Toggle */
-        .mobile-nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 4px;
-        }
-
-        .dark-mode .mobile-nav-toggle {
-            color: var(--accent-color);
-        }
-
-        .mobile-subject-nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: var(--nav-color);
-            box-shadow: 0 5px 15px var(--shadow);
-            padding: 1rem 0;
-            z-index: 999;
-        }
-
-        .mobile-subject-nav.active {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        .mobile-subject-nav .subject-nav-btn {
-            display: block;
-            width: 90%;
-            margin: 0.5rem auto;
-            text-align: center;
-        }
-
-        /* Mode Toggle */
-        .mode-toggle {
-            background: none;
-            border: none;
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 50%;
-            transition: background-color 0.2s;
-            margin-left: 1rem;
-        }
-
-        .mode-toggle:hover {
-            background-color: rgba(255, 215, 0, 0.1);
-        }
-
-        .dark-mode .mode-toggle {
-            color: var(--accent-color);
-        }
-
-        /* Main Container */
-        .main-container {
-            max-width: 1200px;
-            margin: 80px auto 0;
-            padding: 20px;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 3rem 0;
-            margin-bottom: 2rem;
-            background-color: var(--card-color);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .dark-mode .hero h1 {
-            color: var(--accent-color);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            color: var(--secondary-color);
-        }
-
-        .hero-note {
-            margin-top: 2rem;
-            color: var(--accent-color);
-            font-weight: 500;
-        }
-
-        /* Subject Sections */
-        .subject-section {
-            padding: 2rem 0;
-            margin-bottom: var(--section-spacing);
-            scroll-margin-top: 100px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid var(--secondary-color);
-        }
-
-        .section-header i {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-right: 1rem;
-        }
-
-        .section-header h2 {
-            font-size: 2rem;
-            margin-bottom: 0;
-        }
-
-        .section-header p {
-            color: var(--secondary-color);
-            margin-top: 0.5rem;
-        }
-
-        /* Subjects Grid */
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .subject-card {
-            background-color: var(--card-color);
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 3px 10px var(--shadow);
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .subject-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px var(--shadow);
-            border-color: var(--accent-color);
-        }
-
-        .subject-code {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .dark-mode .subject-code {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-        }
-
-        .subject-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: var(--primary-color);
-        }
-
-        .dark-mode .subject-card h3 {
-            color: var(--accent-color);
-        }
-
-        .subject-description {
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .subject-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-
-        /* Quick Navigation Bar */
-        .quick-nav {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: var(--card-color);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px var(--shadow);
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            z-index: 100;
-        }
-
-        .quick-nav-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--input-bg);
-            border: 2px solid var(--secondary-color);
-            color: var(--primary-color);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .quick-nav-btn:hover,
-        .quick-nav-btn.active {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--footer-color);
-            color: #F4F4F2;
-            padding: 3rem 0 2rem;
-            margin-top: 3rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: #ddd;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .subject-nav {
-                display: none;
-            }
-
-            .mobile-nav-toggle {
-                display: block;
-            }
-
-            .quick-nav {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .section-header h2 {
-                font-size: 1.7rem;
-            }
-
-            .subjects-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-        }
-
-        @media (max-width: 480px) {
-            .subjects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .subject-section {
-                padding: 1.5rem 0;
-            }
-
-            .section-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .section-header i {
-                margin-right: 0;
-                margin-bottom: 1rem;
-            }
-        }
-
-        /* Animations */
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .subject-section {
-            animation: fadeIn 0.6s ease;
-        }
-    </style>
+    <link rel="stylesheet" href="css/honours.css">
 </head>
 <body>
     <!-- Header -->
@@ -599,366 +79,366 @@
             
             <div class="subjects-grid">
                 <!-- Sample of 30+ Major Subjects -->
-<a href="ba/history/ancient-history.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">AIWH</span>
-        <h3>Ancient Indian and World History</h3>
-        <p class="subject-description">Exploration of ancient civilizations, cultural evolution, and global historical milestones.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-book"></i> Theory Based</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/history/ancient-history.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">AIWH</span>
+                        <h3>Ancient Indian and World History</h3>
+                        <p class="subject-description">Exploration of ancient civilizations, cultural evolution, and global historical milestones.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-book"></i> Theory Based</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/anthropology/anthropology.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">ANT</span>
-        <h3>Anthropology</h3>
-        <p class="subject-description">The study of human societies, cultures, and the biological evolution of mankind.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-microscope"></i> Field Work</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/anthropology/anthropology.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">ANT</span>
+                        <h3>Anthropology</h3>
+                        <p class="subject-description">The study of human societies, cultures, and the biological evolution of mankind.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-microscope"></i> Field Work</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/arabic.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">ARB</span>
-        <h3>Arabic</h3>
-        <p class="subject-description">Comprehensive study of Arabic literature, grammar, and classical linguistic traditions.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-language"></i> Language</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/arabic.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">ARB</span>
+                        <h3>Arabic</h3>
+                        <p class="subject-description">Comprehensive study of Arabic literature, grammar, and classical linguistic traditions.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-language"></i> Language</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/bengali.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">BNG</span>
-        <h3>Bengali</h3>
-        <p class="subject-description">Deep dive into Bengali literature, prose, poetry, and the history of the language.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-pen-nib"></i> Literature</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/bengali.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">BNG</span>
+                        <h3>Bengali</h3>
+                        <p class="subject-description">Deep dive into Bengali literature, prose, poetry, and the history of the language.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-pen-nib"></i> Literature</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/defense/defense-studies.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">DFS</span>
-        <h3>Defense Studies</h3>
-        <p class="subject-description">Analysis of national security, military strategy, and international strategic relations.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-shield-alt"></i> Strategic</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/defense/defense-studies.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">DFS</span>
+                        <h3>Defense Studies</h3>
+                        <p class="subject-description">Analysis of national security, military strategy, and international strategic relations.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-shield-alt"></i> Strategic</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/economics/economics.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">ECO</span>
-        <h3>Economics</h3>
-        <p class="subject-description">Study of production, consumption, and transfer of wealth at micro and macro levels.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-chart-line"></i> Analytical</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/economics/economics.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">ECO</span>
+                        <h3>Economics</h3>
+                        <p class="subject-description">Study of production, consumption, and transfer of wealth at micro and macro levels.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-chart-line"></i> Analytical</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/education/education.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">EDU</span>
-        <h3>Education</h3>
-        <p class="subject-description">Theory and practice of teaching, pedagogical techniques, and educational psychology.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-chalkboard-teacher"></i> Teaching</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/education/education.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">EDU</span>
+                        <h3>Education</h3>
+                        <p class="subject-description">Theory and practice of teaching, pedagogical techniques, and educational psychology.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-chalkboard-teacher"></i> Teaching</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/english.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">ENG</span>
-        <h3>English</h3>
-        <p class="subject-description">Academic study of English literature, rhetoric, and critical textual analysis.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-book-open"></i> Literature</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/english.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">ENG</span>
+                        <h3>English</h3>
+                        <p class="subject-description">Academic study of English literature, rhetoric, and critical textual analysis.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-book-open"></i> Literature</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/arts/film-studies.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">FLM</span>
-        <h3>Film Studies</h3>
-        <p class="subject-description">Critical analysis of cinema history, theory, and the mechanics of film production.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-film"></i> Media Arts</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/arts/film-studies.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">FLM</span>
+                        <h3>Film Studies</h3>
+                        <p class="subject-description">Critical analysis of cinema history, theory, and the mechanics of film production.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-film"></i> Media Arts</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/french.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">FRN</span>
-        <h3>French</h3>
-        <p class="subject-description">Study of French language proficiency and the rich literary history of France.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-language"></i> Language</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/french.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">FRN</span>
+                        <h3>French</h3>
+                        <p class="subject-description">Study of French language proficiency and the rich literary history of France.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-language"></i> Language</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/geography/geography.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">GEO</span>
-        <h3>Geography</h3>
-        <p class="subject-description">Examination of Earth's landscapes, environments, and the human-environment impact.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-map-marked-alt"></i> Lab Intensive</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/geography/geography.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">GEO</span>
+                        <h3>Geography</h3>
+                        <p class="subject-description">Examination of Earth's landscapes, environments, and the human-environment impact.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-map-marked-alt"></i> Lab Intensive</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/gujarati.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">GUJ</span>
-        <h3>Gujarati</h3>
-        <p class="subject-description">Exploration of Gujarati linguistic roots and its modern literary contributions.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-language"></i> Language</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/gujarati.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">GUJ</span>
+                        <h3>Gujarati</h3>
+                        <p class="subject-description">Exploration of Gujarati linguistic roots and its modern literary contributions.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-language"></i> Language</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/hindi.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">HIN</span>
-        <h3>Hindi</h3>
-        <p class="subject-description">Comprehensive study of Hindi literature, grammar, and its socio-cultural impact.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-language"></i> Language</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/hindi.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">HIN</span>
+                        <h3>Hindi</h3>
+                        <p class="subject-description">Comprehensive study of Hindi literature, grammar, and its socio-cultural impact.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-language"></i> Language</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/history/history.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">HIS</span>
-        <h3>History</h3>
-        <p class="subject-description">Study of the past through archival records, social movements, and political shifts.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-history"></i> Theory Based</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/history/history.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">HIS</span>
+                        <h3>History</h3>
+                        <p class="subject-description">Study of the past through archival records, social movements, and political shifts.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-history"></i> Theory Based</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/social-science/human-rights.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">HMR</span>
-        <h3>Human Rights</h3>
-        <p class="subject-description">Theoretical and practical study of legal frameworks and global human rights issues.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-users"></i> Social Science</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/social-science/human-rights.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">HMR</span>
+                        <h3>Human Rights</h3>
+                        <p class="subject-description">Theoretical and practical study of legal frameworks and global human rights issues.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-users"></i> Social Science</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/history/islamic-history.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">IHC</span>
-        <h3>Islamic History & Culture</h3>
-        <p class="subject-description">In-depth study of Islamic civilization, art, architecture, and its historical influence across the globe.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-mosque"></i> Theory Based</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/history/islamic-history.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">IHC</span>
+                        <h3>Islamic History & Culture</h3>
+                        <p class="subject-description">In-depth study of Islamic civilization, art, architecture, and its historical influence across the globe.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-mosque"></i> Theory Based</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/media/journalism.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">JMC</span>
-        <h3>Journalism & Mass Communication</h3>
-        <p class="subject-description">Study of news reporting, media ethics, digital communication, and the role of mass media in society.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-microphone-alt"></i> Professional</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/media/journalism.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">JMC</span>
+                        <h3>Journalism & Mass Communication</h3>
+                        <p class="subject-description">Study of news reporting, media ethics, digital communication, and the role of mass media in society.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-microphone-alt"></i> Professional</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/linguistics.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">LIN</span>
-        <h3>Linguistics</h3>
-        <p class="subject-description">Scientific study of language structure, phonetics, semantics, and the evolution of human speech.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-font"></i> Analytical</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/linguistics.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">LIN</span>
+                        <h3>Linguistics</h3>
+                        <p class="subject-description">Scientific study of language structure, phonetics, semantics, and the evolution of human speech.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-font"></i> Analytical</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/arts/music.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">MUS</span>
-        <h3>Music</h3>
-        <p class="subject-description">Practical and theoretical training in vocal and instrumental music, including classical and folk traditions.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-music"></i> Performance</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/arts/music.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">MUS</span>
+                        <h3>Music</h3>
+                        <p class="subject-description">Practical and theoretical training in vocal and instrumental music, including classical and folk traditions.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-music"></i> Performance</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/pali.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">PAL</span>
-        <h3>Pali</h3>
-        <p class="subject-description">Study of the ancient Middle Indo-Aryan language, focused on Buddhist scriptures and classical literature.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-scroll"></i> Classical</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/pali.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">PAL</span>
+                        <h3>Pali</h3>
+                        <p class="subject-description">Study of the ancient Middle Indo-Aryan language, focused on Buddhist scriptures and classical literature.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-scroll"></i> Classical</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/persian.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">PER</span>
-        <h3>Persian</h3>
-        <p class="subject-description">Exploration of Persian language, Sufi literature, and the historical impact of Indo-Persian culture.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-feather-alt"></i> Literature</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/persian.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">PER</span>
+                        <h3>Persian</h3>
+                        <p class="subject-description">Exploration of Persian language, Sufi literature, and the historical impact of Indo-Persian culture.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-feather-alt"></i> Literature</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/philosophy/philosophy.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">PHI</span>
-        <h3>Philosophy</h3>
-        <p class="subject-description">Inquiry into fundamental questions regarding existence, ethics, logic, and the nature of human thought.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-brain"></i> Theory Based</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/philosophy/philosophy.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">PHI</span>
+                        <h3>Philosophy</h3>
+                        <p class="subject-description">Inquiry into fundamental questions regarding existence, ethics, logic, and the nature of human thought.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-brain"></i> Theory Based</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/arts/physical-education.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">PED</span>
-        <h3>Physical Education</h3>
-        <p class="subject-description">Study of physical fitness, sports science, health education, and athletic performance.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-running"></i> Practical</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/arts/physical-education.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">PED</span>
+                        <h3>Physical Education</h3>
+                        <p class="subject-description">Study of physical fitness, sports science, health education, and athletic performance.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-running"></i> Practical</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/social-science/political-science.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">PLS</span>
-        <h3>Political Science</h3>
-        <p class="subject-description">Analysis of political systems, governance, international relations, and public policy.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-landmark"></i> Theory Based</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/social-science/political-science.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">PLS</span>
+                        <h3>Political Science</h3>
+                        <p class="subject-description">Analysis of political systems, governance, international relations, and public policy.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-landmark"></i> Theory Based</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/science/psychology.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">PSY</span>
-        <h3>Psychology</h3>
-        <p class="subject-description">Scientific study of the human mind, behavior, mental processes, and social interaction.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-brain"></i> Lab Intensive</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/science/psychology.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">PSY</span>
+                        <h3>Psychology</h3>
+                        <p class="subject-description">Scientific study of the human mind, behavior, mental processes, and social interaction.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-brain"></i> Lab Intensive</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/russian.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">RUS</span>
-        <h3>Russian</h3>
-        <p class="subject-description">Exploration of Russian language, syntax, and the works of legendary Slavic authors.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-language"></i> Language</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/russian.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">RUS</span>
+                        <h3>Russian</h3>
+                        <p class="subject-description">Exploration of Russian language, syntax, and the works of legendary Slavic authors.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-language"></i> Language</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/sanskrit.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">SAN</span>
-        <h3>Sanskrit</h3>
-        <p class="subject-description">Comprehensive study of the world's oldest language, Vedic literature, and grammar.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-om"></i> Classical</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/sanskrit.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">SAN</span>
+                        <h3>Sanskrit</h3>
+                        <p class="subject-description">Comprehensive study of the world's oldest language, Vedic literature, and grammar.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-om"></i> Classical</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/social-science/sociology.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">SOC</span>
-        <h3>Sociology</h3>
-        <p class="subject-description">Examination of social structures, group dynamics, inequality, and community development.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-users"></i> Theory Based</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/social-science/sociology.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">SOC</span>
+                        <h3>Sociology</h3>
+                        <p class="subject-description">Examination of social structures, group dynamics, inequality, and community development.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-users"></i> Theory Based</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/languages/urdu.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">URD</span>
-        <h3>Urdu</h3>
-        <p class="subject-description">Deep dive into Urdu Ghazals, poetry, and the evolution of the language in South Asia.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-pen-fancy"></i> Literature</span>
-        </div>
-    </div>
-</a>
+                <a href="ba/languages/urdu.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">URD</span>
+                        <h3>Urdu</h3>
+                        <p class="subject-description">Deep dive into Urdu Ghazals, poetry, and the evolution of the language in South Asia.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-pen-fancy"></i> Literature</span>
+                        </div>
+                    </div>
+                </a>
 
-<a href="ba/social-science/womens-studies.html" style="text-decoration: none; color: inherit;">
-    <div class="subject-card">
-        <span class="subject-code">WMS</span>
-        <h3>Women's Studies</h3>
-        <p class="subject-description">Interdisciplinary study of gender, feminist theory, and the role of women in history and society.</p>
-        <div class="subject-meta">
-            <span><i class="fas fa-clock"></i> 6 Credits</span>
-            <span><i class="fas fa-venus"></i> Social Science</span>
-        </div>
-    </div>
-</a>
-
+                <a href="ba/social-science/womens-studies.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">WMS</span>
+                        <h3>Women's Studies</h3>
+                        <p class="subject-description">Interdisciplinary study of gender, feminist theory, and the role of women in history and society.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 6 Credits</span>
+                            <span><i class="fas fa-venus"></i> Social Science</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </section>
 
         <!-- MINOR Subjects Section -->
@@ -972,52 +452,52 @@
             </div>
             
             <div class="subjects-grid">
-                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
-                <div class="subject-card">
-                    <span class="subject-code">CHAP</span>
-                    <h3>Chemistry Applied</h3>
-                    <p class="subject-description">Practical applications of chemistry in industry, environment, and daily life.</p>
-                    <div class="subject-meta">
-                        <span><i class="fas fa-clock"></i> 4 Credits</span>
-                        <span><i class="fas fa-industry"></i> Applied</span>
+                <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">CHAP</span>
+                        <h3>Chemistry Applied</h3>
+                        <p class="subject-description">Practical applications of chemistry in industry, environment, and daily life.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 4 Credits</span>
+                            <span><i class="fas fa-industry"></i> Applied</span>
+                        </div>
                     </div>
-                </div>
                 </a>
                 
-                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
-                <div class="subject-card">
-                    <span class="subject-code">MUYO</span>
-                    <h3>Microbiology & Yoga</h3>
-                    <p class="subject-description">Combination of microbial science with yoga practices for holistic health.</p>
-                    <div class="subject-meta">
-                        <span><i class="fas fa-clock"></i> 4 Credits</span>
-                        <span><i class="fas fa-spa"></i> Health Focus</span>
+                <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">MUYO</span>
+                        <h3>Microbiology & Yoga</h3>
+                        <p class="subject-description">Combination of microbial science with yoga practices for holistic health.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 4 Credits</span>
+                            <span><i class="fas fa-spa"></i> Health Focus</span>
+                        </div>
                     </div>
-                </div>
                 </a>
                 
-                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
-                <div class="subject-card">
-                    <span class="subject-code">LAMP</span>
-                    <h3>Lab Methods & Procedures</h3>
-                    <p class="subject-description">Standard laboratory techniques, safety protocols, and experimental methods.</p>
-                    <div class="subject-meta">
-                        <span><i class="fas fa-clock"></i> 4 Credits</span>
-                        <span><i class="fas fa-vial"></i> Practical Skills</span>
+                <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">LAMP</span>
+                        <h3>Lab Methods & Procedures</h3>
+                        <p class="subject-description">Standard laboratory techniques, safety protocols, and experimental methods.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 4 Credits</span>
+                            <span><i class="fas fa-vial"></i> Practical Skills</span>
+                        </div>
                     </div>
-                </div>
                 </a>
                 
-                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
-                <div class="subject-card">
-                    <span class="subject-code">STU</span>
-                    <h3>Scientific Techniques & Utilities</h3>
-                    <p class="subject-description">Modern scientific instruments, data analysis tools, and research methodologies.</p>
-                    <div class="subject-meta">
-                        <span><i class="fas fa-clock"></i> 4 Credits</span>
-                        <span><i class="fas fa-tools"></i> Technical</span>
+                <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">STU</span>
+                        <h3>Scientific Techniques & Utilities</h3>
+                        <p class="subject-description">Modern scientific instruments, data analysis tools, and research methodologies.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 4 Credits</span>
+                            <span><i class="fas fa-tools"></i> Technical</span>
+                        </div>
                     </div>
-                </div>
                 </a>
             </div>
         </section>
@@ -1033,18 +513,18 @@
             </div>
             
             <div style="text-align: center; padding: 3rem; background-color: var(--card-color); border-radius: 10px; margin: 2rem 0;">
-    <i class="fas fa-graduation-cap" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
-    <h2>Find Your Subject Papers</h2>
-    <p style="color: var(--secondary-color); max-width: 600px; margin: 0 auto;">
-        Click on your subject from the list above to access theory papers, practical papers, and study materials.
-        Each subject page contains previous year question papers with view, download, and share options.
-    </p>
-    <div style="margin-top: 2rem;">
-        <a href="#major" style="background-color: var(--accent-color); color: var(--primary-color); padding: 0.8rem 2rem; border-radius: 5px; font-weight: 600; text-decoration: none;">
-            View All Subjects
-        </a>
-    </div>
-</div>
+                <i class="fas fa-graduation-cap" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                <h2>Find Your Subject Papers</h2>
+                <p style="color: var(--secondary-color); max-width: 600px; margin: 0 auto;">
+                    Click on your subject from the list above to access theory papers, practical papers, and study materials.
+                    Each subject page contains previous year question papers with view, download, and share options.
+                </p>
+                <div style="margin-top: 2rem;">
+                    <a href="#major" style="background-color: var(--accent-color); color: var(--primary-color); padding: 0.8rem 2rem; border-radius: 5px; font-weight: 600; text-decoration: none;">
+                        View All Subjects
+                    </a>
+                </div>
+            </div>
         </section>
 
         <!-- AEC (Ability Enhancement Course) Section -->
@@ -1058,28 +538,28 @@
             </div>
             
             <div class="subjects-grid">
-                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
-                <div class="subject-card">
-                    <span class="subject-code">COMM</span>
-                    <h3>Communication Skills</h3>
-                    <p class="subject-description">Developing effective verbal, written, and presentation skills in English.</p>
-                    <div class="subject-meta">
-                        <span><i class="fas fa-clock"></i> 2 Credits</span>
-                        <span><i class="fas fa-comments"></i> Language</span>
+                <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">COMM</span>
+                        <h3>Communication Skills</h3>
+                        <p class="subject-description">Developing effective verbal, written, and presentation skills in English.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 2 Credits</span>
+                            <span><i class="fas fa-comments"></i> Language</span>
+                        </div>
                     </div>
-                </div>
                 </a>
                 
-                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
-                <div class="subject-card">
-                    <span class="subject-code">ENV</span>
-                    <h3>Environmental Science</h3>
-                    <p class="subject-description">Interdisciplinary study of environmental systems and human impact.</p>
-                    <div class="subject-meta">
-                        <span><i class="fas fa-clock"></i> 2 Credits</span>
-                        <span><i class="fas fa-globe"></i> Interdisciplinary</span>
+                <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">ENV</span>
+                        <h3>Environmental Science</h3>
+                        <p class="subject-description">Interdisciplinary study of environmental systems and human impact.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 2 Credits</span>
+                            <span><i class="fas fa-globe"></i> Interdisciplinary</span>
+                        </div>
                     </div>
-                </div>
                 </a>
             </div>
         </section>
@@ -1095,41 +575,41 @@
             </div>
             
             <div class="subjects-grid">
-                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
-                <div class="subject-card">
-                    <span class="subject-code">VALUE</span>
-                    <h3>Value Education</h3>
-                    <p class="subject-description">Developing ethical values, social responsibility, and moral reasoning.</p>
-                    <div class="subject-meta">
-                        <span><i class="fas fa-clock"></i> 2 Credits</span>
-                        <span><i class="fas fa-hands-helping"></i> Ethics</span>
+                <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">VALUE</span>
+                        <h3>Value Education</h3>
+                        <p class="subject-description">Developing ethical values, social responsibility, and moral reasoning.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 2 Credits</span>
+                            <span><i class="fas fa-hands-helping"></i> Ethics</span>
+                        </div>
                     </div>
-                </div>
                 </a>
                 
-                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
-                <div class="subject-card">
-                    <span class="subject-code">PHYED</span>
-                    <h3>Physical Education</h3>
-                    <p class="subject-description">Promoting physical fitness, sports skills, and healthy lifestyle habits.</p>
-                    <div class="subject-meta">
-                        <span><i class="fas fa-clock"></i> 2 Credits</span>
-                        <span><i class="fas fa-running"></i> Fitness</span>
+                <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">PHYED</span>
+                        <h3>Physical Education</h3>
+                        <p class="subject-description">Promoting physical fitness, sports skills, and healthy lifestyle habits.</p>
+                        <div class="subject-meta">
+                            <span><i class="fas fa-clock"></i> 2 Credits</span>
+                            <span><i class="fas fa-running"></i> Fitness</span>
+                        </div>
                     </div>
-                </div>
                 </a>
                 
-                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
                     <div class="subject-card">
                         <span class="subject-code">YOG</span>
                         <h3>Yoga & Meditation</h3>
                         <p class="subject-description">Traditional practices for physical, mental, and spiritual well-being.</p>
                         <div class="subject-meta">
-                        <span><i class="fas fa-clock"></i> 2 Credits</span>
-                        <span><i class="fas fa-spa"></i> Wellness</span>
+                            <span><i class="fas fa-clock"></i> 2 Credits</span>
+                            <span><i class="fas fa-spa"></i> Wellness</span>
                         </div>
                     </div>
-                    </a>
+                </a>
             </div>
         </section>
     </main>
@@ -1154,16 +634,16 @@
                 </ul>
             </div>
             
-             <div class="footer-section">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="report.html">Report Missing Paper</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="guidelines/faq.html">FAQ</a></li>
-                        <li><a href="guidelines/privacy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="report.html">Report Missing Paper</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="guidelines/faq.html">FAQ</a></li>
+                    <li><a href="guidelines/privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
         </div>
         
         <div class="copyright">
@@ -1171,142 +651,6 @@
         </div>
     </footer>
 
-    <script>
-        // Navigation functionality
-        function setupNavigation() {
-            // Get all navigation buttons
-            const desktopNavBtns = document.querySelectorAll('.subject-nav-btn');
-            const mobileNavBtns = document.querySelectorAll('.mobile-subject-nav .subject-nav-btn');
-            const quickNavBtns = document.querySelectorAll('.quick-nav-btn');
-            
-            // Function to scroll to section
-            function scrollToSection(sectionId) {
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    // Update active states
-                    const allNavBtns = document.querySelectorAll('.subject-nav-btn, .quick-nav-btn');
-                    allNavBtns.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Activate current section button
-                    document.querySelectorAll(`[data-target="${sectionId}"]`).forEach(btn => {
-                        btn.classList.add('active');
-                    });
-                    
-                    // Scroll to section with offset for fixed header
-                    window.scrollTo({
-                        top: section.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile nav if open
-                    mobileSubjectNav.classList.remove('active');
-                    mobileNavToggle.querySelector('i').classList.remove('fa-times');
-                    mobileNavToggle.querySelector('i').classList.add('fa-list');
-                }
-            }
-            
-            // Add event listeners to desktop nav buttons
-            desktopNavBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const target = btn.getAttribute('data-target');
-                    scrollToSection(target);
-                });
-            });
-            
-            // Add event listeners to mobile nav buttons
-            mobileNavBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const target = btn.getAttribute('data-target');
-                    scrollToSection(target);
-                });
-            });
-            
-            // Add event listeners to quick nav buttons
-            quickNavBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const target = btn.getAttribute('data-target');
-                    scrollToSection(target);
-                });
-            });
-        }
-
-        // Mobile navigation toggle
-        const mobileNavToggle = document.getElementById('mobileNavToggle');
-        const mobileSubjectNav = document.getElementById('mobileSubjectNav');
-        
-        mobileNavToggle.addEventListener('click', () => {
-            mobileSubjectNav.classList.toggle('active');
-            const icon = mobileNavToggle.querySelector('i');
-            if (mobileSubjectNav.classList.contains('active')) {
-                icon.classList.remove('fa-list');
-                icon.classList.add('fa-times');
-                mobileNavToggle.setAttribute('aria-label', 'Close subject navigation');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-list');
-                mobileNavToggle.setAttribute('aria-label', 'Open subject navigation');
-            }
-        });
-
-        // Dark mode toggle
-        const modeToggle = document.getElementById('modeToggle');
-        const modeIcon = modeToggle.querySelector('i');
-        
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            modeIcon.classList.remove('fa-moon');
-            modeIcon.classList.add('fa-sun');
-        }
-        
-        modeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            
-            if (document.body.classList.contains('dark-mode')) {
-                modeIcon.classList.remove('fa-moon');
-                modeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-                modeToggle.setAttribute('aria-label', 'Switch to light mode');
-            } else {
-                modeIcon.classList.remove('fa-sun');
-                modeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-                modeToggle.setAttribute('aria-label', 'Switch to dark mode');
-            }
-        });
-
-        // Scroll spy to update active nav
-        function setupScrollSpy() {
-            const sections = document.querySelectorAll('.subject-section');
-            const navButtons = document.querySelectorAll('.subject-nav-btn, .quick-nav-btn');
-            
-            window.addEventListener('scroll', () => {
-                let current = '';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    
-                    if (scrollY >= (sectionTop - 150)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                navButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.getAttribute('data-target') === current) {
-                        btn.classList.add('active');
-                    }
-                });
-            });
-        }
-
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            setupNavigation();
-            setupScrollSpy();
-        });
-    </script>
+    <script src="js/honours.js"></script>
 </body>
 </html>
