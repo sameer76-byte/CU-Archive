@@ -134,7 +134,7 @@ open index.html
 
 ## 💻 Live Demo
 
-Visit the live site: **[https://sameer76-byte.github.io/CU-Archive](https://sameer76-byte.github.io/CU-Archive)**
+Visit the live site: **[https://sameer76-byte.github.io/CU-Archive](https://github.com/sameer76-byte/CU-Archive.git)**
 
 ---
 
