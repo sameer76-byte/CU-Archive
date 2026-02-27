@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BCom Subject Catalog - Browse 30+ Major, Minor, SEC, AEC, and CVAC subjects with smooth scrolling navigation">
+    <title>BCom Subject Catalog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables - Using your specified colors */
+        :root {
+            --primary-color: #1A374D;      /* Oxford Blue */
+            --secondary-color: #406882;    /* Steel Blue */
+            --accent-color: #FFD700;       /* Goldenrod */
+            --background-color: #F4F4F2;   /* Soft Grey/White */
+            --text-color: #333333;
+            --card-color: #FFFFFF;
+            --nav-color: #FFFFFF;
+            --footer-color: #1A374D;
+            --input-bg: #FFFFFF;
+            --shadow: rgba(26, 55, 77, 0.1);
+            --section-spacing: 80px;
+        }
+
+        .dark-mode {
+            --primary-color: #0d1c2a;
+            --secondary-color: #2a4a62;
+            --accent-color: #FFD700;
+            --background-color: #121212;
+            --text-color: #F4F4F2;
+            --card-color: #1e1e1e;
+            --nav-color: #1e1e1e;
+            --footer-color: #0d1c2a;
+            --input-bg: #2a2a2a;
+            --shadow: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode h1, 
+        .dark-mode h2, 
+        .dark-mode h3, 
+        .dark-mode h4, 
+        .dark-mode h5 {
+            color: var(--accent-color);
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        :focus {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--nav-color);
+            box-shadow: 0 2px 15px var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+            font-size: 1.8rem;
+        }
+
+        .dark-mode .logo {
+            color: var(--accent-color);
+        }
+
+        /* Subject Navigation Bar */
+        .subject-nav {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .subject-nav-btn {
+            padding: 0.6rem 1.2rem;
+            background-color: var(--input-bg);
+            border: 2px solid var(--secondary-color);
+            border-radius: 25px;
+            font-weight: 500;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+
+        .subject-nav-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .subject-nav-btn.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Mobile Navigation Toggle */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .dark-mode .mobile-nav-toggle {
+            color: var(--accent-color);
+        }
+
+        .mobile-subject-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-color);
+            box-shadow: 0 5px 15px var(--shadow);
+            padding: 1rem 0;
+            z-index: 999;
+        }
+
+        .mobile-subject-nav.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .mobile-subject-nav .subject-nav-btn {
+            display: block;
+            width: 90%;
+            margin: 0.5rem auto;
+            text-align: center;
+        }
+
+        /* Mode Toggle */
+        .mode-toggle {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+            margin-left: 1rem;
+        }
+
+        .mode-toggle:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+
+        .dark-mode .mode-toggle {
+            color: var(--accent-color);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            background-color: var(--card-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode .hero h1 {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--secondary-color);
+        }
+
+        .hero-note {
+            margin-top: 2rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        /* Subject Sections */
+        .subject-section {
+            padding: 2rem 0;
+            margin-bottom: var(--section-spacing);
+            scroll-margin-top: 100px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .section-header i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-right: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0;
+        }
+
+        .section-header p {
+            color: var(--secondary-color);
+            margin-top: 0.5rem;
+        }
+
+        /* Subjects Grid */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .subject-card {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px var(--shadow);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow);
+            border-color: var(--accent-color);
+        }
+
+        .subject-code {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .dark-mode .subject-code {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .subject-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode .subject-card h3 {
+            color: var(--accent-color);
+        }
+
+        .subject-description {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .subject-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Quick Navigation Bar */
+        .quick-nav {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--card-color);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            z-index: 100;
+        }
+
+        .quick-nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--input-bg);
+            border: 2px solid var(--secondary-color);
+            color: var(--primary-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .quick-nav-btn:hover,
+        .quick-nav-btn.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-color);
+            color: #F4F4F2;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .subject-nav {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .quick-nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.7rem;
+            }
+
+            .subjects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .subject-section {
+                padding: 1.5rem 0;
+            }
+
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-header i {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subject-section {
+            animation: fadeIn 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>BCom. Portal</span>
+            </div>
+            
+            <!-- Desktop Subject Navigation -->
+            <nav class="subject-nav" id="desktopSubjectNav">
+                <button class="subject-nav-btn active" data-target="major"><i class="fas fa-star"></i> Major (30+)</button>
+                <button class="subject-nav-btn" data-target="minor"><i class="fas fa-star-half-alt"></i> Minor</button>
+                <button class="subject-nav-btn" data-target="sec"><i class="fas fa-tools"></i> SEC</button>
+                <button class="subject-nav-btn" data-target="aec"><i class="fas fa-brain"></i> AEC</button>
+                <button class="subject-nav-btn" data-target="cvac"><i class="fas fa-heart"></i> CVAC</button>
+            </nav>
+            
+            <div class="nav-right">
+                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open subject navigation">
+                    <i class="fas fa-list"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Subject Navigation -->
+        <div class="mobile-subject-nav" id="mobileSubjectNav">
+            <button class="subject-nav-btn active" data-target="major"><i class="fas fa-star"></i> Major Subjects</button>
+            <button class="subject-nav-btn" data-target="minor"><i class="fas fa-star-half-alt"></i> Minor Subjects</button>
+            <button class="subject-nav-btn" data-target="sec"><i class="fas fa-tools"></i> SEC Courses</button>
+            <button class="subject-nav-btn" data-target="aec"><i class="fas fa-brain"></i> AEC Courses</button>
+            <button class="subject-nav-btn" data-target="cvac"><i class="fas fa-heart"></i> CVAC Courses</button>
+        </div>
+    </header>
+
+    <!-- Quick Navigation (Desktop only) -->
+    <div class="quick-nav" id="quickNav">
+        <button class="quick-nav-btn active" data-target="major">M</button>
+        <button class="quick-nav-btn" data-target="minor">m</button>
+        <button class="quick-nav-btn" data-target="sec">S</button>
+        <button class="quick-nav-btn" data-target="aec">A</button>
+        <button class="quick-nav-btn" data-target="cvac">C</button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>BCom. Subject Catalog</h1>
+            <p>Browse through 30+ Major subjects, Minor specializations, SEC, AEC, and CVAC courses. Click on any category button above to jump directly to that section.</p>
+            <div class="hero-note">
+                <i class="fas fa-arrow-down"></i> Scroll or use the navigation buttons to explore subjects
+            </div>
+        </section>
+
+        <!-- MAJOR Subjects Section -->
+        <section id="major" class="subject-section">
+            <div class="section-header">
+                <i class="fas fa-star"></i>
+                <div>
+                    <h2>Major Subjects (30+ Options)</h2>
+                    <p>Primary specialization subjects for BCom. students</p>
+                </div>
+            </div>
+            
+            <div class="subjects-grid">
+                <!-- Sample of 30+ Major Subjects -->
+                <a href="ba/commerce/accounting.html" style="text-decoration: none; color: inherit;">
+    <div class="subject-card">
+        <span class="subject-code">ACC</span>
+        <h3>Accounting</h3>
+        <p class="subject-description">Study of financial record-keeping, auditing, and the systematic analysis of business transactions.</p>
+        <div class="subject-meta">
+            <span><i class="fas fa-clock"></i> 6 Credits</span>
+            <span><i class="fas fa-file-invoice-dollar"></i> Financial</span>
+        </div>
+    </div>
+</a>
+
+<a href="ba/commerce/law-management.html" style="text-decoration: none; color: inherit;">
+    <div class="subject-card">
+        <span class="subject-code">LWM</span>
+        <h3>Law & Management</h3>
+        <p class="subject-description">Integration of legal frameworks with organizational leadership and operational strategies.</p>
+        <div class="subject-meta">
+            <span><i class="fas fa-clock"></i> 6 Credits</span>
+            <span><i class="fas fa-gavel"></i> Regulatory</span>
+        </div>
+    </div>
+</a>
+
+<a href="ba/commerce/finance-tax.html" style="text-decoration: none; color: inherit;">
+    <div class="subject-card">
+        <span class="subject-code">FNT</span>
+        <h3>Finance & Tax</h3>
+        <p class="subject-description">Analysis of investment strategies, capital markets, and the complexities of taxation laws.</p>
+        <div class="subject-meta">
+            <span><i class="fas fa-clock"></i> 6 Credits</span>
+            <span><i class="fas fa-coins"></i> Analytical</span>
+        </div>
+    </div>
+</a>
+
+<a href="ba/commerce/marketing.html" style="text-decoration: none; color: inherit;">
+    <div class="subject-card">
+        <span class="subject-code">MKT</span>
+        <h3>Marketing</h3>
+        <p class="subject-description">Exploration of consumer behavior, brand management, and strategic market research.</p>
+        <div class="subject-meta">
+            <span><i class="fas fa-clock"></i> 6 Credits</span>
+            <span><i class="fas fa-ad"></i> Creative</span>
+        </div>
+    </div>
+</a>
+            </div>
+        </section>
+
+        <!-- MINOR Subjects Section -->
+        <section id="minor" class="subject-section">
+            <div class="section-header">
+                <i class="fas fa-star-half-alt"></i>
+                <div>
+                    <h2>Minor Specializations</h2>
+                    <p>Supporting subjects to complement your major specialization</p>
+                </div>
+            </div>
+            
+            <div class="subjects-grid">
+                 <a href="ba/management/principles-management.html" style="text-decoration: none; color: inherit;">
+    <div class="subject-card">
+        <span class="subject-code">PPM</span>
+        <h3>Principles & Practice of Management</h3>
+        <p class="subject-description">Foundational theories of organizational behavior, leadership, and administrative efficiency.</p>
+        <div class="subject-meta">
+            <span><i class="fas fa-sitemap"></i> 6 Credits</span>
+            <span><i class="fas fa-users-cog"></i> Management</span>
+        </div>
+    </div>
+</a>
+
+<a href="ba/management/marketing-hrm.html" style="text-decoration: none; color: inherit;">
+    <div class="subject-card">
+        <span class="subject-code">MHRM</span>
+        <h3>Marketing Management & HRM</h3>
+        <p class="subject-description">A dual study of consumer market strategies and human resource capital development.</p>
+        <div class="subject-meta">
+            <span><i class="fas fa-bullhorn"></i> 6 Credits</span>
+            <span><i class="fas fa-user-friends"></i> Strategy</span>
+        </div>
+    </div>
+</a>
+
+<a href="ba/law/business-laws.html" style="text-decoration: none; color: inherit;">
+    <div class="subject-card">
+        <span class="subject-code">BLW</span>
+        <h3>Business Laws</h3>
+        <p class="subject-description">Legal regulations governing contracts, sale of goods, partnership, and negotiable instruments.</p>
+        <div class="subject-meta">
+            <span><i class="fas fa-balance-scale"></i> 6 Credits</span>
+            <span><i class="fas fa-gavel"></i> Regulatory</span>
+        </div>
+    </div>
+</a>
+
+<a href="ba/law/company-law.html" style="text-decoration: none; color: inherit;">
+    <div class="subject-card">
+        <span class="subject-code">CLW</span>
+        <h3>Company Law</h3>
+        <p class="subject-description">Examination of the Companies Act, corporate governance, and legal requirements for incorporation.</p>
+        <div class="subject-meta">
+            <span><i class="fas fa-building"></i> 6 Credits</span>
+            <span><i class="fas fa-file-contract"></i> Compliance</span>
+        </div>
+    </div>
+</a>
+
+<a href="ba/accounting/auditing-assurance.html" style="text-decoration: none; color: inherit;">
+    <div class="subject-card">
+        <span class="subject-code">AUD</span>
+        <h3>Auditing & Assurance</h3>
+        <p class="subject-description">Principles of verifying financial statements and ensuring the accuracy of corporate disclosures.</p>
+        <div class="subject-meta">
+            <span><i class="fas fa-search-dollar"></i> 6 Credits</span>
+            <span><i class="fas fa-check-double"></i> Assurance</span>
+        </div>
+    </div>
+</a>
+
+<a href="ba/finance/indian-financial-system.html" style="text-decoration: none; color: inherit;">
+    <div class="subject-card">
+        <span class="subject-code">IFS</span>
+        <h3>Indian Financial System</h3>
+        <p class="subject-description">Overview of Indian banking, financial markets, institutions, and monetary regulations.</p>
+        <div class="subject-meta">
+            <span><i class="fas fa-university"></i> 6 Credits</span>
+            <span><i class="fas fa-rupee-sign"></i> Economy</span>
+        </div>
+    </div>
+</a>
+            </div>
+        </section>
+
+        <!-- SEC (Skill Enhancement Course) Section -->
+        <section id="sec" class="subject-section">
+            <div class="section-header">
+                <i class="fas fa-tools"></i>
+                <div>
+                    <h2>SEC - Skill Enhancement Courses</h2>
+                    <p>Courses designed to develop practical skills relevant to employment</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding: 3rem; background-color: var(--card-color); border-radius: 10px; margin: 2rem 0;">
+    <i class="fas fa-graduation-cap" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+    <h2>Find Your Subject Papers</h2>
+    <p style="color: var(--secondary-color); max-width: 600px; margin: 0 auto;">
+        Click on your subject from the list above to access theory papers, practical papers, and study materials.
+        Each subject page contains previous year question papers with view, download, and share options.
+    </p>
+    <div style="margin-top: 2rem;">
+        <a href="#major" style="background-color: var(--accent-color); color: var(--primary-color); padding: 0.8rem 2rem; border-radius: 5px; font-weight: 600; text-decoration: none;">
+            View All Subjects
+        </a>
+    </div>
+</div>
+        </section>
+
+        <!-- AEC (Ability Enhancement Course) Section -->
+        <section id="aec" class="subject-section">
+            <div class="section-header">
+                <i class="fas fa-brain"></i>
+                <div>
+                    <h2>AEC - Ability Enhancement Courses</h2>
+                    <p>Courses to enhance language, communication, and analytical abilities</p>
+                </div>
+            </div>
+            
+            <div class="subjects-grid">
+                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                <div class="subject-card">
+                    <span class="subject-code">COMM</span>
+                    <h3>Communication Skills</h3>
+                    <p class="subject-description">Developing effective verbal, written, and presentation skills in English.</p>
+                    <div class="subject-meta">
+                        <span><i class="fas fa-clock"></i> 2 Credits</span>
+                        <span><i class="fas fa-comments"></i> Language</span>
+                    </div>
+                </div>
+                </a>
+                
+                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                <div class="subject-card">
+                    <span class="subject-code">ENV</span>
+                    <h3>Environmental Science</h3>
+                    <p class="subject-description">Interdisciplinary study of environmental systems and human impact.</p>
+                    <div class="subject-meta">
+                        <span><i class="fas fa-clock"></i> 2 Credits</span>
+                        <span><i class="fas fa-globe"></i> Interdisciplinary</span>
+                    </div>
+                </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- CVAC Section -->
+        <section id="cvac" class="subject-section">
+            <div class="section-header">
+                <i class="fas fa-heart"></i>
+                <div>
+                    <h2>CVAC - Co-curricular & Value-Added Courses</h2>
+                    <p>Courses for holistic development, physical education, and value education</p>
+                </div>
+            </div>
+            
+            <div class="subjects-grid">
+                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                <div class="subject-card">
+                    <span class="subject-code">VALUE</span>
+                    <h3>Value Education</h3>
+                    <p class="subject-description">Developing ethical values, social responsibility, and moral reasoning.</p>
+                    <div class="subject-meta">
+                        <span><i class="fas fa-clock"></i> 2 Credits</span>
+                        <span><i class="fas fa-hands-helping"></i> Ethics</span>
+                    </div>
+                </div>
+                </a>
+                
+                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                <div class="subject-card">
+                    <span class="subject-code">PHYED</span>
+                    <h3>Physical Education</h3>
+                    <p class="subject-description">Promoting physical fitness, sports skills, and healthy lifestyle habits.</p>
+                    <div class="subject-meta">
+                        <span><i class="fas fa-clock"></i> 2 Credits</span>
+                        <span><i class="fas fa-running"></i> Fitness</span>
+                    </div>
+                </div>
+                </a>
+                
+                 <a href="bsc/compter/computer.html" style="text-decoration: none; color: inherit;">
+                    <div class="subject-card">
+                        <span class="subject-code">YOG</span>
+                        <h3>Yoga & Meditation</h3>
+                        <p class="subject-description">Traditional practices for physical, mental, and spiritual well-being.</p>
+                        <div class="subject-meta">
+                        <span><i class="fas fa-clock"></i> 2 Credits</span>
+                        <span><i class="fas fa-spa"></i> Wellness</span>
+                        </div>
+                    </div>
+                    </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BSc Subject Catalog</h3>
+                <p>Comprehensive subject browsing system for BSc students under the PAME curriculum structure.</p>
+                <p style="margin-top: 1rem;"><strong>Navigation Tip:</strong> Click any category button to jump directly to that section.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Navigation</h3>
+                <ul class="footer-links">
+                    <li><a href="#major"><i class="fas fa-star"></i> Major Subjects</a></li>
+                    <li><a href="#minor"><i class="fas fa-star-half-alt"></i> Minor Subjects</a></li>
+                    <li><a href="#sec"><i class="fas fa-tools"></i> SEC Courses</a></li>
+                    <li><a href="#aec"><i class="fas fa-brain"></i> AEC Courses</a></li>
+                    <li><a href="#cvac"><i class="fas fa-heart"></i> CVAC Courses</a></li>
+                </ul>
+            </div>
+            
+             <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="report.html">Report Missing Paper</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="guidelines/faq.html">FAQ</a></li>
+                        <li><a href="guidelines/privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 BSc Subject Catalog | C.C.U. Banke | PAME Curriculum | Total Subjects: 40+</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        function setupNavigation() {
+            // Get all navigation buttons
+            const desktopNavBtns = document.querySelectorAll('.subject-nav-btn');
+            const mobileNavBtns = document.querySelectorAll('.mobile-subject-nav .subject-nav-btn');
+            const quickNavBtns = document.querySelectorAll('.quick-nav-btn');
+            
+            // Function to scroll to section
+            function scrollToSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    // Update active states
+                    const allNavBtns = document.querySelectorAll('.subject-nav-btn, .quick-nav-btn');
+                    allNavBtns.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Activate current section button
+                    document.querySelectorAll(`[data-target="${sectionId}"]`).forEach(btn => {
+                        btn.classList.add('active');
+                    });
+                    
+                    // Scroll to section with offset for fixed header
+                    window.scrollTo({
+                        top: section.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile nav if open
+                    mobileSubjectNav.classList.remove('active');
+                    mobileNavToggle.querySelector('i').classList.remove('fa-times');
+                    mobileNavToggle.querySelector('i').classList.add('fa-list');
+                }
+            }
+            
+            // Add event listeners to desktop nav buttons
+            desktopNavBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-target');
+                    scrollToSection(target);
+                });
+            });
+            
+            // Add event listeners to mobile nav buttons
+            mobileNavBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-target');
+                    scrollToSection(target);
+                });
+            });
+            
+            // Add event listeners to quick nav buttons
+            quickNavBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-target');
+                    scrollToSection(target);
+                });
+            });
+        }
+
+        // Mobile navigation toggle
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileSubjectNav = document.getElementById('mobileSubjectNav');
+        
+        mobileNavToggle.addEventListener('click', () => {
+            mobileSubjectNav.classList.toggle('active');
+            const icon = mobileNavToggle.querySelector('i');
+            if (mobileSubjectNav.classList.contains('active')) {
+                icon.classList.remove('fa-list');
+                icon.classList.add('fa-times');
+                mobileNavToggle.setAttribute('aria-label', 'Close subject navigation');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-list');
+                mobileNavToggle.setAttribute('aria-label', 'Open subject navigation');
+            }
+        });
+
+        // Dark mode toggle
+        const modeToggle = document.getElementById('modeToggle');
+        const modeIcon = modeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            modeIcon.classList.remove('fa-moon');
+            modeIcon.classList.add('fa-sun');
+        }
+        
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                modeIcon.classList.remove('fa-moon');
+                modeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+                modeToggle.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+                modeIcon.classList.remove('fa-sun');
+                modeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+                modeToggle.setAttribute('aria-label', 'Switch to dark mode');
+            }
+        });
+
+        // Scroll spy to update active nav
+        function setupScrollSpy() {
+            const sections = document.querySelectorAll('.subject-section');
+            const navButtons = document.querySelectorAll('.subject-nav-btn, .quick-nav-btn');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollY >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('data-target') === current) {
+                        btn.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            setupNavigation();
+            setupScrollSpy();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | CU Archive Guidelines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1A374D;
+            --secondary-color: #406882;
+            --accent-color: #FFD700;
+            --background-color: #F4F4F2;
+            --text-color: #333333;
+            --card-color: #FFFFFF;
+            --nav-color: #FFFFFF;
+            --footer-color: #1A374D;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary-color: #0d1c2a;
+            --secondary-color: #2a4a62;
+            --accent-color: #FFD700;
+            --background-color: #121212;
+            --text-color: #F4F4F2;
+            --card-color: #1e1e1e;
+            --nav-color: #1e1e1e;
+            --footer-color: #0d1c2a;
+            --success-color: #218838;
+            --warning-color: #e0a800;
+            --danger-color: #c82333;
+            --info-color: #138496;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+            color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        .dark-mode a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--nav-color);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .dark-mode .logo {
+            color: var(--accent-color);
+        }
+
+        .desktop-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .desktop-nav li {
+            margin-left: 1.5rem;
+        }
+
+        .desktop-nav a {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .desktop-nav a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .dark-mode .mobile-nav-toggle {
+            color: var(--accent-color);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-color);
+            box-shadow: 0 5px 10px var(--shadow);
+            flex-direction: column;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav li {
+            list-style: none;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .mobile-nav a {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .mobile-nav a.active {
+            color: var(--accent-color);
+            background-color: var(--background-color);
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .dark-mode .mode-toggle {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1.5rem 0;
+            background-color: var(--card-color);
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb li {
+            margin-right: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: "/";
+            margin-left: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dark-mode .page-header h1 {
+            background: linear-gradient(90deg, var(--accent-color), #FFED4E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Content Sections */
+        .content-container {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .section-header i {
+            margin-right: 15px;
+            color: var(--accent-color);
+            font-size: 1.8rem;
+        }
+
+        /* Privacy Sections */
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .privacy-card {
+            background-color: var(--background-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .privacy-card h4 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .privacy-card h4 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        /* Data Collection Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .data-table th, .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--secondary-color);
+        }
+
+        .data-table th {
+            background-color: var(--background-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .dark-mode .data-table th {
+            color: var(--accent-color);
+        }
+
+        .data-table tr:hover {
+            background-color: var(--background-color);
+        }
+
+        /* Rights Section */
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .right-card {
+            background-color: var(--background-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .right-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-color);
+            color: #F4F4F2;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--secondary-color);
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .nav-button:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .nav-button i {
+            margin-right: 8px;
+        }
+
+        .prev-button i {
+            margin-right: 8px;
+        }
+
+        .next-button i {
+            margin-left: 8px;
+            margin-right: 0;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .content-container {
+                padding: 1.5rem;
+            }
+
+            .privacy-grid, .rights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>CU Archive</span>
+            </div>
+            
+            <nav>
+                <ul class="desktop-nav">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../disclaimer.html">Disclaimer</a></li>
+                    <li><a href="../developers.html">Dev Team</a></li>
+                    <li><a href="../contribute.html">Contribute</a></li>
+                    <li><a href="../report.html">Report Missing Paper</a></li>
+                    <li><a href="index.html" class="active">Guidelines</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-right">
+                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <ul class="mobile-nav" id="mobileNav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../disclaimer.html">Disclaimer</a></li>
+            <li><a href="../developers.html">Dev Team</a></li>
+            <li><a href="../contribute.html">Contribute</a></li>
+            <li><a href="../report.html">Report Missing Paper</a></li>
+            <li><a href="index.html" class="active">Guidelines</a></li>
+            <li><a href="#">Dark Mode</a></li>
+        </ul>
+    </header>
+
+    <section class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="index.html">Guidelines</a></li>
+                <li><span>Privacy Policy</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Privacy Policy</h1>
+                <p>How we collect, use, and protect your personal information when you contribute to CU Archive</p>
+            </div>
+
+            <!-- Introduction -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2>Your Privacy Matters</h2>
+                </div>
+                
+                <p>This Privacy Policy explains how CU Archive ("we", "us", or "our") collects, uses, discloses, and protects your personal information when you use our platform to contribute educational materials. We are committed to protecting your privacy and handling your data with transparency and care.</p>
+                
+                <div class="privacy-card">
+                    <h4><i class="fas fa-info-circle"></i> Last Updated</h4>
+                    <p>This policy was last updated on <strong>February 8, 2023</strong>. We may update this policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+                </div>
+            </div>
+
+            <!-- Information We Collect -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-database"></i>
+                    <h2>Information We Collect</h2>
+                </div>
+                
+                <p>We collect different types of information for various purposes to provide and improve our service to you.</p>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Information Type</th>
+                            <th>What We Collect</th>
+                            <th>Purpose</th>
+                            <th>Required/Optional</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Contributor Information</strong></td>
+                            <td>Name and email address</td>
+                            <td>Attribution and communication</td>
+                            <td>Optional (name), Optional (email)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Submission Metadata</strong></td>
+                            <td>Course, subject, year, semester, paper details</td>
+                            <td>Archive organization and categorization</td>
+                            <td>Required</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Uploaded Content</strong></td>
+                            <td>Question papers and reference materials</td>
+                            <td>Educational archive maintenance</td>
+                            <td>Required</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technical Information</strong></td>
+                            <td>IP address, browser type, device information</td>
+                            <td>Security, analytics, and platform improvement</td>
+                            <td>Automatically collected</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Usage Data</strong></td>
+                            <td>Submission timestamps, interaction data</td>
+                            <td>Service optimization and analytics</td>
+                            <td>Automatically collected</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- How We Use Your Information -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-cogs"></i>
+                    <h2>How We Use Your Information</h2>
+                </div>
+                
+                <p>We use the collected information for various purposes related to operating and improving CU Archive:</p>
+                
+                <div class="privacy-grid">
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-user-tag"></i> Attribution</h4>
+                        <p>To credit you as the contributor (if you provide your name) on the paper's download page and contributors list.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-envelope"></i> Communication</h4>
+                        <p>To notify you about your submission status, updates about the archive, and respond to your inquiries.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-archive"></i> Archive Management</h4>
+                        <p>To organize, categorize, and make educational materials accessible to students and researchers.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-chart-line"></i> Platform Improvement</h4>
+                        <p>To analyze contribution patterns, identify popular subjects, and improve our submission process.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-shield-alt"></i> Security</h4>
+                        <p>To monitor for fraudulent activity, protect against security threats, and ensure platform integrity.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-gavel"></i> Legal Compliance</h4>
+                        <p>To comply with applicable laws, regulations, and legal processes when required.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Information Sharing -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-share-alt"></i>
+                    <h2>Information Sharing</h2>
+                </div>
+                
+                <p>We do not sell, trade, or rent your personal information to third parties. We may share information in these limited circumstances:</p>
+                
+                <div class="privacy-grid">
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-users"></i> Public Attribution</h4>
+                        <p>Your name (if provided) will be publicly displayed alongside your contribution as "Contributed by [Your Name]".</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-balance-scale"></i> Legal Requirements</h4>
+                        <p>If required by law, regulation, legal process, or governmental request to protect our rights or safety.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-handshake"></i> Service Providers</h4>
+                        <p>With trusted third-party service providers who assist in operating our platform under strict confidentiality agreements.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-university"></i> Academic Research</h4>
+                        <p>Anonymized, aggregated data may be shared for academic research purposes to study educational trends.</p>
+                    </div>
+                </div>
+                
+                <div class="privacy-card" style="margin-top: 2rem;">
+                    <h4><i class="fas fa-exclamation-circle"></i> Anonymous Contributions</h4>
+                    <p>You can choose to contribute anonymously by not providing your name. In this case, no personal information will be associated with your submission.</p>
+                </div>
+            </div>
+
+            <!-- Your Rights -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-user-check"></i>
+                    <h2>Your Rights</h2>
+                </div>
+                
+                <p>As a contributor, you have certain rights regarding your personal information:</p>
+                
+                <div class="rights-grid">
+                    <div class="right-card">
+                        <div class="right-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h4>Right to Access</h4>
+                        <p>Request a copy of your personal information we hold and how we're using it.</p>
+                    </div>
+                    
+                    <div class="right-card">
+                        <div class="right-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h4>Right to Correction</h4>
+                        <p>Request correction of inaccurate or incomplete personal information.</p>
+                    </div>
+                    
+                    <div class="right-card">
+                        <div class="right-icon">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        <h4>Right to Anonymity</h4>
+                        <p>Request removal of your name from attribution while keeping your contribution in the archive.</p>
+                    </div>
+                    
+                    <div class="right-card">
+                        <div class="right-icon">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                        <h4>Right to Deletion</h4>
+                        <p>Request deletion of your personal information, subject to archive integrity requirements.</p>
+                    </div>
+                </div>
+                
+                <div class="privacy-card" style="margin-top: 2rem;">
+                    <h4><i class="fas fa-envelope-open-text"></i> How to Exercise Your Rights</h4>
+                    <p>To exercise any of these rights, please contact us at <a href="mailto:privacy@cuarchive.example.com">privacy@cuarchive.example.com</a>. We will respond to your request within 30 days.</p>
+                </div>
+            </div>
+
+            <!-- Data Retention -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-history"></i>
+                    <h2>Data Retention</h2>
+                </div>
+                
+                <p>We retain different types of information for different periods based on their purpose:</p>
+                
+                <div class="privacy-grid">
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-infinity"></i> Submitted Papers</h4>
+                        <p><strong>Retention:</strong> Indefinitely</p>
+                        <p>Educational materials remain in the archive as long as the platform exists to serve students.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-user-clock"></i> Contributor Information</h4>
+                        <p><strong>Retention:</strong> As long as the paper remains in the archive</p>
+                        <p>Your name (if provided) is retained for attribution purposes while your contribution is available.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-chart-bar"></i> Technical & Usage Data</h4>
+                        <p><strong>Retention:</strong> Up to 2 years</p>
+                        <p>Analytical data is retained for platform improvement and then anonymized or deleted.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-envelope"></i> Communication Records</h4>
+                        <p><strong>Retention:</strong> 3 years</p>
+                        <p>Email correspondence is retained for reference and then securely deleted.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-lock"></i>
+                    <h2>Security Measures</h2>
+                </div>
+                
+                <p>We implement appropriate technical and organizational measures to protect your information:</p>
+                
+                <div class="privacy-grid">
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-lock"></i> Encryption</h4>
+                        <p>Secure HTTPS connections for all data transmission using TLS encryption.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-shield-alt"></i> Access Controls</h4>
+                        <p>Strict access controls limit who can view personal information to authorized personnel only.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-search"></i> Regular Audits</h4>
+                        <p>Regular security audits, vulnerability assessments, and system updates.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-database"></i> Secure Storage</h4>
+                        <p>Secure storage with encryption for sensitive information and regular backups.</p>
+                    </div>
+                </div>
+                
+                <div class="privacy-card" style="margin-top: 2rem;">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Security Limitations</h4>
+                    <p>While we implement robust security measures, no method of transmission over the Internet or electronic storage is 100% secure. We cannot guarantee absolute security but we strive to use commercially acceptable means to protect your personal information.</p>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-address-card"></i>
+                    <h2>Contact Us</h2>
+                </div>
+                
+                <p>If you have any questions about this Privacy Policy or our privacy practices, please contact us:</p>
+                
+                <div class="privacy-grid">
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-envelope"></i> Email</h4>
+                        <p><a href="mailto:privacy@cuarchive.example.com">privacy@cuarchive.example.com</a></p>
+                        <p>For privacy-related inquiries and data rights requests</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-question-circle"></i> General Support</h4>
+                        <p><a href="mailto:support@cuarchive.example.com">support@cuarchive.example.com</a></p>
+                        <p>For general questions about the platform</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h4><i class="fas fa-paper-plane"></i> Contributions</h4>
+                        <p><a href="mailto:contributions@cuarchive.example.com">contributions@cuarchive.example.com</a></p>
+                        <p>For questions about submitting papers</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="nav-buttons">
+                <a href="quality.html" class="nav-button prev-button">
+                    <i class="fas fa-arrow-left"></i> Previous: Quality Standards
+                </a>
+                <a href="faq.html" class="nav-button next-button">
+                    Next: FAQs <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CU Archive</h3>
+                    <p>An unofficial student-led initiative providing educational resources to help students succeed.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Guidelines</h3>
+                    <ul class="footer-links">
+                        <li><a href="formats.html">Acceptable Formats</a></li>
+                        <li><a href="quality.html">Quality Standards</a></li>
+                        <li><a href="privacy.html" class="active">Privacy Policy</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../contribute.html">Contribute Papers</a></li>
+                        <li><a href="../report.html">Report Missing Paper</a></li>
+                        <li><a href="../disclaimer.html">Disclaimer</a></li>
+                        <li><a href="../developers.html">Development Team</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CU Archive. An unofficial, student-led initiative. Not affiliated with or endorsed by the University of Calcutta.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">All content is provided for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            
+            const icon = mobileNavToggle.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                mobileNavToggle.setAttribute('aria-label', 'Close navigation menu');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            }
+        });
+        
+        // Dark Mode Toggle
+        const modeToggle = document.getElementById('modeToggle');
+        const modeIcon = modeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            modeIcon.classList.remove('fa-moon');
+            modeIcon.classList.add('fa-sun');
+        }
+        
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                modeIcon.classList.remove('fa-moon');
+                modeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+                modeToggle.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+                modeIcon.classList.remove('fa-sun');
+                modeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+                modeToggle.setAttribute('aria-label', 'Switch to dark mode');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                const icon = mobileNavToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            });
+        });
+    </script>
+</body>
+</html>

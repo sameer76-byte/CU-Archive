@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Standards | CU Archive Guidelines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1A374D;
+            --secondary-color: #406882;
+            --accent-color: #FFD700;
+            --background-color: #F4F4F2;
+            --text-color: #333333;
+            --card-color: #FFFFFF;
+            --nav-color: #FFFFFF;
+            --footer-color: #1A374D;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary-color: #0d1c2a;
+            --secondary-color: #2a4a62;
+            --accent-color: #FFD700;
+            --background-color: #121212;
+            --text-color: #F4F4F2;
+            --card-color: #1e1e1e;
+            --nav-color: #1e1e1e;
+            --footer-color: #0d1c2a;
+            --success-color: #218838;
+            --warning-color: #e0a800;
+            --danger-color: #c82333;
+            --info-color: #138496;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+            color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        .dark-mode a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--nav-color);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .dark-mode .logo {
+            color: var(--accent-color);
+        }
+
+        .desktop-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .desktop-nav li {
+            margin-left: 1.5rem;
+        }
+
+        .desktop-nav a {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .desktop-nav a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .dark-mode .mobile-nav-toggle {
+            color: var(--accent-color);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-color);
+            box-shadow: 0 5px 10px var(--shadow);
+            flex-direction: column;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav li {
+            list-style: none;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .mobile-nav a {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .mobile-nav a.active {
+            color: var(--accent-color);
+            background-color: var(--background-color);
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .dark-mode .mode-toggle {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1.5rem 0;
+            background-color: var(--card-color);
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb li {
+            margin-right: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: "/";
+            margin-left: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dark-mode .page-header h1 {
+            background: linear-gradient(90deg, var(--accent-color), #FFED4E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Content Sections */
+        .content-container {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .section-header i {
+            margin-right: 15px;
+            color: var(--accent-color);
+            font-size: 1.8rem;
+        }
+
+        /* Quality Standards */
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .standard-card {
+            background-color: var(--background-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .standard-card h4 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .standard-card h4 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .standard-critical {
+            border-left-color: var(--danger-color);
+            background-color: rgba(220, 53, 69, 0.05);
+        }
+
+        .standard-important {
+            border-left-color: var(--warning-color);
+            background-color: rgba(255, 193, 7, 0.05);
+        }
+
+        .standard-recommended {
+            border-left-color: var(--success-color);
+            background-color: rgba(40, 167, 69, 0.05);
+        }
+
+        /* Review Process */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+            padding-bottom: 2rem;
+            border-bottom: 1px dashed var(--secondary-color);
+        }
+
+        .process-step:last-child .step-content {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode .step-title {
+            color: var(--accent-color);
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--secondary-color);
+        }
+
+        .comparison-table th {
+            background-color: var(--background-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .dark-mode .comparison-table th {
+            color: var(--accent-color);
+        }
+
+        .comparison-table tr:hover {
+            background-color: var(--background-color);
+        }
+
+        .status-approved {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        .status-rejected {
+            color: var(--danger-color);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-color);
+            color: #F4F4F2;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--secondary-color);
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .nav-button:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .nav-button i {
+            margin-right: 8px;
+        }
+
+        .prev-button i {
+            margin-right: 8px;
+        }
+
+        .next-button i {
+            margin-left: 8px;
+            margin-right: 0;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .content-container {
+                padding: 1.5rem;
+            }
+
+            .standards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>CU Archive</span>
+            </div>
+            
+            <nav>
+                <ul class="desktop-nav">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../disclaimer.html">Disclaimer</a></li>
+                    <li><a href="../developers.html">Dev Team</a></li>
+                    <li><a href="../contribute.html">Contribute</a></li>
+                    <li><a href="../report.html">Report Missing Paper</a></li>
+                    <li><a href="index.html" class="active">Guidelines</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-right">
+                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <ul class="mobile-nav" id="mobileNav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../disclaimer.html">Disclaimer</a></li>
+            <li><a href="../developers.html">Dev Team</a></li>
+            <li><a href="../contribute.html">Contribute</a></li>
+            <li><a href="../report.html">Report Missing Paper</a></li>
+            <li><a href="index.html" class="active">Guidelines</a></li>
+            <li><a href="#">Dark Mode</a></li>
+        </ul>
+    </header>
+
+    <section class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="index.html">Guidelines</a></li>
+                <li><span>Quality Standards</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Quality Standards</h1>
+                <p>Understand our quality requirements for submissions to ensure your contributions are approved</p>
+            </div>
+
+            <!-- Content Quality Section -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-search"></i>
+                    <h2>Content Quality Requirements</h2>
+                </div>
+                
+                <p>To ensure our archive maintains high educational value, all submissions must meet these quality standards. Submissions that don't meet these requirements will be rejected.</p>
+                
+                <div class="standards-grid">
+                    <div class="standard-card standard-critical">
+                        <h4><i class="fas fa-eye"></i> Legibility</h4>
+                        <p><strong>Critical Requirement:</strong> All text must be clearly readable. Blurry, pixelated, or low-resolution scans will be rejected immediately.</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Minimum 300 DPI for scanned documents</li>
+                            <li>Proper contrast between text and background</li>
+                            <li>No shadows, glare, or distortions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="standard-card standard-critical">
+                        <h4><i class="fas fa-clipboard-check"></i> Completeness</h4>
+                        <p><strong>Critical Requirement:</strong> Submit complete question papers only. Missing pages, cropped content, or incomplete sections will result in rejection.</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>All pages must be included</li>
+                            <li>No missing questions or sections</li>
+                            <li>Full paper from cover to end</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="standard-card standard-important">
+                        <h4><i class="fas fa-check-double"></i> Accuracy</h4>
+                        <p><strong>Important Requirement:</strong> Information about course, year, subject, and semester must be accurate. Mislabeled papers confuse users and waste archive space.</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Verify course and year information</li>
+                            <li>Double-check subject name</li>
+                            <li>Confirm semester if applicable</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="standard-card standard-important">
+                        <h4><i class="fas fa-book"></i> Relevance</h4>
+                        <p><strong>Important Requirement:</strong> Only academic question papers are accepted. Non-academic content, personal notes, or unrelated materials will be rejected.</p>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>University/college question papers only</li>
+                            <li>No answer keys or solved papers</li>
+                            <li>No personal or private documents</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Preparation Section -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-tools"></i>
+                    <h2>Document Preparation Guidelines</h2>
+                </div>
+                
+                <p>Follow these guidelines when preparing your documents for submission to ensure they meet our quality standards.</p>
+                
+                <h3>For Scanned Documents</h3>
+                <div class="standards-grid">
+                    <div class="standard-card">
+                        <h4><i class="fas fa-ruler"></i> Resolution</h4>
+                        <p>Scan at a minimum of 300 DPI (dots per inch) for optimal clarity. Higher resolutions (600 DPI) are better for detailed diagrams.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h4><i class="fas fa-crop-alt"></i> Alignment</h4>
+                        <p>Ensure proper alignment and orientation. Crooked or skewed scans are difficult to read and may be rejected.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h4><i class="fas fa-adjust"></i> Color Mode</h4>
+                        <p>Use black and white or grayscale for text documents. Color mode increases file size without improving readability for most papers.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h4><i class="fas fa-sun"></i> Lighting</h4>
+                        <p>Remove any shadows, glare, or distortions. Ensure even lighting when photographing or scanning papers.</p>
+                    </div>
+                </div>
+                
+                <h3>For Digital Documents</h3>
+                <div class="standards-grid">
+                    <div class="standard-card">
+                        <h4><i class="fas fa-print"></i> Print Quality</h4>
+                        <p>Save as "Print Quality" PDF to ensure sharp text and proper formatting for printing if needed.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h4><i class="fas fa-font"></i> Font Embedding</h4>
+                        <p>Include all fonts embedded in the PDF to ensure consistent display across different devices and operating systems.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h4><i class="fas fa-unlock"></i> Security</h4>
+                        <p>Remove any password protection or restrictions. Protected files cannot be reviewed or processed.</p>
+                    </div>
+                    
+                    <div class="standard-card">
+                        <h4><i class="fas fa-link"></i> Hyperlinks</h4>
+                        <p>Ensure hyperlinks are functional (if applicable). Broken links detract from document quality.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Process Section -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h2>Review Process</h2>
+                </div>
+                
+                <p>All submissions go through a comprehensive three-step review process. Understanding this process helps you prepare better submissions.</p>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Automated Check</div>
+                            <p>Our system automatically verifies:</p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>File format compatibility</li>
+                                <li>File size limits (max 10MB for PDFs)</li>
+                                <li>Basic metadata completeness</li>
+                                <li>Virus/malware scanning</li>
+                            </ul>
+                            <p><strong>Time:</strong> Instant</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Content Review</div>
+                            <p>Our volunteer review team manually checks:</p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Document quality and legibility</li>
+                                <li>Content relevance and completeness</li>
+                                <li>Accuracy of metadata (course, year, subject)</li>
+                                <li>Check for duplicates in archive</li>
+                            </ul>
+                            <p><strong>Time:</strong> 3-7 days (longer during peak periods)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Final Approval</div>
+                            <p>Quality assurance before publishing:</p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Final verification of all requirements</li>
+                                <li>Proper categorization and tagging</li>
+                                <li>Addition to search index</li>
+                                <li>Notification to contributor (if email provided)</li>
+                            </ul>
+                            <p><strong>Time:</strong> 1-2 days after content review</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common Rejections Section -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h2>Common Reasons for Rejection</h2>
+                </div>
+                
+                <p>Understanding why submissions are rejected helps you avoid common mistakes. Here are the most frequent reasons for rejection:</p>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Reason for Rejection</th>
+                            <th>Frequency</th>
+                            <th>How to Avoid</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Poor scan quality</strong> (blurry, dark, skewed)</td>
+                            <td>High</td>
+                            <td>Scan at 300+ DPI, ensure good lighting</td>
+                            <td class="status-rejected">Rejected</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Incorrect metadata</strong> (wrong course, year, subject)</td>
+                            <td>High</td>
+                            <td>Double-check all information before submitting</td>
+                            <td class="status-rejected">Rejected</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Duplicate paper</strong> (already in archive)</td>
+                            <td>Medium</td>
+                            <td>Search archive thoroughly before submitting</td>
+                            <td class="status-rejected">Rejected</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Incomplete paper</strong> (missing pages)</td>
+                            <td>Medium</td>
+                            <td>Verify all pages are included and in order</td>
+                            <td class="status-rejected">Rejected</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wrong file format</strong> (not PDF for question papers)</td>
+                            <td>Low</td>
+                            <td>Convert to PDF before submission</td>
+                            <td class="status-rejected">Rejected</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Non-academic content</strong></td>
+                            <td>Low</td>
+                            <td>Submit only university question papers</td>
+                            <td class="status-rejected">Rejected</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="standard-card" style="margin-top: 2rem;">
+                    <h4><i class="fas fa-lightbulb"></i> Resubmission After Rejection</h4>
+                    <p>If your submission is rejected, you'll receive an email (if provided) explaining the reason. You can correct the issues and resubmit. There's no limit on resubmissions, but please ensure you address all mentioned issues before resubmitting.</p>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="nav-buttons">
+                <a href="formats.html" class="nav-button prev-button">
+                    <i class="fas fa-arrow-left"></i> Previous: Acceptable Formats
+                </a>
+                <a href="privacy.html" class="nav-button next-button">
+                    Next: Privacy Policy <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CU Archive</h3>
+                    <p>An unofficial student-led initiative providing educational resources to help students succeed.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Guidelines</h3>
+                    <ul class="footer-links">
+                        <li><a href="formats.html">Acceptable Formats</a></li>
+                        <li><a href="quality.html" class="active">Quality Standards</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../contribute.html">Contribute Papers</a></li>
+                        <li><a href="../report.html">Report Missing Paper</a></li>
+                        <li><a href="../disclaimer.html">Disclaimer</a></li>
+                        <li><a href="../developers.html">Development Team</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CU Archive. An unofficial, student-led initiative. Not affiliated with or endorsed by the University of Calcutta.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">All content is provided for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            
+            const icon = mobileNavToggle.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                mobileNavToggle.setAttribute('aria-label', 'Close navigation menu');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            }
+        });
+        
+        // Dark Mode Toggle
+        const modeToggle = document.getElementById('modeToggle');
+        const modeIcon = modeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            modeIcon.classList.remove('fa-moon');
+            modeIcon.classList.add('fa-sun');
+        }
+        
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                modeIcon.classList.remove('fa-moon');
+                modeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+                modeToggle.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+                modeIcon.classList.remove('fa-sun');
+                modeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+                modeToggle.setAttribute('aria-label', 'Switch to dark mode');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                const icon = mobileNavToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            });
+        });
+    </script>
+</body>
+</html>

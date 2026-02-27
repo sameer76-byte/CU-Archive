@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Development | Flutter | CU Archive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for Light/Dark Mode */
+        :root {
+            --primary-color: #1A374D;
+            --secondary-color: #406882;
+            --accent-color: #FFD700;
+            --background-color: #F4F4F2;
+            --text-color: #333333;
+            --card-color: #FFFFFF;
+            --nav-color: #FFFFFF;
+            --footer-color: #1A374D;
+            --border-color: #E0E0E0;
+            --hover-bg: #F0F0F0;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(0, 0, 0, 0.15);
+            --success-bg: #D4EDDA;
+            --success-text: #155724;
+            --drive-color: #4285F4;
+        }
+
+        .dark-mode {
+            --primary-color: #0d1c2a;
+            --secondary-color: #2a4a62;
+            --accent-color: #FFD700;
+            --background-color: #121212;
+            --text-color: #F4F4F2;
+            --card-color: #1e1e1e;
+            --nav-color: #1e1e1e;
+            --footer-color: #0d1c2a;
+            --border-color: #333333;
+            --hover-bg: #2a2a2a;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.4);
+            --success-bg: #1E3A2A;
+            --success-text: #A3D9A5;
+            --drive-color: #8AB4F8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+            color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        .dark-mode a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--nav-color);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .dark-mode .logo {
+            color: var(--accent-color);
+        }
+
+        .desktop-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .desktop-nav li {
+            margin-left: 1.5rem;
+        }
+
+        .desktop-nav a {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .desktop-nav a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .dark-mode .mobile-nav-toggle {
+            color: var(--accent-color);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-color);
+            box-shadow: 0 5px 10px var(--shadow);
+            flex-direction: column;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav li {
+            list-style: none;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .mobile-nav a {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .dark-mode .mode-toggle {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1.5rem 0;
+            background-color: var(--card-color);
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb li {
+            margin-right: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: "/";
+            margin-left: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+        }
+
+        /* Course Info Bar */
+        .course-info {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .course-details h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .course-details p {
+            color: var(--secondary-color);
+            margin-bottom: 0;
+        }
+
+        .course-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--border-color);
+        }
+
+        .filter-tab:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .filter-tab.active {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border-color: var(--accent-color);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: var(--background-color);
+            border-radius: 30px;
+            padding: 0.3rem 0.3rem 0.3rem 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            padding: 0.5rem;
+            color: var(--text-color);
+            width: 200px;
+        }
+
+        .search-box input:focus {
+            outline: none;
+        }
+
+        .search-box button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .search-box button:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* Papers Grid */
+        .papers-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .paper-card {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .paper-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--shadow-hover);
+        }
+
+        .paper-info {
+            flex: 1;
+        }
+
+        .paper-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .paper-title i {
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+
+        .paper-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        .paper-meta span i {
+            margin-right: 0.3rem;
+        }
+
+        /* Drive Badge */
+        .drive-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(66, 133, 244, 0.1);
+            color: var(--drive-color);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+            font-weight: 500;
+        }
+
+        .drive-badge i {
+            margin-right: 0.3rem;
+        }
+
+        /* Action Buttons */
+        .paper-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background-color: var(--background-color);
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .action-btn.view-btn:hover {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        .action-btn.download-btn:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .action-btn.share-btn:hover {
+            background-color: #9C27B0;
+            color: white;
+        }
+
+        /* Share Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 5px 30px var(--shadow);
+            animation: modalFade 0.3s;
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .modal-header h3 {
+            margin-bottom: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-color);
+        }
+
+        .paper-info-modal {
+            background-color: var(--background-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            word-break: break-word;
+        }
+
+        .drive-link-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            color: var(--drive-color);
+            font-size: 0.9rem;
+        }
+
+        .share-link-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .share-link-container input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .share-link-container button {
+            padding: 0.8rem 1.2rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .share-link-container button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .share-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .share-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--background-color);
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .share-option:hover {
+            transform: scale(1.1);
+        }
+
+        .share-option.whatsapp:hover {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .share-option.telegram:hover {
+            background-color: #0088cc;
+            color: white;
+        }
+
+        .share-option.email:hover {
+            background-color: #EA4335;
+            color: white;
+        }
+
+        .copy-success {
+            background-color: var(--success-bg);
+            color: var(--success-text);
+            padding: 0.5rem;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .copy-success.show {
+            display: block;
+        }
+
+        /* PDF Viewer Modal */
+        .pdf-viewer-modal .modal-content {
+            max-width: 1000px;
+            width: 95%;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pdf-viewer-modal .modal-header {
+            flex-shrink: 0;
+        }
+
+        .pdf-viewer-container {
+            flex: 1;
+            background-color: var(--background-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .pdf-viewer-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .drive-viewer-note {
+            background-color: rgba(66, 133, 244, 0.1);
+            color: var(--drive-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .course-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .course-stats {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+            }
+
+            .filter-tabs {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+
+            .paper-card {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .paper-info {
+                width: 100%;
+                text-align: center;
+            }
+
+            .paper-meta {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .paper-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .share-link-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>CU Archive</span>
+            </div>
+            
+            <nav>
+                <ul class="desktop-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="developers.html">Dev Team</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                    <li><a href="report.html">Report Missing Paper</a></li>
+                    <li><a href="guidelines/">Guidelines</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-right">
+                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <ul class="mobile-nav" id="mobileNav">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../../disclaimer.html">Disclaimer</a></li>
+            <li><a href="../../developers.html">Dev Team</a></li>
+            <li><a href="../../contribute.html">Contribute</a></li>
+            <li><a href="../../report.html">Report Missing Paper</a></li>
+            <li><a href="../../guidelines/">Guidelines</a></li>
+            <li><a href="#">Dark Mode</a></li>
+        </ul>
+    </header>
+
+    <section class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../bsc/">BSc</a></li>
+                <li><span>Computer Science</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <!-- Page Header -->
+                       <!-- OOP Section -->
+            <div class="page-header" style="margin-top: 3rem;">
+                <h1>Object Oriented Programming (OOP)</h1>
+                <p>Bachelor of Science (BSc) Computer Science - 3rd Semester</p>
+            </div>
+
+            <!-- Course Info Bar -->
+            <div class="course-info">
+                <div class="course-details">
+                    <h2>Course: OOP (PCC-CS-302)</h2>
+                    <p><i class="fas fa-calendar-alt"></i> Papers from 2018-2023 • <i class="fas fa-file-pdf"></i> 12 Papers Available</p>
+                </div>
+                <div class="course-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Theory Papers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Practical Papers</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-tabs">
+                    <span class="filter-tab active" data-filter="all">All Papers</span>
+                    <span class="filter-tab" data-filter="theory">Theory</span>
+                    <span class="filter-tab" data-filter="practical">Practical</span>
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Search papers..." id="paperSearch">
+                    <button type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            
+
+
+            <div class="course-info">
+                <div class="course-details">
+                    <h2>Course: OOP (PCC-CS-302)</h2>
+                    <p><i class="fas fa-calendar-alt"></i> Papers from 2019-2023 • <i class="fas fa-file-pdf"></i> 10 Papers Available</p>
+                </div>
+                <div class="course-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">Theory Papers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Practical Papers</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="papers-grid">
+                <!-- OOP Theory -->
+                <div class="paper-card" data-type="theory" data-year="2023" data-semester="3">
+                    <div class="paper-info">
+                        <div class="paper-title">
+                            <i class="fas fa-book"></i> OOP (Theory) - End Semester Examination
+                            <span class="drive-badge"><i class="fab fa-google-drive"></i> Drive</span>
+                        </div>
+                        <div class="paper-meta">
+                            <span><i class="fas fa-calendar"></i> 2023</span>
+                            <span><i class="fas fa-layer-group"></i> Semester 3</span>
+                            <span><i class="fas fa-clock"></i> 3 Hours</span>
+                            <span><i class="fas fa-tag"></i> Theory</span>
+                        </div>
+                    </div>
+                    <div class="paper-actions">
+                        <button class="action-btn view-btn" onclick="viewPaper('OOP Theory 2023', '6FGHijklMNOPqrsTUVwxyz')"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn download-btn" onclick="downloadPaper('OOP Theory 2023', '6FGHijklMNOPqrsTUVwxyz')"><i class="fas fa-download"></i></button>
+                        <button class="action-btn share-btn" onclick="sharePaper('OOP Theory 2023', '6FGHijklMNOPqrsTUVwxyz')"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+
+                <div class="paper-card" data-type="theory" data-year="2022" data-semester="3">
+                    <div class="paper-info">
+                        <div class="paper-title">
+                            <i class="fas fa-book"></i> OOP (Theory) - End Semester Examination
+                            <span class="drive-badge"><i class="fab fa-google-drive"></i> Drive</span>
+                        </div>
+                        <div class="paper-meta">
+                            <span><i class="fas fa-calendar"></i> 2022</span>
+                            <span><i class="fas fa-layer-group"></i> Semester 3</span>
+                            <span><i class="fas fa-clock"></i> 3 Hours</span>
+                            <span><i class="fas fa-tag"></i> Theory</span>
+                        </div>
+                    </div>
+                    <div class="paper-actions">
+                        <button class="action-btn view-btn" onclick="viewPaper('OOP Theory 2022', '7GHijklMNOPqrsTUVwxyz')"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn download-btn" onclick="downloadPaper('OOP Theory 2022', '7GHijklMNOPqrsTUVwxyz')"><i class="fas fa-download"></i></button>
+                        <button class="action-btn share-btn" onclick="sharePaper('OOP Theory 2022', '7GHijklMNOPqrsTUVwxyz')"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+
+                <!-- OOP Practical -->
+                <div class="paper-card" data-type="practical" data-year="2023" data-semester="3">
+                    <div class="paper-info">
+                        <div class="paper-title">
+                            <i class="fas fa-flask"></i> OOP (Practical) - Lab Examination
+                            <span class="drive-badge"><i class="fab fa-google-drive"></i> Drive</span>
+                        </div>
+                        <div class="paper-meta">
+                            <span><i class="fas fa-calendar"></i> 2023</span>
+                            <span><i class="fas fa-layer-group"></i> Semester 3</span>
+                            <span><i class="fas fa-clock"></i> 2 Hours</span>
+                            <span><i class="fas fa-tag"></i> Practical</span>
+                        </div>
+                    </div>
+                    <div class="paper-actions">
+                        <button class="action-btn view-btn" onclick="viewPaper('OOP Practical 2023', '8HijklMNOPqrsTUVwxyz')"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn download-btn" onclick="downloadPaper('OOP Practical 2023', '8HijklMNOPqrsTUVwxyz')"><i class="fas fa-download"></i></button>
+                        <button class="action-btn share-btn" onclick="sharePaper('OOP Practical 2023', '8HijklMNOPqrsTUVwxyz')"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+
+                <div class="paper-card" data-type="practical" data-year="2022" data-semester="3">
+                    <div class="paper-info">
+                        <div class="paper-title">
+                            <i class="fas fa-flask"></i> OOP (Practical) - Lab Examination
+                            <span class="drive-badge"><i class="fab fa-google-drive"></i> Drive</span>
+                        </div>
+                        <div class="paper-meta">
+                            <span><i class="fas fa-calendar"></i> 2022</span>
+                            <span><i class="fas fa-layer-group"></i> Semester 3</span>
+                            <span><i class="fas fa-clock"></i> 2 Hours</span>
+                            <span><i class="fas fa-tag"></i> Practical</span>
+                        </div>
+                    </div>
+                    <div class="paper-actions">
+                        <button class="action-btn view-btn" onclick="viewPaper('OOP Practical 2022', '9IjkLMNOPqrsTUVwxyz')"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn download-btn" onclick="downloadPaper('OOP Practical 2022', '9IjkLMNOPqrsTUVwxyz')"><i class="fas fa-download"></i></button>
+                        <button class="action-btn share-btn" onclick="sharePaper('OOP Practical 2022', '9IjkLMNOPqrsTUVwxyz')"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Share Modal -->
+    <div class="modal" id="shareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-share-alt"></i> Share Paper</h3>
+                <button class="modal-close" onclick="closeShareModal()">&times;</button>
+            </div>
+            <div class="paper-info-modal" id="sharePaperInfo">
+                <strong>DAA Theory 2023</strong>
+                <div class="drive-link-info">
+                    <i class="fab fa-google-drive"></i> Stored in Google Drive
+                </div>
+            </div>
+            <div class="share-link-container">
+                <input type="text" id="shareLink" value="" readonly>
+                <button onclick="copyShareLink()"><i class="fas fa-copy"></i> Copy</button>
+            </div>
+            <div class="copy-success" id="copySuccess">
+                Link copied to clipboard!
+            </div>
+            <div class="share-options">
+                <div class="share-option whatsapp" onclick="shareViaWhatsApp()">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="share-option telegram" onclick="shareViaTelegram()">
+                    <i class="fab fa-telegram-plane"></i>
+                </div>
+                <div class="share-option email" onclick="shareViaEmail()">
+                    <i class="fas fa-envelope"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Viewer Modal (for Google Drive) -->
+    <div class="modal pdf-viewer-modal" id="pdfViewerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-file-pdf"></i> <span id="pdfViewerTitle">DAA Theory 2023</span></h3>
+                <button class="modal-close" onclick="closePdfViewer()">&times;</button>
+            </div>
+            <div class="drive-viewer-note">
+                <i class="fab fa-google-drive"></i> Viewing PDF from Google Drive
+            </div>
+            <div class="pdf-viewer-container">
+                <iframe id="pdfViewerFrame" src="about:blank" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CU Archive</h3>
+                    <p>An unofficial student-led initiative providing educational resources to help students succeed.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                        <li><a href="developers.html">Dev Team</a></li>
+                        <li><a href="contribute.html">Contribute</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">BSc Computer Science</a></li>
+                        <li><a href="#">BSc Mathematics</a></li>
+                        <li><a href="#">BCom Accounting</a></li>
+                        <li><a href="#">BA Economics</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CU Archive. An unofficial, student-led initiative. Not affiliated with or endorsed by the University of Calcutta.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">All content is provided for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            
+            const icon = mobileNavToggle.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                mobileNavToggle.setAttribute('aria-label', 'Close navigation menu');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            }
+        });
+        
+        // Dark Mode Toggle
+        const modeToggle = document.getElementById('modeToggle');
+        const modeIcon = modeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            modeIcon.classList.remove('fa-moon');
+            modeIcon.classList.add('fa-sun');
+        }
+        
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                modeIcon.classList.remove('fa-moon');
+                modeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+                modeToggle.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+                modeIcon.classList.remove('fa-sun');
+                modeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+                modeToggle.setAttribute('aria-label', 'Switch to dark mode');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                const icon = mobileNavToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            });
+        });
+
+        // Filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const paperCards = document.querySelectorAll('.paper-card');
+        const searchInput = document.getElementById('paperSearch');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.getAttribute('data-filter');
+                
+                paperCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-type') === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            paperCards.forEach(card => {
+                const title = card.querySelector('.paper-title').textContent.toLowerCase();
+                const year = card.getAttribute('data-year');
+                
+                if (title.includes(searchTerm) || year.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Google Drive Helper Functions
+        function getDriveViewerUrl(fileId) {
+            return `https://drive.google.com/file/d/${fileId}/preview`;
+        }
+
+        function getDriveDownloadUrl(fileId) {
+            return `https://drive.google.com/uc?export=download&id=${fileId}`;
+        }
+
+        function getDriveShareUrl(fileId) {
+            return `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
+        }
+
+        // Share Modal Functions
+        const shareModal = document.getElementById('shareModal');
+        const sharePaperInfo = document.getElementById('sharePaperInfo');
+        const shareLink = document.getElementById('shareLink');
+        const copySuccess = document.getElementById('copySuccess');
+        let currentFileId = '';
+
+        function sharePaper(paperName, fileId) {
+            currentFileId = fileId;
+            sharePaperInfo.innerHTML = `
+                <strong>${paperName}</strong>
+                <div class="drive-link-info">
+                    <i class="fab fa-google-drive"></i> Stored in Google Drive
+                </div>
+            `;
+            shareLink.value = getDriveShareUrl(fileId);
+            shareModal.classList.add('active');
+        }
+
+        function closeShareModal() {
+            shareModal.classList.remove('active');
+            copySuccess.classList.remove('show');
+        }
+
+        function copyShareLink() {
+            shareLink.select();
+            shareLink.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            
+            copySuccess.classList.add('show');
+            setTimeout(() => {
+                copySuccess.classList.remove('show');
+            }, 2000);
+        }
+
+        function shareViaWhatsApp() {
+            const text = encodeURIComponent(`Check out this question paper from CU Archive:`);
+            const url = encodeURIComponent(shareLink.value);
+            window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+        }
+
+        function shareViaTelegram() {
+            const url = encodeURIComponent(shareLink.value);
+            const text = encodeURIComponent('CU Archive Question Paper');
+            window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+        }
+
+        function shareViaEmail() {
+            const subject = encodeURIComponent('Question Paper from CU Archive');
+            const body = encodeURIComponent(`Check out this question paper:\n\n${shareLink.value}`);
+            window.open(`mailto:?subject=${subject}&body=${body}`);
+        }
+
+        // PDF Viewer Functions (Google Drive Embed)
+        const pdfViewerModal = document.getElementById('pdfViewerModal');
+        const pdfViewerTitle = document.getElementById('pdfViewerTitle');
+        const pdfViewerFrame = document.getElementById('pdfViewerFrame');
+
+        function viewPaper(paperName, fileId) {
+            pdfViewerTitle.textContent = paperName;
+            pdfViewerFrame.src = getDriveViewerUrl(fileId);
+            pdfViewerModal.classList.add('active');
+        }
+
+        function closePdfViewer() {
+            pdfViewerModal.classList.remove('active');
+            pdfViewerFrame.src = 'about:blank';
+        }
+
+        function downloadPaper(paperName, fileId) {
+            // Trigger download from Google Drive
+            window.open(getDriveDownloadUrl(fileId), '_blank');
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === shareModal) {
+                closeShareModal();
+            }
+            if (e.target === pdfViewerModal) {
+                closePdfViewer();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeShareModal();
+                closePdfViewer();
+            }
+        });
+    </script>
+</body>
+</html>

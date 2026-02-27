@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoology Courses | CU Archive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>CU Archive</span>
+            </div>
+            
+            <nav>
+                <ul class="desktop-nav">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../disclaimer.html">Disclaimer</a></li>
+                    <li><a href="../../developers.html">Dev Team</a></li>
+                    <li><a href="../../contribute.html">Contribute</a></li>
+                    <li><a href="../../report.html">Report</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-right">
+                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <ul class="mobile-nav" id="mobileNav">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../../disclaimer.html">Disclaimer</a></li>
+            <li><a href="../../developers.html">Dev Team</a></li>
+            <li><a href="../../contribute.html">Contribute</a></li>
+            <li><a href="../../report.html">Report</a></li>
+        </ul>
+    </header>
+
+    <section class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../bsc.html">BSc</a></li>
+                <li><span>Zoology</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Zoology</h1>
+                <p>ALL Semester • 15 Courses • 75 Question Papers</p>
+            </div>
+
+            <!-- Department Header -->
+            <div class="dept-header">
+                <div class="dept-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="dept-title">
+                    <h2>Zoology Courses</h2>
+                    <p>Bachelor of Science (BSc) Zoology</p>
+                </div>
+            </div>
+
+            <!-- Course Strips -->
+            <div class="course-strips">
+                <!-- Syllabus -->
+                <div class="course-strip syllabus" style="cursor: default;">
+                    <div class="course-info">
+                        <span class="course-code">SYLLABUS</span>
+                        <span class="course-name-short"><i class="fas fa-book-open"></i></span>
+                        <span class="course-name-full">Complete Course Syllabus</span>
+                        <span class="stats-badge"><i class="fas fa-file-pdf"></i> PDF Document</span>
+                    </div>
+                    <div class="course-actions">
+                        <span class="action-icon" onclick="viewPaper('Complete Course Syllabus', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="View Syllabus">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                        <span class="action-icon" onclick="downloadPaper('Complete Course Syllabus', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Download Syllabus">
+                            <i class="fas fa-download"></i>
+                        </span>
+                        <span class="action-icon" onclick="sharePaper('Complete Course Syllabus', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Share Syllabus">
+                            <i class="fas fa-share-alt"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <a href="cell-biology.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc1" onclick="window.location.href='cell-biology-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 1</span>
+            <span class="course-name-short">CB</span>
+            <span class="course-name-full">Cell Biology</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Cell Biology')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Cell Biology')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Cell Biology')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="biochemistry.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc2" onclick="window.location.href='biochemistry-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 2</span>
+            <span class="course-name-short">BIOCHM</span>
+            <span class="course-name-full">Biochemistry</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Biochemistry')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Biochemistry')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Biochemistry')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="genetics.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc3" onclick="window.location.href='genetics-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 3</span>
+            <span class="course-name-short">GEN</span>
+            <span class="course-name-full">Genetics</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Genetics')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Genetics')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Genetics')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="cells-tissue-structure.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc4" onclick="window.location.href='cells-tissue-structure-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 4</span>
+            <span class="course-name-short">CTS</span>
+            <span class="course-name-full">Cells and Tissue Structure</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Cells and Tissue Structure')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Cells and Tissue Structure')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Cells and Tissue Structure')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="non-chordate.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc5" onclick="window.location.href='non-chordate-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 5</span>
+            <span class="course-name-short">NCSF</span>
+            <span class="course-name-full">Non-chordate structure and function</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Non-chordate structure and function')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Non-chordate structure and function')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Non-chordate structure and function')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="parasitology.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc6" onclick="window.location.href='parasitology-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 6</span>
+            <span class="course-name-short">PARA</span>
+            <span class="course-name-full">Parasitology</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Parasitology')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Parasitology')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Parasitology')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="molecular-biology.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc7" onclick="window.location.href='molecular-biology-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 7</span>
+            <span class="course-name-short">MB</span>
+            <span class="course-name-full">Molecular Biology</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Molecular Biology')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Molecular Biology')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Molecular Biology')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="ecology.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc8" onclick="window.location.href='ecology-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 8</span>
+            <span class="course-name-short">ECO</span>
+            <span class="course-name-full">Ecology</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Ecology')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Ecology')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Ecology')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="chordate.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc9" onclick="window.location.href='chordate-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 9</span>
+            <span class="course-name-short">CSF</span>
+            <span class="course-name-full">Chordate structure and function</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Chordate structure and function')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Chordate structure and function')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Chordate structure and function')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="endocrinology.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc10" onclick="window.location.href='endocrinology-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 10</span>
+            <span class="course-name-short">ERB</span>
+            <span class="course-name-full">Endocrinology and Reproductive biology</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Endocrinology and Reproductive biology')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Endocrinology and Reproductive biology')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Endocrinology and Reproductive biology')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="animal-physiology.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc11" onclick="window.location.href='animal-physiology-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 11</span>
+            <span class="course-name-short">AP</span>
+            <span class="course-name-full">Animal Physiology</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Animal Physiology')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Animal Physiology')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Animal Physiology')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="biodiversity.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc12" onclick="window.location.href='biodiversity-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 12</span>
+            <span class="course-name-short">BCB</span>
+            <span class="course-name-full">Biodiversity and Conservation Biology</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Biodiversity and Conservation Biology')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Biodiversity and Conservation Biology')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Biodiversity and Conservation Biology')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="developmental-biology.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc13" onclick="window.location.href='developmental-biology-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 13</span>
+            <span class="course-name-short">DB</span>
+            <span class="course-name-full">Developmental Biology</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Developmental Biology')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Developmental Biology')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Developmental Biology')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="taxonomy-evolution.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc14" onclick="window.location.href='taxonomy-evolution-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 14</span>
+            <span class="course-name-short">TEA</span>
+            <span class="course-name-full">Taxonomy, Evolution and Adaptation</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Taxonomy, Evolution and Adaptation')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Taxonomy, Evolution and Adaptation')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Taxonomy, Evolution and Adaptation')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+<a href="animal-behaviour.html" style="text-decoration: none; color: inherit;">
+    <div class="course-strip dscc15" onclick="window.location.href='animal-behaviour-papers.html'">
+        <div class="course-info">
+            <span class="course-code">DSCC 15</span>
+            <span class="course-name-short">AB</span>
+            <span class="course-name-full">Animal Behaviour</span>
+            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+        </div>
+        <div class="course-actions">
+            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Animal Behaviour')" title="View Papers"><i class="fas fa-eye"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Animal Behaviour')" title="Download All"><i class="fas fa-download"></i></span>
+            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Animal Behaviour')" title="Share"><i class="fas fa-share-alt"></i></span>
+        </div>
+    </div>
+</a>
+
+
+
+<div style="height:20px;"></div>
+
+
+                <!-- Skill Enhancement Course -->
+                <a href="sec.html" style="text-decoration: none; color: inherit;">
+                    <div class="course-strip sec">
+                        <div class="course-info">
+                            <span class="course-code">SEC</span>
+                            <span class="course-name-short">SEC-M</span>
+                            <span class="course-name-full">Skill Enhancement Course</span>
+                            <span class="stats-badge"><i class="fas fa-file-pdf"></i> 10 papers</span>
+                        </div>
+                        <div class="course-actions">
+                            <span class="action-icon" onclick="event.stopPropagation(); viewPapers('Skill Enhancement Course')" title="View Papers"><i class="fas fa-eye"></i></span>
+                            <span class="action-icon" onclick="event.stopPropagation(); downloadPapers('Skill Enhancement Course')" title="Download All"><i class="fas fa-download"></i></span>
+                            <span class="action-icon" onclick="event.stopPropagation(); shareCourse('Skill Enhancement Course')" title="Share"><i class="fas fa-share-alt"></i></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Semester Info -->
+            <div class="info-box">
+                <div class="info-box-content">
+                    <span class="badge">
+                        <i class="fas fa-calendar-alt"></i> ALL Semester
+                    </span>
+                    <span style="color: var(--secondary-color);">
+                        <i class="fas fa-book"></i> 15 Courses • 
+                        <i class="fas fa-file-pdf"></i> 75 Papers • 
+                        <i class="fas fa-clock"></i> Updated 2025
+                    </span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CU Archive</h3>
+                    <p>An unofficial student-led initiative providing educational resources.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../../contributr.html">Contribute</a></li>
+                        <li><a href="../../disclaimer.html">Disclaimer</a></li>
+                        <li><a href="../../developers.html">Dev Team</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="../../report.html">Report Missing Paper</a></li>
+                        <li><a href="../../contact.html">Contact Us</a></li>
+                        <li><a href="../../guidelines/faq.html">FAQ</a></li>
+                        <li><a href="../../guidelines/privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 CU Archive. Student-led initiative.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="pdfViewerModal" class="modal">
+        <div class="modal-content viewer-modal">
+            <div class="modal-header">
+                <h3 id="pdfViewerTitle">Document Viewer</h3>
+                <span class="close-btn" onclick="closePdfViewer()">&times;</span>
+            </div>
+            <iframe id="pdfViewerFrame" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div id="shareModal" class="modal">
+        <div class="modal-content share-modal">
+            <span class="close-btn" onclick="closeShareModal()">&times;</span>
+            <div class="modal-header">
+                <h3>Share Document</h3>
+            </div>
+            <div id="sharePaperInfo" class="share-paper-name"></div>
+            
+            <div class="share-input-group">
+                <input type="text" id="shareLink" readonly>
+                <button onclick="copyShareLink()" class="copy-btn">Copy</button>
+            </div>
+            
+            <div id="copySuccess" class="copy-success-msg">Link Copied!</div>
+            
+            <div class="social-share-icons">
+                <i class="fab fa-whatsapp" onclick="shareViaWhatsApp()" title="Share on WhatsApp"></i>
+                <i class="fab fa-telegram" onclick="shareViaTelegram()" title="Share on Telegram"></i>
+                <i class="fas fa-envelope" onclick="shareViaEmail()" title="Share via Email"></i>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

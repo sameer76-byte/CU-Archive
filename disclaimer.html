@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Disclaimer for University Archive - Unofficial student-led initiative for educational purposes only.">
+    <title>Disclaimer | University Archive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for Light/Dark Mode */
+        :root {
+            --primary-color: #1A374D;
+            --secondary-color: #406882;
+            --accent-color: #FFD700;
+            --background-color: #F4F4F2;
+            --text-color: #333333;
+            --card-color: #FFFFFF;
+            --nav-color: #FFFFFF;
+            --footer-color: #1A374D;
+            --warning-bg: #FFF3CD;
+            --warning-border: #FFEAA7;
+            --warning-text: #856404;
+            --danger-bg: #F8D7DA;
+            --danger-border: #F5C6CB;
+            --danger-text: #721C24;
+            --info-bg: #D1ECF1;
+            --info-border: #BEE5EB;
+            --info-text: #0C5460;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary-color: #0d1c2a;
+            --secondary-color: #2a4a62;
+            --accent-color: #FFD700;
+            --background-color: #121212;
+            --text-color: #F4F4F2;
+            --card-color: #1e1e1e;
+            --nav-color: #1e1e1e;
+            --footer-color: #0d1c2a;
+            --warning-bg: #332701;
+            --warning-border: #665004;
+            --warning-text: #FFD700;
+            --danger-bg: #3C0B0F;
+            --danger-border: #721C24;
+            --danger-text: #F8D7DA;
+            --info-bg: #06262D;
+            --info-border: #0C5460;
+            --info-text: #D1ECF1;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+            color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .dark-mode a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--nav-color);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .dark-mode .logo {
+            color: var(--accent-color);
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .desktop-nav li {
+            margin-left: 1.5rem;
+        }
+
+        .desktop-nav a {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .dark-mode .mobile-nav-toggle {
+            color: var(--accent-color);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-color);
+            box-shadow: 0 5px 10px var(--shadow);
+            flex-direction: column;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav li {
+            list-style: none;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .mobile-nav a {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Mode Toggle */
+        .mode-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .dark-mode .mode-toggle {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1.5rem 0;
+            background-color: var(--card-color);
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb li {
+            margin-right: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: "/";
+            margin-left: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Disclaimer Content */
+        .disclaimer-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .disclaimer-card {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 2.5rem;
+        }
+
+        /* Alert Boxes */
+        .alert-box {
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 5px solid;
+        }
+
+        .alert-warning {
+            background-color: var(--warning-bg);
+            border-color: var(--warning-border);
+            color: var(--warning-text);
+        }
+
+        .alert-danger {
+            background-color: var(--danger-bg);
+            border-color: var(--danger-border);
+            color: var(--danger-text);
+        }
+
+        .alert-info {
+            background-color: var(--info-bg);
+            border-color: var(--info-border);
+            color: var(--info-text);
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            float: left;
+        }
+
+        .alert-content {
+            overflow: hidden;
+        }
+
+        .alert-content h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Takedown Policy */
+        .takedown-policy {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .takedown-policy h2 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .takedown-policy h2 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .contact-box {
+            background-color: var(--background-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid var(--secondary-color);
+        }
+
+        .contact-box h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .email-link {
+            font-weight: 600;
+            font-size: 1.1rem;
+            word-break: break-all;
+        }
+
+        /* List Styling */
+        .disclaimer-list {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .disclaimer-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-color);
+            color: #F4F4F2;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .disclaimer-card, .takedown-policy {
+                padding: 1.5rem;
+            }
+
+            .alert-icon {
+                float: none;
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        :focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>CU Archive</span>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav>
+                <ul class="desktop-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="disclaimer.html" class="active">Disclaimer</a></li>
+                    <li><a href="developers.html">Dev Team</a></li>
+                    <li><a href="contributr.html">Contribute</a></li>
+                    <li><a href="report.html">Report Missing Paper</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-right">
+                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <ul class="mobile-nav" id="mobileNav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="disclaimer.html" class="active">Disclaimer</a></li>
+            <li><a href="developers.html">Dev Team</a></li>
+            <li><a href="contributr.html">Contribute</a></li>
+            <li><a href="report.html">Report Missing Paper</a></li>
+            <li><a href="#">Dark Mode</a></li>
+        </ul>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <section class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><span>Disclaimer</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Website Disclaimer</h1>
+                <p>Important information about the nature, purpose, and policies of this website</p>
+            </div>
+
+            <!-- Disclaimer Content -->
+            <div class="disclaimer-content">
+                <!-- Warning Alert -->
+                <div class="alert-box alert-warning">
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="alert-content">
+                        <h3>Important Notice</h3>
+                        <p>This website is an unofficial, student-led initiative. Please read this disclaimer carefully before using any resources provided here.</p>
+                    </div>
+                </div>
+
+                <!-- Main Disclaimer Card -->
+                <div class="disclaimer-card">
+                    <h2><i class="fas fa-balance-scale"></i> Official Disclaimer Statement</h2>
+                    
+                    <div class="alert-box alert-danger">
+                        <div class="alert-icon">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h3>Not Affiliated or Endorsed</h3>
+                            <p>This website is <strong>NOT</strong> affiliated with, endorsed by, or connected to the University of Calcutta or any other official educational organization or institution.</p>
+                        </div>
+                    </div>
+
+                    <p>This platform is an <strong>unofficial, student-led initiative</strong> created to help fellow students access educational resources. The materials provided here are collected from various sources and organized for convenience.</p>
+
+                    <h3>Purpose of This Website</h3>
+                    <p>All resources available on this website, including but not limited to:</p>
+                    <ul class="disclaimer-list">
+                        <li>Previous year question papers</li>
+                        <li>Sample papers</li>
+                        <li>Study materials</li>
+                        <li>Educational resources</li>
+                    </ul>
+                    <p>...are provided <strong>solely for educational and reference purposes</strong> to assist students in their academic preparation.</p>
+
+                    <h3>Accuracy and Reliability</h3>
+                    <p>While we strive to provide accurate and up-to-date information:</p>
+                    <ul class="disclaimer-list">
+                        <li>We do not guarantee the completeness, accuracy, or reliability of any materials</li>
+                        <li>Content may contain errors or inaccuracies</li>
+                        <li>Official university materials should always take precedence</li>
+                        <li>Users should verify information with official sources</li>
+                    </ul>
+
+                    <div class="alert-box alert-info">
+                        <div class="alert-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h3>Educational Use Only</h3>
+                            <p>All materials are intended for personal educational use. Commercial use, redistribution, or any use that violates copyright laws is strictly prohibited.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Takedown Policy -->
+                <div class="takedown-policy">
+                    <h2><i class="fas fa-gavel"></i> Take-Down Policy</h2>
+                    
+                    <div class="alert-box alert-info">
+                        <div class="alert-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h3>Respect for Intellectual Property</h3>
+                            <p>We respect intellectual property rights and are committed to addressing any copyright concerns promptly.</p>
+                        </div>
+                    </div>
+
+                    <h3>Copyright Concerns</h3>
+                    <p>If you are an official representative of the University of Calcutta, a copyright holder, or believe that any content on this website:</p>
+                    <ul class="disclaimer-list">
+                        <li>Infringes upon copyright or intellectual property rights</li>
+                        <li>Should not be publicly available</li>
+                        <li>Needs to be removed for any legitimate reason</li>
+                    </ul>
+                    
+                    <p>...please contact us immediately using the information below.</p>
+
+                    <h3>Removal Process</h3>
+                    <p>Upon receiving a valid takedown request:</p>
+                    <ul class="disclaimer-list">
+                        <li>We will acknowledge your request within <strong>24 hours</strong></li>
+                        <li>We will remove the concerned content within <strong>48 hours</strong> of verification</li>
+                        <li>We will provide confirmation once the content has been removed</li>
+                    </ul>
+
+                    <div class="contact-box">
+                        <h4>Contact for Takedown Requests:</h4>
+                        <p><i class="fas fa-envelope"></i> Email: <a href="mailto:copyright@cuarchive.example.com" class="email-link">copyright@cuarchive.example.com</a></p>
+                        <p><i class="fas fa-clock"></i> Response Time: Within 24 hours</p>
+                        <p><i class="fas fa-history"></i> Removal Timeframe: Within 48 hours of verification</p>
+                    </div>
+
+                    <h3>Information Required for Takedown Requests</h3>
+                    <p>To help us process your request efficiently, please include:</p>
+                    <ul class="disclaimer-list">
+                        <li>Your full name and official position/organization</li>
+                        <li>Contact information (email, phone)</li>
+                        <li>Specific URL(s) of the content to be removed</li>
+                        <li>Description of the content and reason for removal</li>
+                        <li>Proof of ownership/authority (if applicable)</li>
+                    </ul>
+                </div>
+
+                <!-- Final Note -->
+                <div class="alert-box alert-warning">
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="alert-content">
+                        <h3>User Responsibility</h3>
+                        <p>By using this website, you acknowledge and agree to this disclaimer. You assume full responsibility for how you use the materials provided and understand that this website and its maintainers are not liable for any outcomes resulting from your use of these resources.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CU Archive</h3>
+                    <p>An unofficial student-led initiative for educational resources.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Important Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                        <li><a href="developers.html">Dev Team</a></li>
+                        <li><a href="contributr.html">Contribute</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                        <li><a href="#">Take-Down Policy</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CU Archive. This is an unofficial, student-led initiative. Not affiliated with or endorsed by the University of Calcutta.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">All materials provided for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            
+            // Change icon based on state
+            const icon = mobileNavToggle.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                mobileNavToggle.setAttribute('aria-label', 'Close navigation menu');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            }
+        });
+        
+        // Dark Mode Toggle
+        const modeToggle = document.getElementById('modeToggle');
+        const modeIcon = modeToggle.querySelector('i');
+        
+        // Check for saved theme preference or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            modeIcon.classList.remove('fa-moon');
+            modeIcon.classList.add('fa-sun');
+        }
+        
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            // Change icon based on mode
+            if (document.body.classList.contains('dark-mode')) {
+                modeIcon.classList.remove('fa-moon');
+                modeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+                modeToggle.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+                modeIcon.classList.remove('fa-sun');
+                modeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+                modeToggle.setAttribute('aria-label', 'Switch to dark mode');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                const icon = mobileNavToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            });
+        });
+        
+        // Highlight current page in navigation
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

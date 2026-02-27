@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Report missing question papers to help improve CU Archive. Let us know what papers we're missing.">
+    <title>Report Missing Paper | CU Archive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for Light/Dark Mode */
+        :root {
+            --primary-color: #1A374D;
+            --secondary-color: #406882;
+            --accent-color: #FFD700;
+            --background-color: #F4F4F2;
+            --text-color: #333333;
+            --card-color: #FFFFFF;
+            --nav-color: #FFFFFF;
+            --footer-color: #1A374D;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --input-border: #ced4da;
+            --input-focus: #80bdff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(0, 0, 0, 0.15);
+        }
+
+        .dark-mode {
+            --primary-color: #0d1c2a;
+            --secondary-color: #2a4a62;
+            --accent-color: #FFD700;
+            --background-color: #121212;
+            --text-color: #F4F4F2;
+            --card-color: #1e1e1e;
+            --nav-color: #1e1e1e;
+            --footer-color: #0d1c2a;
+            --success-color: #218838;
+            --error-color: #c82333;
+            --warning-color: #e0a800;
+            --info-color: #138496;
+            --input-border: #495057;
+            --input-focus: #0062cc;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+            color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        .dark-mode a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--nav-color);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .dark-mode .logo {
+            color: var(--accent-color);
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .desktop-nav li {
+            margin-left: 1.5rem;
+        }
+
+        .desktop-nav a {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .desktop-nav a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .dark-mode .mobile-nav-toggle {
+            color: var(--accent-color);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-color);
+            box-shadow: 0 5px 10px var(--shadow);
+            flex-direction: column;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav li {
+            list-style: none;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .mobile-nav a {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .mobile-nav a.active {
+            color: var(--accent-color);
+            background-color: var(--background-color);
+        }
+
+        /* Mode Toggle */
+        .mode-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .dark-mode .mode-toggle {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1.5rem 0;
+            background-color: var(--card-color);
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb li {
+            margin-right: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: "/";
+            margin-left: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0 4rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dark-mode .page-header h1 {
+            background: linear-gradient(90deg, var(--accent-color), #FFED4E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Report Info Section */
+        .report-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-card {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Form Styles */
+        .report-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+        }
+
+        label span {
+            color: var(--error-color);
+            margin-left: 5px;
+        }
+
+        .label-help {
+            font-size: 0.85rem;
+            color: var(--secondary-color);
+            font-weight: normal;
+            margin-left: 0.5rem;
+        }
+
+        input, select, textarea {
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--input-border);
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+        }
+
+        /* Optional File Upload */
+        .file-upload-container {
+            border: 2px dashed var(--input-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        .file-upload-container:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(255, 215, 0, 0.05);
+        }
+
+        .file-upload-container.drag-over {
+            border-color: var(--info-color);
+            background-color: rgba(23, 162, 184, 0.1);
+        }
+
+        .file-upload-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .file-upload-text {
+            margin-bottom: 1rem;
+        }
+
+        .file-upload-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .file-upload-button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .file-info {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-top: 0.5rem;
+            word-break: break-all;
+        }
+
+        /* Validation Messages */
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .success-message {
+            color: var(--success-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Submit Button */
+        .submit-button {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: #e6c200;
+            transform: translateY(-2px);
+        }
+
+        .submit-button:disabled {
+            background-color: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Status Updates Section */
+        .status-section {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            border-left: 5px solid var(--info-color);
+        }
+
+        .status-section h3 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-section h3 i {
+            margin-right: 10px;
+            color: var(--info-color);
+        }
+
+        .status-timeline {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .status-item:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 2rem;
+            bottom: -1.5rem;
+            width: 2px;
+            background-color: var(--secondary-color);
+            opacity: 0.5;
+        }
+
+        .status-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+
+        .status-content {
+            flex: 1;
+        }
+
+        .status-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .status-desc {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFade 0.3s;
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-success .modal-icon {
+            color: var(--success-color);
+        }
+
+        .modal-error .modal-icon {
+            color: var(--error-color);
+        }
+
+        .modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal p {
+            margin-bottom: 2rem;
+        }
+
+        .modal-button {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .modal-button:hover {
+            background-color: #e6c200;
+        }
+
+        /* Search Existing Papers */
+        .search-section {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .search-section h3 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-section h3 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .quick-search {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-search-button {
+            background-color: var(--background-color);
+            border: 1px solid var(--input-border);
+            color: var(--text-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-search-button:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-color);
+            color: #F4F4F2;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .info-card {
+                padding: 1.5rem;
+            }
+
+            .quick-search {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        :focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>CU Archive</span>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav>
+                <ul class="desktop-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                    <li><a href="developers.html">Dev Team</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
+                    <li><a href="#" class="active">Report Missing Paper</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-right">
+                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <ul class="mobile-nav" id="mobileNav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="disclaimer.html">Disclaimer</a></li>
+            <li><a href="developers.html">Dev Team</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
+            <li><a href="#" class="active">Report Missing Paper</a></li>
+            <li><a href="#">Dark Mode</a></li>
+        </ul>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <section class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><span>Report Missing Paper</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>Report Missing Question Paper</h1>
+                <p>Help us improve CU Archive by letting us know which papers we're missing. Your reports help make the archive more complete.</p>
+            </div>
+
+            <!-- Report Info Cards -->
+            <div class="report-info">
+                <div class="info-card">
+                    <h3><i class="fas fa-search"></i> Check First</h3>
+                    <p>Before reporting, please use the search function to make sure the paper isn't already in our archive under a different name or category.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-info-circle"></i> Be Specific</h3>
+                    <p>The more details you provide, the easier it is for us to find and add the missing paper. Include course, subject, year, and any other relevant information.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><i class="fas fa-bell"></i> Get Notified</h3>
+                    <p>Provide your email if you'd like to be notified when the paper you reported is added to the archive (optional).</p>
+                </div>
+            </div>
+
+            <!-- Report Form -->
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Missing Paper Report Form</h2>
+                    <p>Fill out the form below to report a missing question paper</p>
+                </div>
+
+                <form id="reportForm" class="report-form">
+                    <!-- Reporter Information -->
+                    <div class="form-group">
+                        <label for="reporterName">Your Name <span>*</span></label>
+                        <input type="text" id="reporterName" name="reporterName" placeholder="Enter your name" required>
+                        <div class="error-message" id="nameError">Please enter your name</div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reporterEmail">Your Email</label>
+                            <input type="email" id="reporterEmail" name="reporterEmail" placeholder="Enter your email (optional)">
+                            <div class="error-message" id="emailError">Please enter a valid email address</div>
+                            <div class="success-message" id="emailHelp">We'll notify you when the paper is added (optional)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="urgency">Urgency Level</label>
+                            <select id="urgency" name="urgency">
+                                <option value="">Select urgency (optional)</option>
+                                <option value="low">Low - Whenever possible</option>
+                                <option value="medium">Medium - Before next semester</option>
+                                <option value="high">High - Needed for upcoming exams</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Paper Information -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="course">Course <span>*</span></label>
+                            <select id="course" name="course" required>
+                                <option value="">Select Course</option>
+                                <option value="BSc">BSc (Bachelor of Science)</option>
+                                <option value="BCom">BCom (Bachelor of Commerce)</option>
+                                <option value="BA">BA (Bachelor of Arts)</option>
+                                <option value="MSc">MSc (Master of Science)</option>
+                                <option value="MA">MA (Master of Arts)</option>
+                                <option value="Other">Other Course</option>
+                            </select>
+                            <div class="error-message" id="courseError">Please select a course</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject/Topic <span>*</span></label>
+                            <input type="text" id="subject" name="subject" placeholder="e.g., Mathematics, Computer Science, Economics" required>
+                            <div class="error-message" id="subjectError">Please enter the subject/topic</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="paperYear">Year <span>*</span></label>
+                            <select id="paperYear" name="paperYear" required>
+                                <option value="">Select Year</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                                <option value="2016">2016</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
+                                <option value="2013">2013</option>
+                                <option value="2012">2012</option>
+                                <option value="2011">2011</option>
+                                <option value="2010">2010</option>
+                                <option value="2009">2009</option>
+                                <option value="2008">2008</option>
+                                <option value="2007">2007</option>
+                                <option value="2006">2006</option>
+                                <option value="2005">2005</option>
+                                <option value="older">Older than 2005</option>
+                            </select>
+                            <div class="error-message" id="yearError">Please select a year</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="semester">Semester</label>
+                            <select id="semester" name="semester">
+                                <option value="">Select Semester (Optional)</option>
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                                <option value="7">Semester 7</option>
+                                <option value="8">Semester 8</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Paper Details -->
+                    <div class="form-group">
+                        <label for="paperType">Paper Type</label>
+                        <select id="paperType" name="paperType">
+                            <option value="">Select Paper Type (Optional)</option>
+                            <option value="final">Final Examination</option>
+                            <option value="midterm">Midterm Examination</option>
+                            <option value="supplementary">Supplementary Examination</option>
+                            <option value="term">Term Test</option>
+                            <option value="model">Model Paper</option>
+                            <option value="sample">Sample Paper</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paperDetails">Additional Paper Details <span>*</span> <span class="label-help">Be as specific as possible</span></label>
+                        <textarea id="paperDetails" name="paperDetails" rows="4" placeholder="Provide any additional details about the missing paper, such as specific topics covered, paper code, college/university, etc." required></textarea>
+                        <div class="error-message" id="detailsError">Please provide details about the missing paper</div>
+                    </div>
+
+                    <!-- Optional File Upload -->
+                    <div class="form-group">
+                        <label for="referenceUpload">Reference Material (Optional)</label>
+                        <div class="file-upload-container" id="fileUploadContainer">
+                            <div class="file-upload-icon">
+                                <i class="fas fa-paperclip"></i>
+                            </div>
+                            <div class="file-upload-text">
+                                <p>If you have a reference (screenshot, partial paper, syllabus, etc.)</p>
+                                <div class="file-upload-button" id="fileUploadButton">Choose File</div>
+                            </div>
+                            <input type="file" id="referenceUpload" name="referenceUpload" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display: none;">
+                            <div class="file-info">
+                                <p>Accepted formats: PDF, JPG, PNG, DOC (Max 5MB)</p>
+                                <p id="fileName" class="file-name">No file selected</p>
+                            </div>
+                        </div>
+                        <div class="error-message" id="fileError">Please upload a valid file (PDF, JPG, PNG, DOC - max 5MB)</div>
+                        <div class="success-message" id="fileSuccess">File uploaded successfully!</div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-button" id="submitButton">
+                        <i class="fas fa-paper-plane"></i> Submit Report
+                    </button>
+                </form>
+            </div>
+
+            <!-- Search Existing Papers -->
+            <!-- <div class="search-section">
+                <h3><i class="fas fa-search"></i> Search Existing Papers First</h3>
+                <p>Before reporting, try searching for the paper using these common categories:</p>
+                
+                <div class="quick-search">
+                    <button class="quick-search-button" data-course="BSc" data-year="2023">BSc 2023 Papers</button>
+                    <button class="quick-search-button" data-course="BCom" data-year="2022">BCom 2022 Papers</button>
+                    <button class="quick-search-button" data-course="BA" data-year="2021">BA 2021 Papers</button>
+                    <button class="quick-search-button" data-course="MSc" data-year="2023">MSc 2023 Papers</button>
+                </div>
+                
+                <p>If you still can't find the paper you're looking for, please complete the form above to report it as missing.</p>
+            </div> -->
+
+            <!-- Status Updates Section -->
+            <div class="status-section">
+                <h3><i class="fas fa-tasks"></i> What Happens After You Report</h3>
+                <p>Here's what you can expect after submitting a missing paper report:</p>
+                
+                <div class="status-timeline">
+                    <div class="status-item">
+                        <div class="status-icon">1</div>
+                        <div class="status-content">
+                            <div class="status-title">Report Received</div>
+                            <div class="status-desc">We'll send you a confirmation email (if provided) within 24 hours.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-item">
+                        <div class="status-icon">2</div>
+                        <div class="status-content">
+                            <div class="status-title">Verification</div>
+                            <div class="status-desc">Our team verifies the paper doesn't already exist in the archive under a different name.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-item">
+                        <div class="status-icon">3</div>
+                        <div class="status-content">
+                            <div class="status-title">Sourcing</div>
+                            <div class="status-desc">We attempt to source the paper from our network of contributors and university resources.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-item">
+                        <div class="status-icon">4</div>
+                        <div class="status-content">
+                            <div class="status-title">Addition to Archive</div>
+                            <div class="status-desc">If found, the paper is added to the archive within 1-4 weeks, depending on availability.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-item">
+                        <div class="status-icon">5</div>
+                        <div class="status-content">
+                            <div class="status-title">Notification</div>
+                            <div class="status-desc">You'll receive an email notification when the paper is available (if you provided your email).</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p><strong>Note:</strong> While we make every effort to source missing papers, we cannot guarantee that all reported papers will be found and added to the archive.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div class="modal modal-success" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Report Submitted Successfully!</h3>
+            <p>Thank you for helping improve CU Archive. Your missing paper report has been received.</p>
+            <p>We'll review your submission and work on sourcing the paper. If you provided an email, we'll notify you when it's added to the archive.</p>
+            <button class="modal-button" id="modalCloseButton">Close</button>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal modal-error" id="errorModal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h3>Report Submission Error</h3>
+            <p id="errorModalMessage">There was an error submitting your report. Please try again.</p>
+            <button class="modal-button" id="errorModalCloseButton">Close</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CU Archive</h3>
+                    <p>Your reports help us identify gaps in our collection and make the archive more complete for all students.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                        <li><a href="developers.html">Dev Team</a></li>
+                        <li><a href="contribute.html">Contribute</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Reporting Guidelines</h3>
+                    <ul class="footer-links">
+                        <li><a href="guidelines/index.html">Before You Report</a></li>
+                        <li><a href="guidelines/formats.html">Search Tips</a></li>
+                        <li><a href="guidelines/faq.html">Common Issues</a></li>
+                        <li><a href="guidelines/privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CU Archive. An unofficial, student-led initiative. Not affiliated with or endorsed by the University of Calcutta.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">All reported papers are for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            
+            const icon = mobileNavToggle.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                mobileNavToggle.setAttribute('aria-label', 'Close navigation menu');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            }
+        });
+        
+        // Dark Mode Toggle
+        const modeToggle = document.getElementById('modeToggle');
+        const modeIcon = modeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            modeIcon.classList.remove('fa-moon');
+            modeIcon.classList.add('fa-sun');
+        }
+        
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                modeIcon.classList.remove('fa-moon');
+                modeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+                modeToggle.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+                modeIcon.classList.remove('fa-sun');
+                modeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+                modeToggle.setAttribute('aria-label', 'Switch to dark mode');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                const icon = mobileNavToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            });
+        });
+        
+        // Highlight current page in navigation
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
+                link.classList.add('active');
+            }
+        });
+        
+        // File Upload Functionality
+        const fileUpload = document.getElementById('referenceUpload');
+        const fileUploadButton = document.getElementById('fileUploadButton');
+        const fileUploadContainer = document.getElementById('fileUploadContainer');
+        const fileName = document.getElementById('fileName');
+        const fileError = document.getElementById('fileError');
+        const fileSuccess = document.getElementById('fileSuccess');
+        
+        fileUploadButton.addEventListener('click', () => {
+            fileUpload.click();
+        });
+        
+        fileUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            handleFileSelection(file);
+        });
+        
+        // Drag and drop functionality
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileUploadContainer.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileUploadContainer.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileUploadContainer.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            fileUploadContainer.classList.add('drag-over');
+        }
+        
+        function unhighlight() {
+            fileUploadContainer.classList.remove('drag-over');
+        }
+        
+        fileUploadContainer.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const file = dt.files[0];
+            handleFileSelection(file);
+        });
+        
+        function handleFileSelection(file) {
+            if (!file) return;
+            
+            // Reset previous messages
+            fileError.style.display = 'none';
+            fileSuccess.style.display = 'none';
+            
+            // Validate file type
+            const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+            if (!allowedTypes.includes(file.type)) {
+                fileName.textContent = 'Invalid file type';
+                fileError.textContent = 'Please upload PDF, JPG, PNG, or DOC files only';
+                fileError.style.display = 'block';
+                fileUpload.value = '';
+                return;
+            }
+            
+            // Validate file size (5MB max)
+            const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+            if (file.size > maxSize) {
+                fileName.textContent = 'File too large';
+                fileError.textContent = 'File size exceeds 5MB limit';
+                fileError.style.display = 'block';
+                fileUpload.value = '';
+                return;
+            }
+            
+            // Update UI
+            fileName.textContent = file.name;
+            fileSuccess.style.display = 'block';
+        }
+        
+        // Form Validation and Submission
+        const form = document.getElementById('reportForm');
+        const submitButton = document.getElementById('submitButton');
+        const successModal = document.getElementById('successModal');
+        const errorModal = document.getElementById('errorModal');
+        const modalCloseButton = document.getElementById('modalCloseButton');
+        const errorModalCloseButton = document.getElementById('errorModalCloseButton');
+        const errorModalMessage = document.getElementById('errorModalMessage');
+        
+        // Form validation
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Reset error messages
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            let isValid = true;
+            
+            // Validate name
+            const nameInput = document.getElementById('reporterName');
+            if (!nameInput.value.trim()) {
+                document.getElementById('nameError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate email if provided
+            const emailInput = document.getElementById('reporterEmail');
+            if (emailInput.value.trim() && !validateEmail(emailInput.value)) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate course
+            const courseSelect = document.getElementById('course');
+            if (!courseSelect.value) {
+                document.getElementById('courseError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate subject
+            const subjectInput = document.getElementById('subject');
+            if (!subjectInput.value.trim()) {
+                document.getElementById('subjectError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate year
+            const yearSelect = document.getElementById('paperYear');
+            if (!yearSelect.value) {
+                document.getElementById('yearError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate paper details
+            const detailsInput = document.getElementById('paperDetails');
+            if (!detailsInput.value.trim()) {
+                document.getElementById('detailsError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate file if uploaded
+            if (fileUpload.files.length) {
+                const file = fileUpload.files[0];
+                const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+                if (!allowedTypes.includes(file.type)) {
+                    fileError.textContent = 'Please upload PDF, JPG, PNG, or DOC files only';
+                    fileError.style.display = 'block';
+                    isValid = false;
+                }
+                
+                const maxSize = 5 * 1024 * 1024;
+                if (file.size > maxSize) {
+                    fileError.textContent = 'File size exceeds 5MB limit';
+                    fileError.style.display = 'block';
+                    isValid = false;
+                }
+            }
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // Disable submit button
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            
+            // Simulate submission delay
+            setTimeout(() => {
+                // Simulate successful submission
+                successModal.style.display = 'flex';
+                
+                // Reset form
+                form.reset();
+                fileName.textContent = 'No file selected';
+                fileSuccess.style.display = 'none';
+                
+                // Re-enable submit button
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Report';
+            }, 1500);
+        });
+        
+        // Email validation helper
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // Modal close buttons
+        modalCloseButton.addEventListener('click', () => {
+            successModal.style.display = 'none';
+        });
+        
+        errorModalCloseButton.addEventListener('click', () => {
+            errorModal.style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                successModal.style.display = 'none';
+            }
+            if (e.target === errorModal) {
+                errorModal.style.display = 'none';
+            }
+        });
+        
+        // Quick search buttons
+        const quickSearchButtons = document.querySelectorAll('.quick-search-button');
+        quickSearchButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const course = button.getAttribute('data-course');
+                const year = button.getAttribute('data-year');
+                
+                // In a real implementation, this would redirect to search results
+                alert(`Searching for ${course} ${year} papers...\n\nIn a real implementation, this would redirect to the search results page.`);
+                
+                // Auto-fill the form with the selected values
+                document.getElementById('course').value = course;
+                document.getElementById('paperYear').value = year;
+                
+                // Scroll to the form
+                document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // Real-time validation for inputs
+        const inputs = form.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                validateField(input);
+            });
+            
+            // For email, validate on change
+            if (input.type === 'email') {
+                input.addEventListener('input', () => {
+                    if (input.value.trim()) {
+                        validateEmailField(input);
+                    }
+                });
+            }
+        });
+        
+        function validateField(field) {
+            const errorElement = document.getElementById(field.id + 'Error');
+            if (!errorElement) return;
+            
+            errorElement.style.display = 'none';
+            
+            if (field.hasAttribute('required') && !field.value.trim()) {
+                errorElement.style.display = 'block';
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function validateEmailField(field) {
+            const errorElement = document.getElementById(field.id + 'Error');
+            if (!errorElement) return;
+            
+            errorElement.style.display = 'none';
+            
+            if (field.value.trim() && !validateEmail(field.value)) {
+                errorElement.style.display = 'block';
+                return false;
+            }
+            
+            return true;
+        }
+    </script>
+</body>
+</html>

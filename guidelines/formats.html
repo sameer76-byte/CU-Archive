@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceptable Formats | CU Archive Guidelines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1A374D;
+            --secondary-color: #406882;
+            --accent-color: #FFD700;
+            --background-color: #F4F4F2;
+            --text-color: #333333;
+            --card-color: #FFFFFF;
+            --nav-color: #FFFFFF;
+            --footer-color: #1A374D;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary-color: #0d1c2a;
+            --secondary-color: #2a4a62;
+            --accent-color: #FFD700;
+            --background-color: #121212;
+            --text-color: #F4F4F2;
+            --card-color: #1e1e1e;
+            --nav-color: #1e1e1e;
+            --footer-color: #0d1c2a;
+            --success-color: #218838;
+            --warning-color: #e0a800;
+            --danger-color: #c82333;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+            color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        .dark-mode a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--nav-color);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .dark-mode .logo {
+            color: var(--accent-color);
+        }
+
+        .desktop-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .desktop-nav li {
+            margin-left: 1.5rem;
+        }
+
+        .desktop-nav a {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .desktop-nav a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .dark-mode .mobile-nav-toggle {
+            color: var(--accent-color);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-color);
+            box-shadow: 0 5px 10px var(--shadow);
+            flex-direction: column;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav li {
+            list-style: none;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .mobile-nav a {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .mobile-nav a.active {
+            color: var(--accent-color);
+            background-color: var(--background-color);
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .dark-mode .mode-toggle {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1.5rem 0;
+            background-color: var(--card-color);
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb li {
+            margin-right: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: "/";
+            margin-left: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dark-mode .page-header h1 {
+            background: linear-gradient(90deg, var(--accent-color), #FFED4E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Content Sections */
+        .content-container {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .section-header i {
+            margin-right: 15px;
+            color: var(--accent-color);
+            font-size: 1.8rem;
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .status-approved {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: var(--success-color);
+        }
+
+        .status-warning {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: var(--warning-color);
+        }
+
+        .status-rejected {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: var(--danger-color);
+        }
+
+        /* Tables */
+        .format-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .format-table th, .format-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--secondary-color);
+        }
+
+        .format-table th {
+            background-color: var(--background-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .dark-mode .format-table th {
+            color: var(--accent-color);
+        }
+
+        .format-table tr:hover {
+            background-color: var(--background-color);
+        }
+
+        /* Examples */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .example-card {
+            background-color: var(--background-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .example-card h4 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-card h4 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .example-good {
+            background-color: rgba(40, 167, 69, 0.1);
+            border-left-color: var(--success-color);
+        }
+
+        .example-bad {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-left-color: var(--danger-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-color);
+            color: #F4F4F2;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--secondary-color);
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .nav-button:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .nav-button i {
+            margin-right: 8px;
+        }
+
+        .prev-button i {
+            margin-right: 8px;
+        }
+
+        .next-button i {
+            margin-left: 8px;
+            margin-right: 0;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .content-container {
+                padding: 1.5rem;
+            }
+
+            .format-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>CU Archive</span>
+            </div>
+            
+            <nav>
+                <ul class="desktop-nav">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../disclaimer.html">Disclaimer</a></li>
+                    <li><a href="../developers.html">Dev Team</a></li>
+                    <li><a href="../contribute.html">Contribute</a></li>
+                    <li><a href="../report.html">Report Missing Paper</a></li>
+                    <li><a href="index.html" class="active">Guidelines</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-right">
+                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <ul class="mobile-nav" id="mobileNav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../disclaimer.html">Disclaimer</a></li>
+            <li><a href="../developers.html">Dev Team</a></li>
+            <li><a href="../contribute.html">Contribute</a></li>
+            <li><a href="../report.html">Report Missing Paper</a></li>
+            <li><a href="index.html" class="active">Guidelines</a></li>
+            <li><a href="#">Dark Mode</a></li>
+        </ul>
+    </header>
+
+    <section class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="index.html">Guidelines</a></li>
+                <li><span>Acceptable Formats</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Acceptable Formats</h1>
+                <p>Learn which file formats we accept for submissions, size limits, and naming conventions</p>
+            </div>
+
+            <!-- Primary Format Section -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-file-pdf"></i>
+                    <h2>Primary Format: PDF</h2>
+                </div>
+                
+                <p>PDF (Portable Document Format) is our <strong>preferred and primary format</strong> for all question papers. PDF files ensure document integrity, cross-platform compatibility, and maintain consistent formatting across all devices.</p>
+                
+                <h3>PDF Requirements</h3>
+                <div class="examples-grid">
+                    <div class="example-card example-good">
+                        <h4><i class="fas fa-check-circle"></i> Text-based PDFs</h4>
+                        <p><strong>Status:</strong> <span class="status-indicator status-approved">Preferred</span></p>
+                        <p>Created from digital sources (Word, LaTeX, etc.). These have searchable text and smaller file sizes.</p>
+                    </div>
+                    
+                    <div class="example-card example-good">
+                        <h4><i class="fas fa-check-circle"></i> Scanned PDFs</h4>
+                        <p><strong>Status:</strong> <span class="status-indicator status-approved">Accepted</span></p>
+                        <p>Created by scanning physical papers. Must be clear, legible, and properly oriented.</p>
+                    </div>
+                    
+                    <div class="example-card">
+                        <h4><i class="fas fa-info-circle"></i> File Size Limit</h4>
+                        <p><strong>Maximum:</strong> 10MB per file</p>
+                        <p>Larger files may be rejected. Compress scans if needed while maintaining readability.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Formats Section -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-file-alt"></i>
+                    <h2>Additional Formats</h2>
+                </div>
+                
+                <p>For supporting materials, screenshots, or reference documents, we also accept these formats:</p>
+                
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Format</th>
+                            <th>Status</th>
+                            <th>Purpose</th>
+                            <th>Maximum Size</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>JPG/JPEG</strong></td>
+                            <td><span class="status-indicator status-approved">Accepted</span></td>
+                            <td>Screenshots, photos of papers</td>
+                            <td>5MB</td>
+                            <td>High quality, clear images only</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PNG</strong></td>
+                            <td><span class="status-indicator status-approved">Accepted</span></td>
+                            <td>Screenshots, diagrams, charts</td>
+                            <td>5MB</td>
+                            <td>Lossless format for diagrams</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DOC/DOCX</strong></td>
+                            <td><span class="status-indicator status-warning">Limited Use</span></td>
+                            <td>Reference materials only</td>
+                            <td>5MB</td>
+                            <td>Not for question papers</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="example-card" style="margin-top: 2rem;">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Important Note</h4>
+                    <p>While we accept these additional formats for reference materials, <strong>question papers must be submitted as PDF files whenever possible</strong>. Other formats are for supplementary materials only.</p>
+                </div>
+            </div>
+
+            <!-- Unacceptable Formats Section -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-times-circle"></i>
+                    <h2>Unacceptable Formats</h2>
+                </div>
+                
+                <p>The following formats will be rejected automatically. Please avoid submitting files in these formats.</p>
+                
+                <table class="format-table">
+                    <thead>
+                        <tr>
+                            <th>Format</th>
+                            <th>Status</th>
+                            <th>Reason for Rejection</th>
+                            <th>Alternative</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ZIP/RAR/7Z</strong></td>
+                            <td><span class="status-indicator status-rejected">Not Accepted</span></td>
+                            <td>Archived files cannot be reviewed individually</td>
+                            <td>Submit individual files</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EXE/BAT/MSI</strong></td>
+                            <td><span class="status-indicator status-rejected">Not Accepted</span></td>
+                            <td>Security risk, executable files</td>
+                            <td>Convert to PDF</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Password-protected files</strong></td>
+                            <td><span class="status-indicator status-rejected">Not Accepted</span></td>
+                            <td>Cannot be reviewed or processed</td>
+                            <td>Remove password before submission</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Corrupted files</strong></td>
+                            <td><span class="status-indicator status-rejected">Not Accepted</span></td>
+                            <td>Cannot be opened or verified</td>
+                            <td>Check file integrity before submission</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Naming Convention Section -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-file-signature"></i>
+                    <h2>File Naming Convention</h2>
+                </div>
+                
+                <p>Properly naming your files helps us organize and categorize submissions efficiently. Follow this naming convention:</p>
+                
+                <div class="example-card example-good" style="margin: 2rem 0;">
+                    <h4><i class="fas fa-file-code"></i> Format: Course_Subject_Year_Semester.pdf</h4>
+                    <p><strong>Example:</strong> <code>BSc_Mathematics_2022_3.pdf</code></p>
+                    <p><strong>Breakdown:</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><strong>Course:</strong> BSc, BCom, BA, etc.</li>
+                        <li><strong>Subject:</strong> Mathematics, Computer Science, Economics</li>
+                        <li><strong>Year:</strong> 2022, 2021, 2020</li>
+                        <li><strong>Semester:</strong> 1, 2, 3, 4, 5, 6 (optional if not applicable)</li>
+                    </ul>
+                </div>
+                
+                <h3>Additional Examples</h3>
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <h4><i class="fas fa-check"></i> Good Examples</h4>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li><code>BCom_Accounting_2021_4.pdf</code></li>
+                            <li><code>BA_History_2020.pdf</code> (no semester)</li>
+                            <li><code>BSc_Physics_2019_Final.pdf</code> (paper type instead of semester)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="example-card example-bad">
+                        <h4><i class="fas fa-times"></i> Bad Examples</h4>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li><code>Document1.pdf</code> (too vague)</li>
+                            <li><code>scan0001.jpg</code> (generic name)</li>
+                            <li><code>my_paper_final_version_2_revised.pdf</code> (too long, unclear)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-button prev-button">
+                    <i class="fas fa-arrow-left"></i> Back to Guidelines Hub
+                </a>
+                <a href="quality.html" class="nav-button next-button">
+                    Next: Quality Standards <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CU Archive</h3>
+                    <p>An unofficial student-led initiative providing educational resources to help students succeed.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Guidelines</h3>
+                    <ul class="footer-links">
+                        <li><a href="formats.html" class="active">Acceptable Formats</a></li>
+                        <li><a href="quality.html">Quality Standards</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../contribute.html">Contribute Papers</a></li>
+                        <li><a href="../report.html">Report Missing Paper</a></li>
+                        <li><a href="../disclaimer.html">Disclaimer</a></li>
+                        <li><a href="../developers.html">Development Team</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CU Archive. An unofficial, student-led initiative. Not affiliated with or endorsed by the University of Calcutta.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">All content is provided for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            
+            const icon = mobileNavToggle.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                mobileNavToggle.setAttribute('aria-label', 'Close navigation menu');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            }
+        });
+        
+        // Dark Mode Toggle
+        const modeToggle = document.getElementById('modeToggle');
+        const modeIcon = modeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            modeIcon.classList.remove('fa-moon');
+            modeIcon.classList.add('fa-sun');
+        }
+        
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                modeIcon.classList.remove('fa-moon');
+                modeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+                modeToggle.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+                modeIcon.classList.remove('fa-sun');
+                modeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+                modeToggle.setAttribute('aria-label', 'Switch to dark mode');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                const icon = mobileNavToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            });
+        });
+    </script>
+</body>
+</html>

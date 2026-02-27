@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions | CU Archive Guidelines</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1A374D;
+            --secondary-color: #406882;
+            --accent-color: #FFD700;
+            --background-color: #F4F4F2;
+            --text-color: #333333;
+            --card-color: #FFFFFF;
+            --nav-color: #FFFFFF;
+            --footer-color: #1A374D;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary-color: #0d1c2a;
+            --secondary-color: #2a4a62;
+            --accent-color: #FFD700;
+            --background-color: #121212;
+            --text-color: #F4F4F2;
+            --card-color: #1e1e1e;
+            --nav-color: #1e1e1e;
+            --footer-color: #0d1c2a;
+            --success-color: #218838;
+            --warning-color: #e0a800;
+            --info-color: #138496;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+            color: var(--accent-color);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        .dark-mode a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--nav-color);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .dark-mode .logo {
+            color: var(--accent-color);
+        }
+
+        .desktop-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .desktop-nav li {
+            margin-left: 1.5rem;
+        }
+
+        .desktop-nav a {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .desktop-nav a.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .dark-mode .mobile-nav-toggle {
+            color: var(--accent-color);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-color);
+            box-shadow: 0 5px 10px var(--shadow);
+            flex-direction: column;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav li {
+            list-style: none;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .mobile-nav a {
+            display: block;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .mobile-nav a.active {
+            color: var(--accent-color);
+            background-color: var(--background-color);
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .dark-mode .mode-toggle {
+            color: var(--accent-color);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1.5rem 0;
+            background-color: var(--card-color);
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb li {
+            margin-right: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: "/";
+            margin-left: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dark-mode .page-header h1 {
+            background: linear-gradient(90deg, var(--accent-color), #FFED4E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* FAQ Categories */
+        .faq-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+        }
+
+        .category-button {
+            background-color: var(--card-color);
+            border: 2px solid var(--secondary-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-button:hover, .category-button.active {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border-color: var(--accent-color);
+        }
+
+        /* FAQ Section */
+        .content-container {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .section-header i {
+            margin-right: 15px;
+            color: var(--accent-color);
+            font-size: 1.8rem;
+        }
+
+        /* FAQ Items */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .faq-item {
+            border: 1px solid var(--secondary-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background-color: var(--background-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .faq-question:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+
+        .faq-question .faq-number {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .faq-question-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-toggle {
+            transition: transform 0.3s;
+            color: var(--secondary-color);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+            color: var(--accent-color);
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            display: none;
+            border-top: 1px solid var(--secondary-color);
+            background-color: var(--card-color);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-answer ul, .faq-answer ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 5px 20px var(--shadow);
+            text-align: center;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .contact-section h2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-section h2 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-color);
+            color: #F4F4F2;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--secondary-color);
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .nav-button:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .nav-button i {
+            margin-right: 8px;
+        }
+
+        .prev-button i {
+            margin-right: 8px;
+        }
+
+        .next-button i {
+            margin-left: 8px;
+            margin-right: 0;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .content-container {
+                padding: 1.5rem;
+            }
+
+            .faq-categories {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+
+            .category-button {
+                white-space: nowrap;
+            }
+
+            .faq-question-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>CU Archive</span>
+            </div>
+            
+            <nav>
+                <ul class="desktop-nav">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../disclaimer.html">Disclaimer</a></li>
+                    <li><a href="../developers.html">Dev Team</a></li>
+                    <li><a href="../contribute.html">Contribute</a></li>
+                    <li><a href="../report.html">Report Missing Paper</a></li>
+                    <li><a href="index.html" class="active">Guidelines</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-right">
+                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <ul class="mobile-nav" id="mobileNav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../disclaimer.html">Disclaimer</a></li>
+            <li><a href="../developers.html">Dev Team</a></li>
+            <li><a href="../contribute.html">Contribute</a></li>
+            <li><a href="../report.html">Report Missing Paper</a></li>
+            <li><a href="index.html" class="active">Guidelines</a></li>
+            <li><a href="#">Dark Mode</a></li>
+        </ul>
+    </header>
+
+    <section class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="index.html">Guidelines</a></li>
+                <li><span>FAQs</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Frequently Asked Questions</h1>
+                <p>Find answers to common questions about contributing to CU Archive</p>
+            </div>
+
+            <!-- FAQ Categories -->
+            <div class="faq-categories">
+                <button class="category-button active" data-category="all">All Questions</button>
+                <button class="category-button" data-category="submission">Submission Process</button>
+                <button class="category-button" data-category="format">File Format & Quality</button>
+                <button class="category-button" data-category="review">Review & Approval</button>
+                <button class="category-button" data-category="account">Account & Attribution</button>
+                <button class="category-button" data-category="other">Other Questions</button>
+            </div>
+
+            <!-- FAQ Container -->
+            <div class="content-container">
+                <div class="section-header">
+                    <i class="fas fa-question-circle"></i>
+                    <h2>Common Questions & Answers</h2>
+                </div>
+                
+                <div class="faq-list">
+                    <!-- FAQ 1 -->
+                    <div class="faq-item" data-categories="submission,account">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-number">1</div>
+                                <span>Do I need to create an account to contribute?</span>
+                            </div>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>No, you don't need to create an account.</strong> You can submit papers anonymously or provide your name for attribution. We only require basic information about the paper you're submitting.</p>
+                            <p>When you submit a paper:</p>
+                            <ul>
+                                <li><strong>Name field is optional:</strong> Leave it blank to remain anonymous</li>
+                                <li><strong>Email field is optional:</strong> Provide it only if you want status updates</li>
+                                <li><strong>No login required:</strong> Submit directly through our contribution form</li>
+                                <li><strong>No password to remember:</strong> Simple one-time submission process</li>
+                            </ul>
+                            <p>This makes contributing quick and accessible for everyone while maintaining your privacy.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 2 -->
+                    <div class="faq-item" data-categories="review">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-number">2</div>
+                                <span>How long does it take for my submission to be reviewed?</span>
+                            </div>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Typically 3-7 days,</strong> but it can vary based on several factors:</p>
+                            <ul>
+                                <li><strong>Standard timeline:</strong> 3-7 business days for most submissions</li>
+                                <li><strong>Peak periods:</strong> Up to 2 weeks during exam seasons (May-June, Nov-Dec)</li>
+                                <li><strong>Complex submissions:</strong> Longer if additional verification is needed</li>
+                                <li><strong>Weekends/holidays:</strong> Review team may not be available</li>
+                            </ul>
+                            <p><strong>What affects review time:</strong></p>
+                            <ol>
+                                <li>Quality of submission (clear, complete submissions are reviewed faster)</li>
+                                <li>Volume of submissions (more submissions = longer queues)</li>
+                                <li>Time of year (exam seasons are busiest)</li>
+                                <li>Completeness of information (complete metadata speeds up review)</li>
+                            </ol>
+                            <p><strong>Notification:</strong> If you provide an email address, we'll notify you once your submission is approved or if we need additional information.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 3 -->
+                    <div class="faq-item" data-categories="submission">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-number">3</div>
+                                <span>Can I submit papers from previous universities or other institutions?</span>
+                            </div>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Our primary focus is University of Calcutta papers,</strong> but we may accept papers from:</p>
+                            <ul>
+                                <li><strong>Affiliated colleges:</strong> Colleges officially affiliated with University of Calcutta</li>
+                                <li><strong>Similar courses:</strong> Papers from other universities with equivalent courses</li>
+                                <li><strong>Relevant content:</strong> Papers that would benefit University of Calcutta students</li>
+                            </ul>
+                            <p><strong>Please ensure:</strong></p>
+                            <ol>
+                                <li>The paper is relevant to courses we support (BSc, BCom, BA, and related programs)</li>
+                                <li>You clearly indicate the source institution in the "Additional Notes" field</li>
+                                <li>The paper follows all our quality standards and format requirements</li>
+                                <li>You have the right to share the paper (no copyright violations)</li>
+                            </ol>
+                            <p><strong>Note:</strong> Papers from completely unrelated institutions or courses may be rejected if they don't serve our primary audience.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 4 -->
+                    <div class="faq-item" data-categories="format">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-number">4</div>
+                                <span>What if I don't have a digital copy, only a physical paper?</span>
+                            </div>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>You can digitize physical papers using several methods:</strong></p>
+                            
+                            <h4>Option 1: Smartphone Scanning Apps</h4>
+                            <ul>
+                                <li><strong>Google Drive:</strong> Has a built-in document scanner</li>
+                                <li><strong>Adobe Scan:</strong> Free app that converts photos to PDF</li>
+                                <li><strong>Microsoft Office Lens:</strong> Great for document scanning</li>
+                                <li><strong>CamScanner:</strong> Popular scanning app (free version available)</li>
+                            </ul>
+                            
+                            <h4>Option 2: Traditional Scanner</h4>
+                            <ul>
+                                <li>Scan at 300 DPI or higher for best quality</li>
+                                <li>Save as PDF format</li>
+                                <li>Use black and white or grayscale for text documents</li>
+                            </ul>
+                            
+                            <h4>Option 3: Library/Print Shop Services</h4>
+                            <ul>
+                                <li>Many libraries offer free scanning services</li>
+                                <li>Print shops can scan documents for a small fee</li>
+                                <li>University computer labs often have scanners</li>
+                            </ul>
+                            
+                            <p><strong>Tips for good results:</strong></p>
+                            <ul>
+                                <li>Ensure even lighting with no shadows or glare</li>
+                                <li>Place paper on a dark, contrasting surface</li>
+                                <li>Hold camera directly above the paper (not at an angle)</li>
+                                <li>Make sure entire page is in frame</li>
+                                <li>Check that all text is legible before submitting</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 5 -->
+                    <div class="faq-item" data-categories="submission">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-number">5</div>
+                                <span>Can I submit multiple papers at once?</span>
+                            </div>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Yes, but each paper must be submitted separately.</strong> Here's why and how:</p>
+                            
+                            <h4>Why Separate Submissions?</h4>
+                            <ul>
+                                <li><strong>Proper categorization:</strong> Each paper needs its own metadata (course, year, subject)</li>
+                                <li><strong>Individual review:</strong> Each paper is reviewed independently for quality</li>
+                                <li><strong>Better organization:</strong> Separate submissions make the archive more searchable</li>
+                                <li><strong>Faster processing:</strong> Bulk submissions often get stuck in review</li>
+                            </ul>
+                            
+                            <h4>How to Submit Multiple Papers Efficiently:</h4>
+                            <ol>
+                                <li><strong>Prepare all files first:</strong> Ensure each is properly named and in PDF format</li>
+                                <li><strong>Use the same browser session:</strong> Your form data may autofill for subsequent submissions</li>
+                                <li><strong>Submit systematically:</strong> Complete one submission before starting the next</li>
+                                <li><strong>Keep track:</strong> Note which papers you've submitted to avoid duplicates</li>
+                            </ol>
+                            
+                            <h4>What NOT to Do:</h4>
+                            <ul>
+                                <li><strong>Don't upload zip/rar files:</strong> They will be rejected</li>
+                                <li><strong>Don't combine multiple papers into one PDF:</strong> Each paper should be separate</li>
+                                <li><strong>Don't rush:</strong> Take time to provide accurate information for each submission</li>
+                            </ul>
+                            
+                            <p><strong>Tip:</strong> If you have a large collection (10+ papers), consider contacting us first at <a href="mailto:contributions@cuarchive.example.com">contributions@cuarchive.example.com</a> for guidance.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 6 -->
+                    <div class="faq-item" data-categories="review">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-number">6</div>
+                                <span>What happens if my submission is rejected?</span>
+                            </div>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>If your submission is rejected, you'll receive an email (if provided) explaining the reason.</strong> Here's what happens and what you can do:</p>
+                            
+                            <h4>Rejection Process:</h4>
+                            <ol>
+                                <li><strong>Notification:</strong> Email sent explaining specific reason(s) for rejection</li>
+                                <li><strong>Feedback:</strong> Clear instructions on what needs to be fixed</li>
+                                <li><strong>No penalty:</strong> Rejection doesn't affect future submissions</li>
+                                <li><strong>Opportunity to resubmit:</strong> You can fix issues and submit again</li>
+                            </ol>
+                            
+                            <h4>Common Reasons for Rejection:</h4>
+                            <ul>
+                                <li><strong>Poor quality scan:</strong> Blurry, dark, or illegible text</li>
+                                <li><strong>Incorrect format:</strong> Not PDF, or wrong file type for question papers</li>
+                                <li><strong>Missing information:</strong> Incomplete metadata (course, year, subject)</li>
+                                <li><strong>Duplicate:</strong> Paper already exists in archive</li>
+                                <li><strong>Incomplete paper:</strong> Missing pages or sections</li>
+                                <li><strong>Wrong content:</strong> Not a question paper, or contains answer key</li>
+                            </ul>
+                            
+                            <h4>How to Resubmit After Rejection:</h4>
+                            <ol>
+                                <li><strong>Read the rejection email carefully</strong> to understand the specific issues</li>
+                                <li><strong>Fix all mentioned problems</strong> before resubmitting</li>
+                                <li><strong>Use the same contribution form</strong> to submit again</li>
+                                <li><strong>Consider adding a note</strong> in "Additional Information" explaining corrections made</li>
+                            </ol>
+                            
+                            <p><strong>Important:</strong> There's no limit on resubmissions, but please ensure you address all mentioned issues before resubmitting to avoid repeated rejections.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 7 -->
+                    <div class="faq-item" data-categories="account">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-number">7</div>
+                                <span>How are contributors credited?</span>
+                            </div>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>We offer flexible attribution options to respect your privacy while recognizing your contribution.</strong></p>
+                            
+                            <h4>Attribution Options:</h4>
+                            <ul>
+                                <li><strong>Full Attribution:</strong> "Contributed by [Your Full Name]" displayed on paper's download page</li>
+                                <li><strong>Partial Attribution:</strong> "Contributed by [First Name]" or initials</li>
+                                <li><strong>Anonymous:</strong> No name displayed (simply shows "Contributed by a student")</li>
+                                <li><strong>Pseudonym:</strong> Use a nickname or username instead of real name</li>
+                            </ul>
+                            
+                            <h4>Where Attribution Appears:</h4>
+                            <ol>
+                                <li><strong>Paper Download Page:</strong> Below the paper details</li>
+                                <li><strong>Search Results:</strong> In paper metadata (if enabled)</li>
+                                <li><strong>Contributors Page:</strong> List of all contributors (optional)</li>
+                                <li><strong>Monthly Newsletter:</strong> Feature top contributors (optional)</li>
+                            </ol>
+                            
+                            <h4>Additional Recognition:</h4>
+                            <ul>
+                                <li><strong>Top Contributors:</strong> Featured on our contributors page</li>
+                                <li><strong>Special Thanks:</strong> Annual acknowledgment of major contributors</li>
+                                <li><strong>Social Media Shoutouts:</strong> With permission, we may feature contributors on our social media</li>
+                            </ul>
+                            
+                            <h4>Changing Attribution Later:</h4>
+                            <p>If you want to change how you're credited after submission:</p>
+                            <ol>
+                                <li><strong>From named to anonymous:</strong> Email us at <a href="mailto:contributions@cuarchive.example.com">contributions@cuarchive.example.com</a> with the paper details</li>
+                                <li><strong>From anonymous to named:</strong> Contact us with proof of contribution</li>
+                                <li><strong>Name correction:</strong> We can update your name if there was a typo</li>
+                            </ol>
+                            
+                            <p><strong>Privacy First:</strong> Your choice of attribution is always respected. We never share email addresses or other contact information publicly.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 8 -->
+                    <div class="faq-item" data-categories="review">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-number">8</div>
+                                <span>Can I update or remove a paper I've submitted?</span>
+                            </div>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Yes, but with some limitations.</strong> Here's what you can and cannot do:</p>
+                            
+                            <h4>What You CAN Do:</h4>
+                            <ul>
+                                <li><strong>Update metadata:</strong> Fix errors in course, year, subject information</li>
+                                <li><strong>Change attribution:</strong> Update your name or switch to anonymous</li>
+                                <li><strong>Replace file:</strong> Upload a better quality version of the same paper</li>
+                                <li><strong>Add information:</strong> Provide additional details in notes section</li>
+                            </ul>
+                            
+                            <h4>What You CANNOT Do:</h4>
+                            <ul>
+                                <li><strong>Remove published papers easily:</strong> Once published, papers generally remain in archive</li>
+                                <li><strong>Change to different paper:</strong> Cannot replace one paper with a completely different one</li>
+                                <li><strong>Bypass review:</strong> Updates still go through review process</li>
+                            </ul>
+                            
+                            <h4>How to Request Updates/Removal:</h4>
+                            <ol>
+                                <li><strong>Email us:</strong> Contact <a href="mailto:contributions@cuarchive.example.com">contributions@cuarchive.example.com</a></li>
+                                <li><strong>Include details:</strong> Paper title, submission date, your email (if used)</li>
+                                <li><strong>Explain request:</strong> Clearly state what needs to be changed and why</li>
+                                <li><strong>Provide proof:</strong> If requesting removal, explain the reason</li>
+                            </ol>
+                            
+                            <h4>Removal Circumstances:</h4>
+                            <p>Papers may be removed in these cases:</p>
+                            <ul>
+                                <li><strong>Copyright claim:</strong> Legitimate copyright holder requests removal</li>
+                                <li><strong>Incorrect paper:</strong> Wrong paper was submitted accidentally</li>
+                                <li><strong>Privacy concern:</strong> Personal information is included in the paper</li>
+                                <li><strong>Duplicate:</strong> Exact duplicate of another paper in archive</li>
+                            </ul>
+                            
+                            <p><strong>Note:</strong> We aim to preserve the educational archive, so removal is considered carefully. Updates are generally easier and faster than removals.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 9 -->
+                    <div class="faq-item" data-categories="submission">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-number">9</div>
+                                <span>Are there any restrictions on the age of papers I can submit?</span>
+                            </div>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>No, we accept papers from any year!</strong> Older papers are often particularly valuable for several reasons:</p>
+                            
+                            <h4>Why Older Papers Are Valuable:</h4>
+                            <ul>
+                                <li><strong>Historical perspective:</strong> Shows how subjects and examination patterns have evolved</li>
+                                <li><strong>Research value:</strong> Useful for academic research on education trends</li>
+                                <li><strong>Comparative studies:</strong> Helps students understand changes in curriculum</li>
+                                <li><strong>Rare finds:</strong> Older papers are often harder to find, making them more valuable</li>
+                                <li><strong>Comprehensive archive:</strong> A complete historical record benefits everyone</li>
+                            </ul>
+                            
+                            <h4>Special Considerations for Older Papers:</h4>
+                            <ol>
+                                <li><strong>Scan quality:</strong> Older papers may need careful scanning due to paper condition</li>
+                                <li><strong>Metadata accuracy:</strong> Ensure course/subject names are correct for the time period</li>
+                                <li><strong>Legibility:</strong> Faded ink or poor paper quality may affect readability</li>
+                                <li><strong>Historical context:</strong> Add notes about any historical significance in "Additional Notes"</li>
+                            </ol>
+                            
+                            <h4>Age Categories:</h4>
+                            <ul>
+                                <li><strong>Recent (0-5 years):</strong> Most relevant for current students</li>
+                                <li><strong>Mid-range (6-15 years):</strong> Shows recent curriculum changes</li>
+                                <li><strong>Historical (16+ years):</strong> Valuable for research and historical perspective</li>
+                                <li><strong>Very old (pre-2000):</strong> Rare and particularly valuable for archive completeness</li>
+                            </ul>
+                            
+                            <h4>Digitizing Old Papers:</h4>
+                            <p>If you have fragile or delicate old papers:</p>
+                            <ul>
+                                <li><strong>Handle carefully:</strong> Avoid further damage during scanning</li>
+                                <li><strong>Professional help:</strong> Consider professional scanning for very old/fragile papers</li>
+                                <li><strong>Multiple angles:</strong> Take photos from different angles if paper is curled or damaged</li>
+                                <li><strong>Note condition:</strong> Mention paper condition in submission notes</li>
+                            </ul>
+                            
+                            <p><strong>Encouragement:</strong> We especially welcome submissions of older papers, as they help create a more comprehensive historical archive for researchers and students alike.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 10 -->
+                    <div class="faq-item" data-categories="submission,other">
+                        <div class="faq-question">
+                            <div class="faq-question-content">
+                                <div class="faq-number">10</div>
+                                <span>What if I'm not sure about the course or subject of a paper?</span>
+                            </div>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>It's better to submit with partial information than not at all!</strong> Here's what to do when you're uncertain:</p>
+                            
+                            <h4>When You're Unsure:</h4>
+                            <ol>
+                                <li><strong>Provide what you know:</strong> Fill in the fields you're certain about</li>
+                                <li><strong>Use "Additional Notes":</strong> Explain your uncertainties here</li>
+                                <li><strong>Make educated guesses:</strong> Use your best judgment for uncertain fields</li>
+                                <li><strong>Indicate uncertainty:</strong> Add question marks or "possibly" in uncertain fields</li>
+                            </ol>
+                            
+                            <h4>Specific Guidance:</h4>
+                            <ul>
+                                <li><strong>Course unsure:</strong> Select "Other Course" and explain in notes</li>
+                                <li><strong>Year unsure:</strong> Make your best estimate based on paper style/content</li>
+                                <li><strong>Subject unsure:</strong> List possible subjects separated by slashes (e.g., "Physics/Chemistry")</li>
+                                <li><strong>Semester unsure:</strong> Leave blank if completely unknown</li>
+                            </ul>
+                            
+                            <h4>What Our Review Team Does:</h4>
+                            <p>When we receive submissions with uncertain information:</p>
+                            <ol>
+                                <li><strong>Research:</strong> We try to verify information based on paper content</li>
+                                <li><strong>Contact you:</strong> If email provided, we may ask for clarification</li>
+                                <li><strong>Expert consultation:</strong> We consult subject experts when needed</li>
+                                <li><strong>Make best determination:</strong> Based on available information</li>
+                            </ol>
+                            
+                            <h4>Examples of How to Handle Uncertainty:</h4>
+                            <ul>
+                                <li><strong>Instead of leaving blank:</strong> "BSc (possibly)" in course field</li>
+                                <li><strong>Instead of guessing:</strong> "Mathematics or Statistics" in subject field</li>
+                                <li><strong>In notes field:</strong> "Found this paper in old notes, not sure of exact year but appears to be from 2015-2018 based on question style"</li>
+                                <li><strong>When completely unsure:</strong> "Unknown course - appears to be science related based on content"</li>
+                            </ul>
+                            
+                            <p><strong>Important:</strong> It's always better to submit a paper with some uncertainty than to not submit it at all. Many students may still find it useful even with incomplete metadata, and our review team can often help fill in the gaps.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="contact-section">
+                <h2><i class="fas fa-comments"></i> Still Have Questions?</h2>
+                <p>If you couldn't find the answer to your question here, please contact our support team. We're here to help!</p>
+                <p style="margin-top: 1.5rem;">
+                    <a href="mailto:support@cuarchive.example.com" style="background-color: var(--accent-color); color: var(--primary-color); padding: 0.8rem 1.5rem; border-radius: 5px; font-weight: 600; display: inline-block;">
+                        <i class="fas fa-envelope"></i> Email Support Team
+                    </a>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--secondary-color);">
+                    We typically respond within 24-48 hours
+                </p>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="nav-buttons">
+                <a href="privacy.html" class="nav-button prev-button">
+                    <i class="fas fa-arrow-left"></i> Previous: Privacy Policy
+                </a>
+                <a href="index.html" class="nav-button next-button">
+                    Back to Guidelines Hub <i class="fas fa-home"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CU Archive</h3>
+                    <p>An unofficial student-led initiative providing educational resources to help students succeed.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Guidelines</h3>
+                    <ul class="footer-links">
+                        <li><a href="formats.html">Acceptable Formats</a></li>
+                        <li><a href="quality.html">Quality Standards</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="faq.html" class="active">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../contribute.html">Contribute Papers</a></li>
+                        <li><a href="../report.html">Report Missing Paper</a></li>
+                        <li><a href="../disclaimer.html">Disclaimer</a></li>
+                        <li><a href="../developers.html">Development Team</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CU Archive. An unofficial, student-led initiative. Not affiliated with or endorsed by the University of Calcutta.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">All content is provided for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            
+            const icon = mobileNavToggle.querySelector('i');
+            if (mobileNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                mobileNavToggle.setAttribute('aria-label', 'Close navigation menu');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            }
+        });
+        
+        // Dark Mode Toggle
+        const modeToggle = document.getElementById('modeToggle');
+        const modeIcon = modeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            modeIcon.classList.remove('fa-moon');
+            modeIcon.classList.add('fa-sun');
+        }
+        
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                modeIcon.classList.remove('fa-moon');
+                modeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+                modeToggle.setAttribute('aria-label', 'Switch to light mode');
+            } else {
+                modeIcon.classList.remove('fa-sun');
+                modeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+                modeToggle.setAttribute('aria-label', 'Switch to dark mode');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                const icon = mobileNavToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            });
+        });
+        
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // If the clicked item wasn't active, open it
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+        
+        // FAQ Category Filtering
+        const categoryButtons = document.querySelectorAll('.category-button');
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const selectedCategory = button.getAttribute('data-category');
+                
+                // Show/hide FAQ items based on category
+                faqItems.forEach(item => {
+                    const categories = item.getAttribute('data-categories').split(',');
+                    
+                    if (selectedCategory === 'all' || categories.includes(selectedCategory)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Open first visible FAQ item
+                const firstVisibleItem = document.querySelector('.faq-item[style="display: block;"]');
+                if (firstVisibleItem) {
+                    // Close all first
+                    faqItems.forEach(item => item.classList.remove('active'));
+                    // Open first visible
+                    firstVisibleItem.classList.add('active');
+                }
+            });
+        });
+        
+        // Open first FAQ item by default
+        if (faqItems.length > 0) {
+            faqItems[0].classList.add('active');
+        }
+    </script>
+</body>
+</html>
