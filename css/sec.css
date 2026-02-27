@@ -13,9 +13,9 @@
     --shadow-hover: rgba(0, 0, 0, 0.15);
     
     /* SEC Course Colors */
-    --excel-color: #1D6F42;      /* Excel Green */
-    --web-color: #E44D26;         /* HTML Orange/Red */
-    --app-color: #4285F4;         /* Google Blue */
+    --sec1-color: #1D6F42;      /* Green for SEC 1 - Data Visualization */
+    --sec2-color: #E44D26;       /* Orange/Red for SEC 2 - Web Development */
+    --sec3-color: #4285F4;       /* Blue for SEC 3 - App Development */
 }
 
 .dark-mode {
@@ -32,9 +32,9 @@
     --shadow-hover: rgba(0, 0, 0, 0.4);
     
     /* Dark Mode SEC Colors */
-    --excel-color: #2D8C5A;
-    --web-color: #F16B4A;
-    --app-color: #6C9EF8;
+    --sec1-color: #2D8C5A;
+    --sec2-color: #F16B4A;
+    --sec3-color: #6C9EF8;
 }
 
 * {
@@ -320,16 +320,17 @@ header {
     border-color: var(--accent-color);
 }
 
-.sec-card.excel {
-    border-top: 5px solid var(--excel-color);
+/* SEC Card Colors - Using sec1, sec2, sec3 classes */
+.sec-card.sec1 {
+    border-top: 5px solid var(--sec1-color);
 }
 
-.sec-card.web {
-    border-top: 5px solid var(--web-color);
+.sec-card.sec2 {
+    border-top: 5px solid var(--sec2-color);
 }
 
-.sec-card.app {
-    border-top: 5px solid var(--app-color);
+.sec-card.sec3 {
+    border-top: 5px solid var(--sec3-color);
 }
 
 .sec-header {
@@ -350,16 +351,17 @@ header {
     color: white;
 }
 
-.sec-card.excel .sec-icon {
-    background: linear-gradient(135deg, var(--excel-color), #2D8C5A);
+/* Icon backgrounds */
+.sec-card.sec1 .sec-icon {
+    background: linear-gradient(135deg, var(--sec1-color), #2D8C5A);
 }
 
-.sec-card.web .sec-icon {
-    background: linear-gradient(135deg, var(--web-color), #F16B4A);
+.sec-card.sec2 .sec-icon {
+    background: linear-gradient(135deg, var(--sec2-color), #F16B4A);
 }
 
-.sec-card.app .sec-icon {
-    background: linear-gradient(135deg, var(--app-color), #6C9EF8);
+.sec-card.sec3 .sec-icon {
+    background: linear-gradient(135deg, var(--sec3-color), #6C9EF8);
 }
 
 .sec-code {
@@ -373,16 +375,17 @@ header {
     margin-bottom: 1rem;
 }
 
-.sec-card.excel .sec-code {
-    color: var(--excel-color);
+/* Code colors */
+.sec-card.sec1 .sec-code {
+    color: var(--sec1-color);
 }
 
-.sec-card.web .sec-code {
-    color: var(--web-color);
+.sec-card.sec2 .sec-code {
+    color: var(--sec2-color);
 }
 
-.sec-card.app .sec-code {
-    color: var(--app-color);
+.sec-card.sec3 .sec-code {
+    color: var(--sec3-color);
 }
 
 .sec-card h2 {
