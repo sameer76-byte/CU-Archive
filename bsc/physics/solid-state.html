@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solid State Physics | CU Archive</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/topic.css">
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>CU Archive</span>
+            </div>
+            
+            <nav>
+                <ul class="desktop-nav">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../disclaimer.html">Disclaimer</a></li>
+                    <li><a href="../../developers.html">Dev Team</a></li>
+                    <li><a href="../../contributr.html">Contribute</a></li>
+                    <li><a href="../../report.html">Report Missing Paper</a></li>
+                    <li><a href="../../guidelines/">Guidelines</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-right">
+                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <ul class="mobile-nav" id="mobileNav">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../../disclaimer.html">Disclaimer</a></li>
+            <li><a href="../../developers.html">Dev Team</a></li>
+            <li><a href="../../contributr.html">Contribute</a></li>
+            <li><a href="../../report.html">Report Missing Paper</a></li>
+            <li><a href="../../guidelines/">Guidelines</a></li>
+            <li><a href="#">Dark Mode</a></li>
+        </ul>
+    </header>
+
+    <section class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../bsc.html">BSc</a></li>
+                <li><a href="physics.html">Physics</a></li>
+                <li><span>Solid State Physics</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Solid State Physics</h1>
+                <p>Bachelor of Science (BSc) Physics - 5th Semester</p>
+            </div>
+
+            <div class="course-info">
+                <div class="course-details">
+                    <h2>Course: Solid State Physics (PHS-A-CC-5-12)</h2>
+                    <p><i class="fas fa-calendar-alt"></i> Papers from 2019-2023 • <i class="fas fa-file-pdf"></i> 6 Papers Available</p>
+                </div>
+                <div class="course-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Theory Papers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">2</div>
+                        <div class="stat-label">Practical Papers</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-bar">
+                <div class="filter-tabs">
+                    <span class="filter-tab active" data-filter="all">All Papers</span>
+                    <span class="filter-tab" data-filter="theory">Theory</span>
+                    <span class="filter-tab" data-filter="practical">Practical</span>
+                </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Search papers..." id="paperSearch">
+                    <button type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="papers-grid">
+                <div class="paper-card" data-type="theory" data-year="2023" data-semester="5">
+                    <div class="paper-info">
+                        <div class="paper-title">
+                            <i class="fas fa-cube"></i> Solid State Physics (Theory)
+                            <span class="drive-badge"><i class="fab fa-google-drive"></i> Drive</span>
+                        </div>
+                        <div class="paper-meta">
+                            <span><i class="fas fa-calendar"></i> 2023</span>
+                            <span><i class="fas fa-layer-group"></i> Semester 5</span>
+                            <span><i class="fas fa-clock"></i> 3 Hours</span>
+                            <span><i class="fas fa-tag"></i> Theory</span>
+                        </div>
+                    </div>
+                    <div class="paper-actions">
+                        <button class="action-btn view-btn" onclick="viewPaper('Solid State Physics Theory 2023', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="View"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn download-btn" onclick="downloadPaper('Solid State Physics Theory 2023', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Download"><i class="fas fa-download"></i></button>
+                        <button class="action-btn share-btn" onclick="sharePaper('Solid State Physics Theory 2023', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Share"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+
+                <div class="paper-card" data-type="practical" data-year="2022" data-semester="5">
+                    <div class="paper-info">
+                        <div class="paper-title">
+                            <i class="fas fa-microscope"></i> Solid State Lab (Practical)
+                            <span class="drive-badge"><i class="fab fa-google-drive"></i> Drive</span>
+                        </div>
+                        <div class="paper-meta">
+                            <span><i class="fas fa-calendar"></i> 2022</span>
+                            <span><i class="fas fa-layer-group"></i> Semester 5</span>
+                            <span><i class="fas fa-clock"></i> 2 Hours</span>
+                            <span><i class="fas fa-tag"></i> Practical</span>
+                        </div>
+                    </div>
+                    <div class="paper-actions">
+                        <button class="action-btn view-btn" onclick="viewPaper('Solid State Practical 2022', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="View"><i class="fas fa-eye"></i></button>
+                        <button class="action-btn download-btn" onclick="downloadPaper('Solid State Practical 2022', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Download"><i class="fas fa-download"></i></button>
+                        <button class="action-btn share-btn" onclick="sharePaper('Solid State Practical 2022', '17p46iWoyDBGReFI6JBW9rs0FyDpKNba1')" title="Share"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CU Archive</h3>
+                    <p>An unofficial student-led initiative providing educational resources to help students succeed.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../../index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="../../disclaimer.html"><i class="fas fa-file-alt"></i> Disclaimer</a></li>
+                        <li><a href="../../developers.html"><i class="fas fa-users"></i> Dev Team</a></li>
+                        <li><a href="../../contributr.html"><i class="fas fa-hand-holding-heart"></i> Contribute</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="../../report.html"><i class="fas fa-exclamation-triangle"></i> Report Missing Papers</a></li>
+                        <li><a href="../../contact.html"><i class="fas fa-envelope"></i> Contact us</a></li>
+                        <li><a href="../../guidelines/faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                        <li><a href="../../guidelines/privacy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 CU Archive. An unofficial, student-led initiative.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">Papers hosted on <i class="fab fa-google-drive"></i> Google Drive</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="shareModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-share-alt"></i> Share Paper</h3>
+                <button class="modal-close" onclick="closeShareModal()">&times;</button>
+            </div>
+            <div class="paper-info-modal" id="sharePaperInfo">
+                <strong>Solid State Physics</strong>
+            </div>
+            <div class="share-link-container">
+                <input type="text" id="shareLink" value="" readonly>
+                <button onclick="copyShareLink()"><i class="fas fa-copy"></i> Copy</button>
+            </div>
+            <div class="copy-success" id="copySuccess">Link copied!</div>
+            <div class="share-options">
+                <div class="share-option whatsapp" onclick="shareViaWhatsApp()"><i class="fab fa-whatsapp"></i></div>
+                <div class="share-option telegram" onclick="shareViaTelegram()"><i class="fab fa-telegram-plane"></i></div>
+                <div class="share-option email" onclick="shareViaEmail()"><i class="fas fa-envelope"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal pdf-viewer-modal" id="pdfViewerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-file-pdf"></i> <span id="pdfViewerTitle">Solid State Physics</span></h3>
+                <button class="modal-close" onclick="closePdfViewer()">&times;</button>
+            </div>
+            <div class="pdf-viewer-container">
+                <iframe id="pdfViewerFrame" src="about:blank" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/topic.js"></script>
+</body>
+</html>
