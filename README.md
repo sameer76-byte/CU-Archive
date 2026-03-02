@@ -77,6 +77,8 @@ CU-Archive/
     ├── privacy.html
     └── formats.html
     ```
+
+```    
 ---
 
 ## 🔍 Search Functionality
