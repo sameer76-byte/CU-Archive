@@ -191,25 +191,23 @@ function shareCourse(course) {
     }
 }
 
-// Course Search Functionality
+// Universal Course Search
 document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('courseSearch');
-    // Select all the anchor tags that wrap the course-strips
-    const courseLinks = document.querySelectorAll('.course-strips > a');
-
+    const searchInput = document.getElementById('universalSearch');
+    
     if (searchInput) {
         searchInput.addEventListener('input', function(e) {
-            const term = e.target.value.toLowerCase();
+            const term = e.target.value.toLowerCase().trim();
+            // This selects all <a> tags inside the container holding your courses
+            const courseLinks = document.querySelectorAll('.course-strips > a');
 
             courseLinks.forEach(link => {
-                // Get the text content from the full name and short name
-                const courseNameFull = link.querySelector('.course-name-full').textContent.toLowerCase();
-                const courseNameShort = link.querySelector('.course-name-short').textContent.toLowerCase();
-                const courseCode = link.querySelector('.course-code').textContent.toLowerCase();
+                // We gather all possible text areas to search through
+                const content = link.innerText.toLowerCase();
 
-                // If the term matches any part of the course info, show it; otherwise, hide it
-                if (courseNameFull.includes(term) || courseNameShort.includes(term) || courseCode.includes(term)) {
-                    link.style.display = "";
+                // If the term matches ANY text inside the card (Code, Short Name, or Full Name)
+                if (content.includes(term)) {
+                    link.style.display = "block"; 
                 } else {
                     link.style.display = "none";
                 }
