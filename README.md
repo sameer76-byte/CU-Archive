@@ -233,7 +233,6 @@ Contributions are welcome! Follow these steps to contribute:
 | 6️⃣ | 📤 **Push** to branch | `git push origin feature/YourFeature` |
 | 7️⃣ | 🔍 **Open** Pull Request | Click "New Pull Request" on GitHub |
 
----
 
 ---
 
@@ -246,6 +245,7 @@ Use descriptive commit messages
 Update README if adding new subjects
 
 Ensure Google Drive links are public
+
 ---
 
 ## 👨‍💻 Developer
@@ -290,5 +290,44 @@ This project is developed for educational purposes only.
 ## ⭐ Support
 If you found this project useful for your studies, please consider supporting it:
 
-<div align="center"> <table> <tr> <td align="center">⭐</td> <td><strong>Star the repository</strong> - Show appreciation</td> </tr> <tr> <td align="center">🍴</td> <td><strong>Fork it</strong> - Use for your institution</td> </tr> <tr> <td align="center">📢</td> <td><strong>Share with friends</strong> - Help fellow students</td> </tr> <tr> <td align="center">📝</td> <td><strong>Contribute papers</strong> - Expand the archive</td> </tr> </table><br> <br><h3>Made with ❤️ for students, by a student</h3>
-<a href="https://github.com/sameer76-byte/CU-Archive/stargazers"> <img src="https://img.shields.io/github/stars/sameer76-byte/CU-Archive?style=for-the-badge&logo=github&color=yellow" alt="GitHub stars"> </a> <a href="https://github.com/sameer76-byte/CU-Archive/network/members"> <img src="https://img.shields.io/github/forks/sameer76-byte/CU-Archive?style=for-the-badge&logo=github&color=blue" alt="GitHub forks"> </a> <a href="https://github.com/sameer76-byte/CU-Archive/watchers"> <img src="https://img.shields.io/github/watchers/sameer76-byte/CU-Archive?style=for-the-badge&logo=github&color=green" alt="GitHub watchers"> </a><br> <br><p> <strong>⭐ Star this repo if it helped you!</strong> </p><p> <sub>Last updated: March 2025 | Version 1.0.0</sub> </p> </div> ```
+<div align="center">
+  <table style="border-collapse: collapse; border: none;">
+    <tr>
+      <td align="center">⭐</td>
+      <td><strong>Star the repository</strong> — Show your appreciation</td>
+    </tr>
+    <tr>
+      <td align="center">🍴</td>
+      <td><strong>Fork it</strong> — Use it for your own institution</td>
+    </tr>
+    <tr>
+      <td align="center">📢</td>
+      <td><strong>Share with friends</strong> — Help fellow students find resources</td>
+    </tr>
+    <tr>
+      <td align="center">📝</td>
+      <td><strong>Contribute papers</strong> — Help us expand the archive</td>
+    </tr>
+  </table>
+
+  <br>
+  <h3>Made with ❤️ for students, by a student</h3>
+
+  <p>
+    <a href="https://github.com/sameer76-byte/CU-Archive/stargazers">
+      <img src="https://img.shields.io/github/stars/sameer76-byte/CU-Archive?style=for-the-badge&logo=github&color=yellow" alt="GitHub stars">
+    </a>
+    <a href="https://github.com/sameer76-byte/CU-Archive/network/members">
+      <img src="https://img.shields.io/github/forks/sameer76-byte/CU-Archive?style=for-the-badge&logo=github&color=blue" alt="GitHub forks">
+    </a>
+    <a href="https://github.com/sameer76-byte/CU-Archive/watchers">
+      <img src="https://img.shields.io/github/watchers/sameer76-byte/CU-Archive?style=for-the-badge&logo=github&color=green" alt="GitHub watchers">
+    </a>
+  </p>
+
+  <p><strong>⭐ Star this repo if it helped you!</strong></p>
+  
+  <p>
+    <sub>Last updated: March 2026 | Version 1.1.0</sub>
+  </p>
+</div>
