@@ -277,9 +277,9 @@ Ensure Google Drive links are public
     </a>
   </p>
 </div>
----
 
 ---
+
 ## 📄 License
 This project is developed for educational purposes only.
 
