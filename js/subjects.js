@@ -190,3 +190,30 @@ function shareCourse(course) {
         prompt(`Share this course:`, url);
     }
 }
+
+// Course Search Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('courseSearch');
+    // Select all the anchor tags that wrap the course-strips
+    const courseLinks = document.querySelectorAll('.course-strips > a');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            const term = e.target.value.toLowerCase();
+
+            courseLinks.forEach(link => {
+                // Get the text content from the full name and short name
+                const courseNameFull = link.querySelector('.course-name-full').textContent.toLowerCase();
+                const courseNameShort = link.querySelector('.course-name-short').textContent.toLowerCase();
+                const courseCode = link.querySelector('.course-code').textContent.toLowerCase();
+
+                // If the term matches any part of the course info, show it; otherwise, hide it
+                if (courseNameFull.includes(term) || courseNameShort.includes(term) || courseCode.includes(term)) {
+                    link.style.display = "";
+                } else {
+                    link.style.display = "none";
+                }
+            });
+        });
+    }
+});

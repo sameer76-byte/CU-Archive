@@ -314,6 +314,13 @@ header {
 .dark-mode .course-strip.sec { border-left-color: #16A085; }
 .dark-mode .course-strip.syllabus { border-left-color: #FFC107; }
 
+
+.dark-mode #courseSearch {
+    background: #2d2d2d;
+    color: white;
+    border-color: #444;
+}
+
 /* Course Info */
 .course-info {
     display: flex;
