@@ -517,3 +517,114 @@ footer {
 .subject-section {
     animation: fadeIn 0.6s ease;
 }
+
+/* Search Bar Styles */
+.search-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    z-index: 1;
+}
+
+.search-input {
+    width: 100%;
+    padding: 1.2rem 1.2rem 1.2rem 50px;
+    font-size: 1.1rem;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    background-color: var(--card-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.search-clear {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: none;
+    padding: 5px;
+}
+
+.search-clear:hover {
+    color: var(--accent-color);
+}
+
+.search-results {
+    margin-top: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: var(--card-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: none;
+}
+
+.search-results.active {
+    display: block;
+}
+
+.search-result-item {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.search-result-item:hover {
+    background-color: rgba(var(--accent-rgb), 0.1);
+    padding-left: 1.5rem;
+}
+
+.search-result-item h4 {
+    margin: 0 0 0.3rem 0;
+    color: var(--text-color);
+}
+
+.search-result-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.no-results {
+    padding: 2rem;
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+.sticky-search {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--bg-color);
+    padding: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+}

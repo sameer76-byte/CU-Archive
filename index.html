@@ -263,6 +263,281 @@
             background-color: #e6c200;
         }
 
+        /* Global Search Styles */
+        .global-search-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 3rem 0;
+            margin: 2rem 0;
+            border-radius: 20px;
+        }
+
+        .dark-mode .global-search-section {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        }
+
+        .global-search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .global-search-container h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        .dark-mode .global-search-container h2 {
+            color: var(--accent-color);
+        }
+
+        .global-search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            border-radius: 60px;
+            padding: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .dark-mode .global-search-wrapper {
+            background: #2a2a2a;
+        }
+
+        .global-search-wrapper:focus-within {
+            border-color: #ff6347;
+            box-shadow: 0 15px 40px rgba(255, 99, 71, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 25px;
+            color: #ff6347;
+            font-size: 1.2rem;
+            z-index: 1;
+        }
+
+        .global-search-input {
+            flex: 1;
+            padding: 1.5rem 1.5rem 1.5rem 55px;
+            font-size: 1.1rem;
+            border: none;
+            background: transparent;
+            color: #333;
+            border-radius: 60px;
+        }
+
+        .dark-mode .global-search-input {
+            color: #f4f4f2;
+        }
+
+        .dark-mode .global-search-input::placeholder {
+            color: #999;
+        }
+
+        .global-search-input:focus {
+            outline: none;
+        }
+
+        .global-search-input::placeholder {
+            color: #999;
+        }
+
+        .global-search-button {
+            background: #ff6347;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .global-search-button:hover {
+            background: #ff4f2e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
+        }
+
+        .global-search-clear {
+            position: absolute;
+            right: 120px;
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .global-search-clear:hover {
+            background: rgba(255, 99, 71, 0.1);
+            color: #ff6347;
+        }
+
+        .global-search-results {
+            margin-top: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            max-height: 500px;
+            overflow-y: auto;
+            display: none;
+            border: 1px solid #eee;
+        }
+
+        .dark-mode .global-search-results {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+
+        .global-search-results.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .search-tips {
+            margin-top: 1rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .dark-mode .search-tips {
+            color: #aaa;
+        }
+
+        .search-tips i {
+            color: #ff6347;
+            margin-right: 0.5rem;
+        }
+
+        .results-header {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #ff6347;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dark-mode .results-header {
+            background: #333;
+            color: #ff6347;
+            border-color: #444;
+        }
+
+        .global-result-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .dark-mode .global-result-item {
+            border-color: #444;
+        }
+
+        .global-result-item:hover {
+            background: #f8f9fa;
+            padding-left: 2rem;
+        }
+
+        .dark-mode .global-result-item:hover {
+            background: #333;
+        }
+
+        .result-info h4 {
+            margin: 0 0 0.3rem 0;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .dark-mode .result-info h4 {
+            color: #f4f4f2;
+        }
+
+        .result-info p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .dark-mode .result-info p {
+            color: #aaa;
+        }
+
+        .result-badge {
+            background: #ff6347;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .result-stream {
+            background: white;
+            color: #ff6347;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            border: 1px solid #ff6347;
+        }
+
+        .dark-mode .result-stream {
+            background: #2a2a2a;
+        }
+
+        .highlight {
+            background: yellow;
+            color: black;
+            font-weight: 600;
+            padding: 0 2px;
+        }
+
+        .no-results {
+            padding: 3rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+            color: #ff6347;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Course Categories */
         .course-categories {
             padding: 2rem 0;
@@ -405,6 +680,42 @@
             .courses-grid {
                 grid-template-columns: 1fr;
             }
+
+            .global-search-section {
+                padding: 2rem 0;
+            }
+            
+            .global-search-container {
+                padding: 0 1rem;
+            }
+            
+            .global-search-wrapper {
+                flex-direction: column;
+                background: transparent;
+                box-shadow: none;
+                padding: 0;
+            }
+            
+            .global-search-input {
+                width: 100%;
+                padding: 1.2rem 1.2rem 1.2rem 45px;
+                background: white;
+                border-radius: 50px;
+            }
+
+            .dark-mode .global-search-input {
+                background: #2a2a2a;
+            }
+            
+            .global-search-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .global-search-clear {
+                right: 15px;
+                top: 18px;
+            }
         }
 
         /* Accessibility */
@@ -463,7 +774,6 @@
             <li><a href="developers.html">Dev Team</a></li>
             <li><a href="contributr.html">Contribute</a></li>
             <li><a href="report.html">Report Missing Paper</a></li>
-            <li><a href="#">Dark Mode</a></li>
         </ul>
     </header>
 
@@ -477,19 +787,37 @@
             </div>
         </section>
 
-        <!-- Search Section 
-        <section class="search-section">
+        <!-- Global Search Section - WORKING VERSION -->
+        <section class="global-search-section">
             <div class="container">
-                <div class="search-container">
-                    <h2>Search for Question Papers</h2>
-                    <div class="search-bar">
-                        <input type="text" class="search-input" placeholder="Search by course, year, or subject..." aria-label="Search question papers">
-                        <button class="search-button">Search</button>
+                <div class="global-search-container">
+                    <h2><i class="fas fa-search"></i> Search Question Papers Across All Streams</h2>
+                    
+                    <!-- Search Bar -->
+                    <div class="global-search-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="globalSearchInput" class="global-search-input" 
+                               placeholder="e.g., Physics, Computer Science, English, Accounting..." 
+                               autocomplete="off">
+                        <button class="global-search-button" id="globalSearchBtn">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <button class="global-search-clear" id="globalSearchClear" style="display: none;">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
-                    <p>Try searching for "BSc Mathematics 2022" or "BCom Accounting 2021"</p>
+                    
+                    <!-- Search Results Dropdown -->
+                    <div id="globalSearchResults" class="global-search-results"></div>
+                    
+                    <!-- Search Tips -->
+                    <div class="search-tips">
+                        <i class="fas fa-lightbulb"></i> 
+                        <span>Try searching: "Computer Science", "Physics", "English", "Accounting", "Mathematics"</span>
+                    </div>
                 </div>
             </div>
-        </section> -->
+        </section>
 
         <!-- Course Categories -->
         <section class="course-categories">
@@ -608,28 +936,6 @@
             }
         });
         
-        // Search functionality (basic)
-        const searchInput = document.querySelector('.search-input');
-        const searchButton = document.querySelector('.search-button');
-        
-        searchButton.addEventListener('click', () => {
-            const searchTerm = searchInput.value.trim();
-            if (searchTerm) {
-                alert(`Searching for: "${searchTerm}"\n\nIn a real implementation, this would redirect to search results.`);
-                // In a real app: window.location.href = `/search?q=${encodeURIComponent(searchTerm)}`;
-            } else {
-                alert('Please enter a search term');
-                searchInput.focus();
-            }
-        });
-        
-        // Allow pressing Enter to search
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                searchButton.click();
-            }
-        });
-        
         // Close mobile menu when clicking on a link
         const mobileLinks = document.querySelectorAll('.mobile-nav a');
         mobileLinks.forEach(link => {
@@ -639,6 +945,137 @@
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
                 mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+            });
+        });
+
+        // ===== GLOBAL SEARCH FUNCTIONALITY =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const globalSearchInput = document.getElementById('globalSearchInput');
+            const globalSearchBtn = document.getElementById('globalSearchBtn');
+            const globalSearchResults = document.getElementById('globalSearchResults');
+            const globalClearBtn = document.getElementById('globalSearchClear');
+            
+            if (!globalSearchInput) return;
+            
+            // Define all subjects
+            const allSubjects = [
+                // BSc Subjects
+                { name: 'Computer Science', stream: 'BSc', path: 'bsc/major/computer/computer.html', code: 'CMSM', description: 'Programming, algorithms, and software development' },
+                { name: 'Physics', stream: 'BSc', path: 'bsc/major/physics/physics.html', code: 'MN-PHY', description: 'Mechanics, electromagnetism, quantum physics' },
+                { name: 'Chemistry', stream: 'BSc', path: 'bsc/major/chemistry/chemistry.html', code: 'MN-CHM', description: 'Organic, inorganic, and physical chemistry' },
+                { name: 'Mathematics', stream: 'BSc', path: 'bsc/major/maths/maths.html', code: 'MTMH', description: 'Calculus, algebra, geometry, and statistics' },
+                { name: 'Botany', stream: 'BSc', path: 'bsc/major/botany/botany.html', code: 'MN-BOT', description: 'Plant biology, taxonomy, and ecology' },
+                { name: 'Zoology', stream: 'BSc', path: 'bsc/major/zoology/zoology.html', code: 'MN-ZOO', description: 'Animal biology, physiology, and evolution' },
+                { name: 'Microbiology', stream: 'BSc', path: 'bsc/major/microbiology/microbiology.html', code: 'MN-MCB', description: 'Bacteria, viruses, fungi, and microscopic life' },
+                { name: 'Biochemistry', stream: 'BSc', path: 'bsc/major/biochemistry/biochemistry.html', code: 'MN-BCH', description: 'Chemical processes in living organisms' },
+                { name: 'Electronics', stream: 'BSc', path: 'bsc/major/electronics/electronics.html', code: 'MN-ELC', description: 'Circuits, semiconductors, and digital systems' },
+                { name: 'Environmental Science', stream: 'BSc', path: 'bsc/major/environmental-science/environmental-science.html', code: 'MN-EVS', description: 'Ecology, pollution, and sustainability' },
+                { name: 'Geology', stream: 'BSc', path: 'bsc/major/geology/geology.html', code: 'MN-GEL', description: 'Earth structure, minerals, and rocks' },
+                { name: 'Psychology', stream: 'BSc', path: 'bsc/major/psychology/psychology.html', code: 'MN-PSY', description: 'Human behavior, mind, and mental processes' },
+                { name: 'Statistics', stream: 'BSc', path: 'bsc/major/statistics/statistics.html', code: 'MN-STA', description: 'Data analysis, probability, and statistical methods' },
+                { name: 'Anthropology', stream: 'BSc', path: 'bsc/major/anthropology/anthropology.html', code: 'MN-ANT', description: 'Human evolution, culture, and society' },
+                { name: 'Physiology', stream: 'BSc', path: 'bsc/major/physiology/physiology.html', code: 'MN-PHS', description: 'Body functions, organs, and systems' },
+                { name: 'Fisheries', stream: 'BSc', path: 'bsc/major/fisheries/fisheries.html', code: 'MN-FFF', description: 'Fish biology, aquaculture, and management' },
+                { name: 'Food & Nutrition', stream: 'BSc', path: 'bsc/major/food-nutrition/food-nutrition.html', code: 'MN-FNT', description: 'Diet, health, and nutritional science' },
+                { name: 'Geography', stream: 'BSc', path: 'bsc/major/geography/geography.html', code: 'MN-GEO', description: 'Physical landscapes and human-environment interaction' },
+                { name: 'Human Development', stream: 'BSc', path: 'bsc/major/human-development/human-development.html', code: 'MN-HMD', description: 'Growth and development across the lifespan' },
+                
+                // BA Subjects
+                { name: 'English', stream: 'BA', path: 'ba/major/english/english.html', code: 'BA-ENG', description: 'Literature, language, and composition' },
+                { name: 'History', stream: 'BA', path: 'ba/major/history/history.html', code: 'BA-HIS', description: 'World history, civilizations, and events' },
+                { name: 'Political Science', stream: 'BA', path: 'ba/major/political-science/political-science.html', code: 'BA-POL', description: 'Government, politics, and political theory' },
+                { name: 'Economics', stream: 'BA', path: 'ba/major/economics/economics.html', code: 'BA-ECO', description: 'Microeconomics, macroeconomics, and development' },
+                { name: 'Sociology', stream: 'BA', path: 'ba/major/sociology/sociology.html', code: 'BA-SOC', description: 'Social structures, institutions, and relationships' },
+                { name: 'Philosophy', stream: 'BA', path: 'ba/major/philosophy/philosophy.html', code: 'BA-PHI', description: 'Logic, ethics, and philosophical thought' },
+                
+                // BCom Subjects
+                { name: 'Accounting', stream: 'BCom', path: 'bcom/major/accounting/accounting.html', code: 'COM-ACC', description: 'Financial accounting, bookkeeping, and statements' },
+                { name: 'Finance', stream: 'BCom', path: 'bcom/major/finance/finance.html', code: 'COM-FIN', description: 'Corporate finance, investments, and markets' },
+                { name: 'Marketing', stream: 'BCom', path: 'bcom/major/marketing/marketing.html', code: 'COM-MKT', description: 'Marketing principles, consumer behavior, and strategy' },
+                { name: 'Business Management', stream: 'BCom', path: 'bcom/major/management/management.html', code: 'COM-MGT', description: 'Organizational behavior and business administration' },
+                { name: 'Economics', stream: 'BCom', path: 'bcom/major/economics/economics.html', code: 'COM-ECO', description: 'Business economics and market analysis' },
+                { name: 'Taxation', stream: 'BCom', path: 'bcom/major/taxation/taxation.html', code: 'COM-TAX', description: 'Income tax, GST, and tax planning' }
+            ];
+            
+            function performSearch() {
+                const query = globalSearchInput.value.trim().toLowerCase();
+                
+                if (query.length < 2) {
+                    globalSearchResults.classList.remove('active');
+                    return;
+                }
+                
+                const matches = allSubjects.filter(subject => 
+                    subject.name.toLowerCase().includes(query) ||
+                    subject.code.toLowerCase().includes(query) ||
+                    subject.description.toLowerCase().includes(query)
+                );
+                
+                displayResults(matches, query);
+            }
+            
+            function displayResults(matches, query) {
+                if (matches.length === 0) {
+                    globalSearchResults.innerHTML = `
+                        <div class="no-results">
+                            <i class="fas fa-search"></i>
+                            <h3>No results found for "${query}"</h3>
+                            <p>Try different keywords or check spelling</p>
+                        </div>`;
+                    globalSearchResults.classList.add('active');
+                    return;
+                }
+                
+                let html = `<div class="results-header">📚 Found ${matches.length} subject${matches.length > 1 ? 's' : ''}</div>`;
+                
+                matches.forEach(subject => {
+                    const highlightedName = subject.name.replace(new RegExp(query, 'gi'), match => `<span class="highlight">${match}</span>`);
+                    const highlightedDesc = subject.description.replace(new RegExp(query, 'gi'), match => `<span class="highlight">${match}</span>`);
+                    
+                    html += `
+                        <a href="${subject.path}" style="text-decoration: none;" class="global-result-item">
+                            <div class="result-info">
+                                <h4>${highlightedName} <span class="result-badge">${subject.code}</span></h4>
+                                <p>${highlightedDesc}</p>
+                            </div>
+                            <span class="result-stream">${subject.stream}</span>
+                        </a>
+                    `;
+                });
+                
+                globalSearchResults.innerHTML = html;
+                globalSearchResults.classList.add('active');
+            }
+            
+            // Event listeners
+            globalSearchBtn.addEventListener('click', performSearch);
+            globalSearchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') performSearch();
+            });
+            
+            globalSearchInput.addEventListener('input', (e) => {
+                globalClearBtn.style.display = e.target.value.length > 0 ? 'block' : 'none';
+                if (e.target.value.length >= 2) {
+                    performSearch();
+                } else {
+                    globalSearchResults.classList.remove('active');
+                }
+            });
+            
+            globalClearBtn.addEventListener('click', () => {
+                globalSearchInput.value = '';
+                globalSearchInput.focus();
+                globalClearBtn.style.display = 'none';
+                globalSearchResults.classList.remove('active');
+            });
+            
+            // Close results when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.global-search-wrapper') && 
+                    !e.target.closest('.global-search-results') &&
+                    !e.target.closest('.global-search-button')) {
+                    globalSearchResults.classList.remove('active');
+                }
             });
         });
     </script>

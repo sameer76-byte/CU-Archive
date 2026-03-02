@@ -143,3 +143,111 @@ document.addEventListener('DOMContentLoaded', () => {
     setupNavigation();
     setupScrollSpy();
 });
+
+// Search functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('subjectSearch');
+    const searchResults = document.getElementById('searchResults');
+    const clearButton = document.getElementById('clearSearch');
+    
+    // Get all subject cards
+    const subjectCards = document.querySelectorAll('.subject-card');
+    const subjects = [];
+    
+    // Build subjects array with their data
+    subjectCards.forEach(card => {
+        const link = card.closest('a');
+        if (link) {
+            subjects.push({
+                name: card.querySelector('h3').textContent,
+                code: card.querySelector('.subject-code')?.textContent || '',
+                description: card.querySelector('.subject-description')?.textContent || '',
+                url: link.getAttribute('href'),
+                category: card.closest('.subject-section')?.id || ''
+            });
+        }
+    });
+    
+    // Search function
+    function performSearch(query) {
+        query = query.toLowerCase().trim();
+        
+        if (query.length < 2) {
+            searchResults.classList.remove('active');
+            return;
+        }
+        
+        const matches = subjects.filter(subject => 
+            subject.name.toLowerCase().includes(query) ||
+            subject.code.toLowerCase().includes(query) ||
+            subject.description.toLowerCase().includes(query)
+        );
+        
+        displayResults(matches);
+    }
+    
+    // Display search results
+    function displayResults(matches) {
+        if (matches.length === 0) {
+            searchResults.innerHTML = '<div class="no-results">No subjects found matching your search.</div>';
+            searchResults.classList.add('active');
+            return;
+        }
+        
+        let html = '';
+        matches.slice(0, 10).forEach(subject => {
+            const categoryName = getCategoryName(subject.category);
+            html += `
+                <a href="${subject.url}" style="text-decoration: none;">
+                    <div class="search-result-item">
+                        <h4>${subject.name} <span style="color: var(--accent-color); font-size: 0.8rem;">${subject.code}</span></h4>
+                        <p>${subject.description.substring(0, 100)}${subject.description.length > 100 ? '...' : ''}</p>
+                        <small style="color: var(--accent-color);">${categoryName}</small>
+                    </div>
+                </a>
+            `;
+        });
+        
+        if (matches.length > 10) {
+            html += `<div class="search-result-item" style="text-align: center; color: var(--accent-color);">
+                + ${matches.length - 10} more results. Refine your search.
+            </div>`;
+        }
+        
+        searchResults.innerHTML = html;
+        searchResults.classList.add('active');
+    }
+    
+    // Helper function to get category name
+    function getCategoryName(category) {
+        const categories = {
+            'major': 'Major Subjects',
+            'minor': 'Minor Specializations',
+            'sec': 'SEC Courses',
+            'aec': 'AEC Courses',
+            'cvac': 'CVAC Courses'
+        };
+        return categories[category] || category;
+    }
+    
+    // Event listeners
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value;
+        performSearch(query);
+        clearButton.style.display = query.length > 0 ? 'block' : 'none';
+    });
+    
+    clearButton.addEventListener('click', () => {
+        searchInput.value = '';
+        searchInput.focus();
+        clearButton.style.display = 'none';
+        searchResults.classList.remove('active');
+    });
+    
+    // Close search results when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-container')) {
+            searchResults.classList.remove('active');
+        }
+    });
+});
