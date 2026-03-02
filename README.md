@@ -146,7 +146,7 @@ graph TD
     I --> J[📄 Subject Page]
     J --> K[📁 Choose Paper]
     K --> L[📥 View on Google Drive]
-    ```
+```   
 ---
 
 ## 💻 Tech Stack
@@ -250,7 +250,33 @@ Ensure Google Drive links are public
 
 ## 👨‍💻 Developer
 
-<div align="center"> <img src="https://img.shields.io/badge/Developer-Sameer%20Prasad-blue?style=for-the-badge" alt="Developer"> <h3>Sameer Prasad</h3> <p><em>B.Sc Computer Science Student</em></p> <p>Building scalable and practical academic tools for the student community.</p> <br> <p> 📧 <strong>Email:</strong> <a href="mailto:sameerprasad980@gmail.com">sameerprasad980@gmail.com</a> • 🔗 <strong>GitHub:</strong> <a href="https://github.com/sameer76-byte">@sameer76-byte</a> </p> <p> <a href="https://github.com/sameer76-byte"> <img src="https://img.shields.io/github/followers/sameer76-byte?style=social" alt="GitHub followers"> </a> </p> </div>
+<div align="center">
+  <img src="https://img.shields.io/badge/Developer-Sameer%20Prasad-blue?style=for-the-badge" alt="Developer">
+  
+  <br><br>
+
+  <img src="https://github.com/sameer76-byte.png?size=100" width="100" style="border-radius: 50%;" alt="Sameer Prasad">
+  
+  <h3>Sameer Prasad</h3>
+  <p><em>B.Sc Computer Science Student</em></p>
+  <p>Building scalable and practical academic tools for the student community.</p>
+  
+  <p>
+    <a href="mailto:sameerprasad980@gmail.com">
+      <img src="https://img.shields.io/badge/Email-sameerprasad980%40gmail.com-red?style=flat-square&logo=gmail" alt="Email">
+    </a>
+    &nbsp;&nbsp;
+    <a href="https://github.com/sameer76-byte">
+      <img src="https://img.shields.io/badge/GitHub-@sameer76--byte-black?style=flat-square&logo=github" alt="GitHub">
+    </a>
+  </p>
+
+  <p>
+    <a href="https://github.com/sameer76-byte">
+      <img src="https://img.shields.io/github/followers/sameer76-byte?style=social" alt="GitHub followers">
+    </a>
+  </p>
+</div>
 ---
 
 ---
