@@ -11,15 +11,14 @@ A structured, web-based Question Bank Platform designed for undergraduate studen
 
 ## 📌 Project Overview
 
-The Academic Question Bank System is a lightweight, static web project that allows students to browse, select, and view previous year question papers efficiently across multiple disciplines.
-
+The Academic Question Bank System is a lightweight, static web project that allows students to browse, select, and view previous year question papers efficiently across multiple disciplines. The platform now features Supabase integration for handling user contributions and paper reporting, while leveraging Google Drive for fast and scalable PDF storage.
 ### 🎓 Supported Streams
 
 | Stream | Subjects | Focus Areas |
 |--------|----------|-------------|
-| **B.Sc** (Bachelor of Science) | 30+ | Physics, Chemistry, Mathematics, Computer Science, Botany, Zoology |
+| **B.Sc** (Bachelor of Science) | 25+ | Physics, Chemistry, Mathematics, Computer Science, Botany, Zoology |
 | **B.A** (Bachelor of Arts) | 25+ | English, History, Political Science, Economics, Sociology |
-| **B.Com** (Bachelor of Commerce) | 20+ | Accounting, Finance, Marketing, Business Management, Taxation |
+| **B.Com** (Bachelor of Commerce) | 10+ | Accounting, Finance, Marketing, Business Management, Taxation |
 
 Each stream follows a consistent folder structure making it easy to navigate and maintain.
 
@@ -36,8 +35,8 @@ CU-Archive/
 ├── bcom.html            # B.Com stream overview
 ├── disclaimer.html      # Disclaimer page
 ├── developers.html      # Developer team info
-├── contributr.html      # Contribution guidelines
-├── report.html          # Report missing paper
+├── contribute.html      # 📤 Contribution form (Supabase + Google Drive)
+├── report.html          # 📥 Report missing paper (Supabase + Google Drive)
 ├── contact.html         # Contact page
 │
 ├── bsc/                 # B.Sc subjects
@@ -70,13 +69,15 @@ CU-Archive/
 │   └── subjects.css     # Main stylesheet
 │
 ├── js/
-│   └── subjects.js      # JavaScript functionality
+│   ├── subjects.js      # Core JavaScript functionality
+│   ├── supabase-client.js # Supabase configuration & connection
+│   └── contribute.js    # Contribution form handling
 │
 └── guidelines/          # Documentation
     ├── faq.html
     ├── privacy.html
     └── formats.html
-    ```
+        ```
 
 ```    
 ---
@@ -90,20 +91,19 @@ The platform features a **global search bar** on the homepage that allows studen
 - ⚡ **Real-time results** as you type
 - 🎯 Click results to **directly navigate** to subject papers
 
-![Search Demo](https://img.shields.io/badge/demo-search%20feature-blue)
-
 ---
 
 ## 📊 Content Scale
 
 | Category | Quantity |
 |----------|----------|
-| 📚 **B.Sc Subjects** | 30+ |
+| 📚 **B.Sc Subjects** | 25+ |
 | 📚 **B.A Subjects** | 25+ |
-| 📚 **B.Com Subjects** | 20+ |
+| 📚 **B.Com Subjects** | 10+ |
 | 📄 **Files per subject** | 16+ |
 | 📁 **SEC module files** | 4+ |
 | 📝 **Total Question Papers** | **2500+** |
+| 💾 **Supabase Tables** |	4 (contributions, reports, papers, users) |
 | ☁️ **Storage Type** | Google Drive |
 
 ---
@@ -131,21 +131,33 @@ Instead of storing heavy PDF files locally, this system uses:
 graph TD
     A[🏠 Home Page] --> B[🔍 Search Bar]
     A --> C[📚 Browse by Stream]
+    A --> D[📤 Contribute Paper]
+    A --> E[📥 Report Missing Paper]
     
-    B --> D[🔎 Search Results]
-    D --> E[📄 Subject Page]
+    B --> F[🔎 Search Results]
+    F --> G[📄 Subject Page]
     
-    C --> F[B.Sc]
-    C --> G[B.A]
-    C --> H[B.Com]
+    C --> H[B.Sc]
+    C --> I[B.A]
+    C --> J[B.Com]
     
-    F --> I[Select Subject]
-    G --> I
-    H --> I
+    H --> K[Select Subject]
+    I --> K
+    J --> K
     
-    I --> J[📄 Subject Page]
-    J --> K[📁 Choose Paper]
-    K --> L[📥 View on Google Drive]
+    K --> G
+    
+    G --> L[📁 Choose Paper]
+    L --> M[📥 View on Google Drive]
+    
+    D --> N[📝 Fill Contribution Form]
+    N --> O[📎 Upload PDF]
+    O --> P[💾 Save to Supabase]
+    P --> Q[✅ Await Review]
+    
+    E --> R[📝 Fill Report Form]
+    R --> S[💾 Save to Supabase]
+    S --> T[🔍 Admin Review]
 ```   
 ---
 
@@ -156,6 +168,7 @@ graph TD
 | **HTML5** | Structure & Content |
 | **CSS3** | Styling & Layout |
 | **JavaScript** | Interactivity |
+| **Supabase** |	Database & Backend |
 | **Google Drive** | Cloud Storage |
 | **Anchor Links** | Navigation |
 | **Font Awesome** | Icons|
@@ -172,8 +185,10 @@ graph TD
 | ✅ **Consistent Layout** | Uniform design across all streams |
 | ✅ **SEC Modules** | Separated Skill Enhancement Courses |
 | ✅ **Cloud Hosted** | All papers on Google Drive |
+| ✅ **Contribution System** |	Students can submit papers via Supabase |
+| ✅ **Report System** |	Track missing paper requests |
 | ✅ **Responsive UI** | Works on all devices |
-| ✅ **No Database** | Pure static files |
+| ✅ **No Database** | Pure static files with Supabase backend |
 | ✅ **Scalable** | Easy to add new content |
 | ✅ **Fast Loading** | No heavy PDF files locally |
 
@@ -189,7 +204,9 @@ graph TD
 | 📊 **Usage analytics** | Track popular papers |
 | 📥 **Download tracking** | Monitor paper access |
 | 🤖 **AI-based recommendations** | Smart paper suggestions |
-| 📱 ** PWA Support** | Offline access |
+| 📱 **PWA Support** | Offline access |
+| 🔔 **Email Notifications** |	Status updates via Supabase Edge Functions |
+|📈 **Admin Dashboard**	| Review contributions and reports |
 
 ---
 
