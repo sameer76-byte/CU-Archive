@@ -6,757 +6,547 @@
     <meta name="description" content="Find your year's question papers from the university archive. Browse BSc, BCom, and BA papers.">
     <title>CU Archive | Calcutta University Archive | Find Your Question Papers</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for Light/Dark Mode */
         :root {
-            --primary-color: #1A374D;
-            --secondary-color: #406882;
-            --accent-color: #FFD700;
-            --background-color: #F4F4F2;
-            --text-color: #333333;
-            --card-color: #FFFFFF;
-            --nav-color: #FFFFFF;
-            --footer-color: #1A374D;
+            --primary: #1A374D;
+            --secondary: #406882;
+            --accent: #FFD700;
+            --accent-dark: #e6c200;
+            --bg: #F4F4F2;
+            --text: #222222;
+            --card: #FFFFFF;
+            --nav: #FFFFFF;
+            --footer: #1A374D;
             --input-bg: #FFFFFF;
-            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+            --shadow-md: 0 6px 20px rgba(0,0,0,0.10);
+            --shadow-lg: 0 16px 40px rgba(0,0,0,0.13);
+            --border: #e5e7eb;
+            --muted: #6b7280;
+            --search-accent: #ff6347;
+            --search-accent-light: rgba(255,99,71,0.10);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --radius-pill: 999px;
         }
 
         .dark-mode {
-            --primary-color: #0d1c2a;
-            --secondary-color: #2a4a62;
-            --accent-color: #FFD700;
-            --background-color: #121212;
-            --text-color: #F4F4F2;
-            --card-color: #1e1e1e;
-            --nav-color: #1e1e1e;
-            --footer-color: #0d1c2a;
-            --input-bg: #2a2a2a;
-            --shadow: rgba(0, 0, 0, 0.3);
+            --primary: #0d1c2a;
+            --secondary: #2a4a62;
+            --accent: #FFD700;
+            --accent-dark: #e6c200;
+            --bg: #0f0f0f;
+            --text: #f0f0ee;
+            --card: #1a1a1a;
+            --nav: #141414;
+            --footer: #0d1c2a;
+            --input-bg: #1e1e1e;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+            --shadow-md: 0 6px 20px rgba(0,0,0,0.35);
+            --shadow-lg: 0 16px 40px rgba(0,0,0,0.45);
+            --border: #2a2a2a;
+            --muted: #9ca3af;
+            --search-accent: #ff6347;
+            --search-accent-light: rgba(255,99,71,0.12);
         }
 
-        /* Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Typography */
         h1, h2, h3, h4 {
+            font-family: 'Sora', sans-serif;
             font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
+            line-height: 1.25;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
         }
 
-        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
-            color: var(--accent-color);
-        }
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 { color: var(--accent); }
+        p { margin-bottom: 1rem; }
+        a { text-decoration: none; color: var(--secondary); transition: color 0.2s; }
+        a:hover { color: var(--primary); }
+        .dark-mode a:hover { color: var(--accent); }
 
-        p {
-            margin-bottom: 1rem;
-        }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-        a {
-            text-decoration: none;
-            color: var(--secondary-color);
-            transition: color 0.2s;
-        }
-
-        a:hover {
-            color: var(--primary-color);
-        }
-
-        .dark-mode a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Container */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Navigation */
+        /* ── HEADER ── */
         header {
-            background-color: var(--nav-color);
-            box-shadow: 0 2px 10px var(--shadow);
+            background-color: var(--nav);
+            box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid var(--border);
         }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
 
         .logo {
             display: flex;
             align-items: center;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color);
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--primary);
+            gap: 10px;
         }
-
-        .logo i {
-            margin-right: 10px;
-            color: var(--accent-color);
+        .logo-icon {
+            width: 38px; height: 38px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
         }
+        .logo-icon i { color: var(--accent); font-size: 1.1rem; }
+        .dark-mode .logo { color: var(--accent); }
+        .dark-mode .logo-icon { background: var(--accent); }
+        .dark-mode .logo-icon i { color: var(--primary); }
 
-        .dark-mode .logo {
-            color: var(--accent-color);
-        }
-
-        /* Desktop Navigation */
-        .desktop-nav {
-            display: flex;
-            list-style: none;
-        }
-
-        .desktop-nav li {
-            margin-left: 1.5rem;
-        }
-
+        .desktop-nav { display: flex; list-style: none; gap: 0.25rem; }
         .desktop-nav a {
-            font-weight: 600;
-            font-size: 1rem;
+            font-weight: 600; font-size: 0.9rem;
+            padding: 0.5rem 0.9rem;
+            border-radius: 8px;
+            color: var(--text);
+            transition: background 0.2s, color 0.2s;
         }
+        .desktop-nav a:hover { background: var(--bg); color: var(--primary); }
+        .dark-mode .desktop-nav a:hover { background: #2a2a2a; color: var(--accent); }
+        .desktop-nav a.active { color: var(--accent); background: var(--primary); }
+        .dark-mode .desktop-nav a.active { background: var(--accent); color: var(--primary); }
 
-        /* Mobile Navigation */
+        .nav-right { display: flex; align-items: center; gap: 0.5rem; }
+
         .mobile-nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
+            display: none; background: none; border: none;
+            font-size: 1.4rem; color: var(--primary); cursor: pointer;
+            padding: 0.4rem; border-radius: 8px;
         }
-
-        .dark-mode .mobile-nav-toggle {
-            color: var(--accent-color);
-        }
+        .dark-mode .mobile-nav-toggle { color: var(--accent); }
 
         .mobile-nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: var(--nav-color);
-            box-shadow: 0 5px 10px var(--shadow);
-            flex-direction: column;
-            padding: 1rem 0;
+            display: none; position: absolute; top: 100%; left: 0; width: 100%;
+            background-color: var(--nav); box-shadow: var(--shadow-md);
+            flex-direction: column; padding: 0.75rem 0;
+            border-top: 1px solid var(--border);
         }
+        .mobile-nav.active { display: flex; }
+        .mobile-nav li { list-style: none; }
+        .mobile-nav a { display: block; font-weight: 600; font-size: 1rem; padding: 0.8rem 1.5rem; color: var(--text); }
+        .mobile-nav a:hover { background: var(--bg); color: var(--primary); }
+        .dark-mode .mobile-nav a:hover { background: #1e1e1e; color: var(--accent); }
+        .mobile-nav a.active { color: var(--accent); }
 
-        .mobile-nav.active {
-            display: flex;
-        }
-
-        .mobile-nav li {
-            list-style: none;
-            padding: 0.8rem 1.5rem;
-        }
-
-        .mobile-nav a {
-            display: block;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        /* Mode Toggle */
         .mode-toggle {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            margin-left: 1rem;
+            background: var(--bg); border: 1px solid var(--border);
+            font-size: 1rem; color: var(--primary); cursor: pointer;
+            padding: 0.45rem 0.7rem; border-radius: 8px;
+            transition: all 0.2s;
         }
+        .mode-toggle:hover { background: var(--border); }
+        .dark-mode .mode-toggle { color: var(--accent); background: #1e1e1e; }
 
-        .dark-mode .mode-toggle {
-            color: var(--accent-color);
-        }
-
-        /* Hero Section */
+        /* ── HERO ── */
         .hero {
-            padding: 4rem 0;
+            padding: 5rem 0 4rem;
             text-align: center;
-            background-color: var(--card-color);
-            margin-bottom: 2rem;
-            border-radius: 0 0 10px 10px;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            color: var(--secondary-color);
-        }
-
-        /* Search Section */
-        .search-section {
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        .search-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: var(--card-color);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-
-        .search-container h2 {
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        /* Search Bar */
-        .search-bar {
-            display: flex;
-            margin-bottom: 1.5rem;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 0.9rem 1.2rem;
-            border: 2px solid var(--secondary-color);
-            border-radius: 5px 0 0 5px;
-            font-size: 1rem;
-            background-color: var(--input-bg);
-            color: var(--text-color);
-        }
-
-        .search-button {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            border: none;
-            padding: 0 1.5rem;
-            border-radius: 0 5px 5px 0;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .search-button:hover {
-            background-color: #e6c200;
-        }
-
-        /* Global Search Styles */
-        .global-search-section {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 3rem 0;
-            margin: 2rem 0;
-            border-radius: 20px;
-        }
-
-        .dark-mode .global-search-section {
-            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-        }
-
-        .global-search-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .global-search-container h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #333;
-            font-size: 1.8rem;
-        }
-
-        .dark-mode .global-search-container h2 {
-            color: var(--accent-color);
-        }
-
-        .global-search-wrapper {
+            background: linear-gradient(160deg, var(--card) 60%, #eef3f7 100%);
+            border-bottom: 1px solid var(--border);
             position: relative;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: white;
-            border-radius: 60px;
-            padding: 0.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 2px solid transparent;
+            overflow: hidden;
         }
-
-        .dark-mode .global-search-wrapper {
-            background: #2a2a2a;
+        .dark-mode .hero {
+            background: linear-gradient(160deg, var(--card) 60%, #0d1c2a 100%);
         }
-
-        .global-search-wrapper:focus-within {
-            border-color: #ff6347;
-            box-shadow: 0 15px 40px rgba(255, 99, 71, 0.15);
-        }
-
-        .search-icon {
+        .hero::before {
+            content: '';
             position: absolute;
-            left: 25px;
-            color: #ff6347;
-            font-size: 1.2rem;
-            z-index: 1;
+            top: -80px; right: -80px;
+            width: 360px; height: 360px;
+            background: radial-gradient(circle, rgba(255,215,0,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--search-accent-light); color: var(--search-accent);
+            font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em;
+            padding: 0.35rem 1rem; border-radius: var(--radius-pill);
+            border: 1px solid rgba(255,99,71,0.2);
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .dark-mode .hero h1 {
+            background: linear-gradient(135deg, var(--accent), #ffe566);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero p {
+            font-size: 1.1rem; max-width: 620px;
+            margin: 0 auto 2rem; color: var(--muted);
+        }
+        .hero-stats {
+            display: flex; justify-content: center; gap: 2.5rem;
+            flex-wrap: wrap; margin-top: 2rem;
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.8rem; font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+        .dark-mode .stat-number { color: var(--accent); }
+        .stat-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+
+        /* ── SEARCH SECTION ── */
+        .search-section {
+            padding: 3.5rem 0;
+            background: var(--bg);
         }
 
-        .global-search-input {
-            flex: 1;
-            padding: 1.5rem 1.5rem 1.5rem 55px;
-            font-size: 1.1rem;
-            border: none;
-            background: transparent;
-            color: #333;
-            border-radius: 60px;
+        .search-section-inner {
+            max-width: 820px;
+            margin: 0 auto;
         }
 
-        .dark-mode .global-search-input {
-            color: #f4f4f2;
+        .search-heading {
+            text-align: center;
+            margin-bottom: 2rem;
         }
-
-        .dark-mode .global-search-input::placeholder {
-            color: #999;
+        .search-heading h2 {
+            font-size: 1.9rem; margin-bottom: 0.4rem;
         }
+        .search-heading p { color: var(--muted); font-size: 0.95rem; margin: 0; }
 
-        .global-search-input:focus {
-            outline: none;
-        }
-
-        .global-search-input::placeholder {
-            color: #999;
-        }
-
-        .global-search-button {
-            background: #ff6347;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            box-shadow: 0 5px 15px rgba(255, 99, 71, 0.3);
+        /* Search box */
+        .search-box {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            box-shadow: var(--shadow-md);
+            transition: border-color 0.25s, box-shadow 0.25s;
+            position: relative;
         }
-
-        .global-search-button:hover {
-            background: #ff4f2e;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 99, 71, 0.4);
+        .search-box:focus-within {
+            border-color: var(--search-accent);
+            box-shadow: 0 0 0 4px rgba(255,99,71,0.12), var(--shadow-md);
         }
-
-        .global-search-clear {
-            position: absolute;
-            right: 120px;
-            background: none;
+        .search-box-icon {
+            padding: 0 0.75rem 0 1rem;
+            color: var(--search-accent);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        #globalSearchInput {
+            flex: 1;
             border: none;
-            color: #999;
-            font-size: 1.2rem;
+            outline: none;
+            background: transparent;
+            font-size: 1.05rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            padding: 0.9rem 0;
+            min-width: 0;
+        }
+        #globalSearchInput::placeholder { color: var(--muted); }
+
+        #globalSearchClear {
+            background: none; border: none;
+            color: var(--muted); cursor: pointer;
+            font-size: 1rem; padding: 0.5rem;
+            border-radius: 8px; display: none;
+            transition: color 0.2s, background 0.2s;
+            flex-shrink: 0;
+        }
+        #globalSearchClear:hover { color: var(--search-accent); background: var(--search-accent-light); }
+
+        .search-btn {
+            background: var(--search-accent);
+            color: white; border: none;
+            padding: 0.85rem 1.6rem;
+            border-radius: var(--radius);
+            font-size: 0.95rem; font-weight: 600;
+            font-family: 'Inter', sans-serif;
             cursor: pointer;
-            display: none;
-            padding: 0.5rem;
-            border-radius: 50%;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            display: flex; align-items: center; gap: 0.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(255,99,71,0.3);
         }
-
-        .global-search-clear:hover {
-            background: rgba(255, 99, 71, 0.1);
-            color: #ff6347;
+        .search-btn:hover {
+            background: #e8533a;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(255,99,71,0.4);
         }
+        .search-btn:active { transform: translateY(0); }
 
-        .global-search-results {
-            margin-top: 2rem;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            max-height: 500px;
-            overflow-y: auto;
-            display: none;
-            border: 1px solid #eee;
-        }
-
-        .dark-mode .global-search-results {
-            background: #2a2a2a;
-            border-color: #444;
-        }
-
-        .global-search-results.active {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        .search-tips {
+        /* Filter chips */
+        .filter-chips {
+            display: flex; gap: 0.5rem; flex-wrap: wrap;
             margin-top: 1rem;
-            text-align: center;
-            color: #666;
-            font-size: 0.9rem;
         }
-
-        .dark-mode .search-tips {
-            color: #aaa;
+        .chip {
+            padding: 0.35rem 0.9rem;
+            border-radius: var(--radius-pill);
+            border: 1.5px solid var(--border);
+            background: var(--card);
+            font-size: 0.82rem; font-weight: 600;
+            color: var(--muted); cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
         }
+        .chip:hover { border-color: var(--search-accent); color: var(--search-accent); background: var(--search-accent-light); }
+        .chip.active { background: var(--search-accent); color: white; border-color: var(--search-accent); }
 
-        .search-tips i {
-            color: #ff6347;
-            margin-right: 0.5rem;
+        /* Search results */
+        #searchResults {
+            margin-top: 1rem;
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            display: none;
+            animation: fadeSlide 0.2s ease;
+        }
+        #searchResults.active { display: block; }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .results-header {
-            padding: 1rem 1.5rem;
-            background: #f8f9fa;
-            font-weight: 600;
-            color: #ff6347;
-            border-bottom: 1px solid #eee;
+            padding: 0.85rem 1.25rem;
+            background: var(--bg);
+            font-size: 0.82rem; font-weight: 600;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
         }
+        .results-count { color: var(--search-accent); }
 
-        .dark-mode .results-header {
-            background: #333;
-            color: #ff6347;
-            border-color: #444;
-        }
-
-        .global-result-item {
-            padding: 1.5rem;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .result-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
             text-decoration: none;
             color: inherit;
+            transition: background 0.15s, padding-left 0.15s;
+            gap: 1rem;
         }
+        .result-item:last-child { border-bottom: none; }
+        .result-item:hover { background: var(--bg); padding-left: 1.5rem; }
+        .dark-mode .result-item:hover { background: #1e1e1e; }
 
-        .dark-mode .global-result-item {
-            border-color: #444;
+        .result-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; flex-shrink: 0;
         }
+        .result-icon.bsc { background: rgba(59,130,246,0.12); color: #3b82f6; }
+        .result-icon.ba  { background: rgba(168,85,247,0.12); color: #a855f7; }
+        .result-icon.bcom{ background: rgba(34,197,94,0.12);  color: #22c55e; }
 
-        .global-result-item:hover {
-            background: #f8f9fa;
-            padding-left: 2rem;
+        .result-body { flex: 1; min-width: 0; }
+        .result-name {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700; font-size: 0.97rem;
+            color: var(--text); margin-bottom: 0.15rem;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
+        .result-desc { font-size: 0.82rem; color: var(--muted); }
 
-        .dark-mode .global-result-item:hover {
-            background: #333;
+        .result-meta { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+        .badge {
+            font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.65rem;
+            border-radius: var(--radius-pill);
         }
+        .badge-code { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+        .dark-mode .badge-code { background: #2a2a2a; }
+        .badge-stream-bsc  { background: rgba(59,130,246,0.12);  color: #3b82f6; }
+        .badge-stream-ba   { background: rgba(168,85,247,0.12); color: #a855f7; }
+        .badge-stream-bcom { background: rgba(34,197,94,0.12);  color: #22c55e; }
 
-        .result-info h4 {
-            margin: 0 0 0.3rem 0;
-            color: #333;
-            font-size: 1.2rem;
-        }
+        .result-arrow { color: var(--muted); font-size: 0.85rem; }
 
-        .dark-mode .result-info h4 {
-            color: #f4f4f2;
-        }
-
-        .result-info p {
-            margin: 0;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .dark-mode .result-info p {
-            color: #aaa;
-        }
-
-        .result-badge {
-            background: #ff6347;
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-left: 0.5rem;
-        }
-
-        .result-stream {
-            background: white;
-            color: #ff6347;
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            border: 1px solid #ff6347;
-        }
-
-        .dark-mode .result-stream {
-            background: #2a2a2a;
-        }
-
-        .highlight {
-            background: yellow;
-            color: black;
-            font-weight: 600;
+        mark.hl {
+            background: rgba(255,215,0,0.45);
+            color: inherit;
+            border-radius: 3px;
             padding: 0 2px;
         }
+        .dark-mode mark.hl { background: rgba(255,215,0,0.3); }
 
         .no-results {
-            padding: 3rem;
-            text-align: center;
-            color: #666;
+            padding: 3rem 2rem; text-align: center;
         }
+        .no-results i { font-size: 2.5rem; color: var(--border); margin-bottom: 1rem; display: block; }
+        .no-results h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .no-results p { color: var(--muted); font-size: 0.9rem; margin: 0; }
 
-        .no-results i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-            color: #ff6347;
+        .search-suggestions {
+            padding: 1rem 1.25rem;
+            border-top: 1px solid var(--border);
         }
+        .suggestion-label {
+            font-size: 0.78rem; font-weight: 600; color: var(--muted);
+            text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.6rem;
+        }
+        .suggestion-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+        .suggestion-tag {
+            padding: 0.3rem 0.75rem;
+            border-radius: var(--radius-pill);
+            background: var(--bg); border: 1.5px solid var(--border);
+            font-size: 0.8rem; color: var(--muted); cursor: pointer;
+            transition: all 0.2s;
+        }
+        .suggestion-tag:hover { border-color: var(--search-accent); color: var(--search-accent); background: var(--search-accent-light); }
 
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* search tips */
+        .search-tips {
+            text-align: center; margin-top: 1rem;
+            font-size: 0.82rem; color: var(--muted);
         }
+        .search-tips i { color: var(--search-accent); margin-right: 4px; }
 
-        /* Course Categories */
-        .course-categories {
-            padding: 2rem 0;
+        /* ── COURSE CARDS ── */
+        .course-section {
+            padding: 3.5rem 0;
+            border-top: 1px solid var(--border);
         }
-
-        .course-categories h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-        }
+        .section-header { text-align: center; margin-bottom: 2.5rem; }
+        .section-header h2 { font-size: 1.9rem; }
+        .section-header p { color: var(--muted); margin: 0; }
 
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
         }
 
         .course-card {
-            background-color: var(--card-color);
-            border-radius: 8px;
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-lg);
             padding: 2rem;
-            text-align: center;
-            box-shadow: 0 3px 10px var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            display: flex; flex-direction: column; gap: 1rem;
+            position: relative; overflow: hidden;
         }
-
+        .course-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 4px; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+        .course-card.bsc::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        .course-card.bcom::before { background: linear-gradient(90deg, #22c55e, #4ade80); }
+        .course-card.ba::before   { background: linear-gradient(90deg, #a855f7, #c084fc); }
         .course-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px var(--shadow);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
         }
 
-        .course-card i {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
+        .card-icon-wrap {
+            width: 52px; height: 52px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
         }
+        .bsc .card-icon-wrap { background: rgba(59,130,246,0.12); color: #3b82f6; }
+        .bcom .card-icon-wrap { background: rgba(34,197,94,0.12); color: #22c55e; }
+        .ba .card-icon-wrap   { background: rgba(168,85,247,0.12); color: #a855f7; }
 
-        .course-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .course-card h3 { font-size: 1.2rem; margin: 0; }
+        .course-card p { color: var(--muted); font-size: 0.9rem; margin: 0; flex: 1; }
+
+        .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.5rem; }
+        .card-count { font-size: 0.8rem; color: var(--muted); }
+
+        .card-btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-pill);
+            font-weight: 600; font-size: 0.88rem;
+            transition: all 0.2s;
         }
+        .bsc .card-btn  { background: rgba(59,130,246,0.1);  color: #3b82f6; }
+        .bcom .card-btn { background: rgba(34,197,94,0.1);   color: #22c55e; }
+        .ba .card-btn   { background: rgba(168,85,247,0.1);  color: #a855f7; }
+        .bsc .card-btn:hover  { background: #3b82f6; color: white; }
+        .bcom .card-btn:hover { background: #22c55e; color: white; }
+        .ba .card-btn:hover   { background: #a855f7; color: white; }
 
-        .course-card p {
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .course-button {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: background-color 0.2s;
-        }
-
-        .course-button:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        /* Footer */
+        /* ── FOOTER ── */
         footer {
-            background-color: var(--footer-color);
-            color: #F4F4F2;
+            background-color: var(--footer);
+            color: #e5e7eb;
             padding: 3rem 0 1.5rem;
-            margin-top: 3rem;
+            margin-top: 0;
         }
-
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem; margin-bottom: 2rem;
         }
+        .footer-section h3 { color: var(--accent); margin-bottom: 1rem; font-size: 1rem; font-weight: 700; }
+        .footer-section p { color: #9ca3af; font-size: 0.88rem; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.6rem; }
+        .footer-links a { color: #9ca3af; font-size: 0.88rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+        .copyright { text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.82rem; color: #6b7280; }
 
-        .footer-section h3 {
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: #ddd;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        /* Responsive Styles */
+        /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-
-            .mobile-nav-toggle {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .search-bar {
-                flex-direction: column;
-            }
-
-            .search-input {
-                border-radius: 5px;
-                margin-bottom: 1rem;
-            }
-
-            .search-button {
-                border-radius: 5px;
-                padding: 0.9rem;
-            }
-
-            .courses-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .global-search-section {
-                padding: 2rem 0;
-            }
-            
-            .global-search-container {
-                padding: 0 1rem;
-            }
-            
-            .global-search-wrapper {
-                flex-direction: column;
-                background: transparent;
-                box-shadow: none;
-                padding: 0;
-            }
-            
-            .global-search-input {
-                width: 100%;
-                padding: 1.2rem 1.2rem 1.2rem 45px;
-                background: white;
-                border-radius: 50px;
-            }
-
-            .dark-mode .global-search-input {
-                background: #2a2a2a;
-            }
-            
-            .global-search-button {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .global-search-clear {
-                right: 15px;
-                top: 18px;
-            }
+            .desktop-nav { display: none; }
+            .mobile-nav-toggle { display: block; }
+            .hero { padding: 3rem 0 2.5rem; }
+            .hero-stats { gap: 1.5rem; }
+            .search-btn span { display: none; }
+            .search-btn { padding: 0.85rem 1.1rem; }
+            .courses-grid { grid-template-columns: 1fr; }
+            .result-meta { display: none; }
         }
 
-        /* Accessibility */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        :focus {
-            outline: 2px solid var(--accent-color);
-            outline-offset: 2px;
-        }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     </style>
 </head>
 <body>
-    <!-- Header with Navigation -->
     <header>
         <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-university"></i>
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-university"></i></div>
                 <span>CU Archive</span>
-            </div>
-            
-            <!-- Desktop Navigation -->
-            <nav>
+            </a>
+            <nav aria-label="Main navigation">
                 <ul class="desktop-nav">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="#" class="active">Home</a></li>
                     <li><a href="disclaimer.html">Disclaimer</a></li>
                     <li><a href="developers.html">Dev Team</a></li>
                     <li><a href="contributr.html">Contribute</a></li>
-                    <li><a href="report.html">Report Missing Paper</a></li>
+                    <li><a href="report.html">Report Missing</a></li>
                 </ul>
             </nav>
-            
             <div class="nav-right">
                 <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
                     <i class="fas fa-moon"></i>
@@ -766,10 +556,8 @@
                 </button>
             </div>
         </div>
-        
-        <!-- Mobile Navigation -->
-        <ul class="mobile-nav" id="mobileNav">
-            <li><a href="#">Home</a></li>
+        <ul class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+            <li><a href="#" class="active">Home</a></li>
             <li><a href="disclaimer.html">Disclaimer</a></li>
             <li><a href="developers.html">Dev Team</a></li>
             <li><a href="contributr.html">Contribute</a></li>
@@ -777,79 +565,120 @@
         </ul>
     </header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
+        <!-- Hero -->
         <section class="hero">
             <div class="container">
+                <div class="hero-badge"><i class="fas fa-bolt"></i> Free • Always Updated</div>
                 <h1>Find Your Year's Question Papers</h1>
-                <p>Access a comprehensive collection of previous year question papers for BSc, BCom, and BA courses. Prepare for your exams with our extensive archive.</p>
-            </div>
-        </section>
-
-        <!-- Global Search Section - WORKING VERSION -->
-        <section class="global-search-section">
-            <div class="container">
-                <div class="global-search-container">
-                    <h2><i class="fas fa-search"></i> Search Question Papers Across All Streams</h2>
-                    
-                    <!-- Search Bar -->
-                    <div class="global-search-wrapper">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" id="globalSearchInput" class="global-search-input" 
-                               placeholder="e.g., Physics, Computer Science, English, Accounting..." 
-                               autocomplete="off">
-                        <button class="global-search-button" id="globalSearchBtn">
-                            <i class="fas fa-search"></i> Search
-                        </button>
-                        <button class="global-search-clear" id="globalSearchClear" style="display: none;">
-                            <i class="fas fa-times"></i>
-                        </button>
+                <p>Access previous year question papers for BSc, BCom, and BA courses from Calcutta University. Free, fast, and always growing.</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Papers</span>
                     </div>
-                    
-                    <!-- Search Results Dropdown -->
-                    <div id="globalSearchResults" class="global-search-results"></div>
-                    
-                    <!-- Search Tips -->
-                    <div class="search-tips">
-                        <i class="fas fa-lightbulb"></i> 
-                        <span>Try searching: "Computer Science", "Physics", "English", "Accounting", "Mathematics"</span>
+                    <div class="stat-item">
+                        <span class="stat-number">30+</span>
+                        <span class="stat-label">Subjects</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Streams</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Free</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Course Categories -->
-        <section class="course-categories">
+        <!-- Search -->
+        <section class="search-section" id="search">
             <div class="container">
-                <h2>Browse by Course</h2>
+                <div class="search-section-inner">
+                    <div class="search-heading">
+                        <h2>Search Question Papers</h2>
+                        <p>Search by subject name, course code, or description across all streams</p>
+                    </div>
+
+                    <!-- Search Box -->
+                    <div class="search-box" role="search">
+                        <span class="search-box-icon" aria-hidden="true"><i class="fas fa-search"></i></span>
+                        <input
+                            type="text"
+                            id="globalSearchInput"
+                            placeholder="e.g., Physics, Computer Science, Accounting..."
+                            autocomplete="off"
+                            aria-label="Search question papers"
+                            spellcheck="false"
+                        >
+                        <button id="globalSearchClear" aria-label="Clear search"><i class="fas fa-times"></i></button>
+                        <button class="search-btn" id="globalSearchBtn" aria-label="Search">
+                            <i class="fas fa-search"></i>
+                            <span>Search</span>
+                        </button>
+                    </div>
+
+                    <!-- Stream filter chips -->
+                    <div class="filter-chips" role="group" aria-label="Filter by stream">
+                        <button class="chip active" data-filter="all">All Streams</button>
+                        <button class="chip" data-filter="BSc">BSc</button>
+                        <button class="chip" data-filter="BCom">BCom</button>
+                        <button class="chip" data-filter="BA">BA</button>
+                    </div>
+
+                    <!-- Results -->
+                    <div id="searchResults" role="listbox" aria-label="Search results"></div>
+
+                    <p class="search-tips">
+                        <i class="fas fa-lightbulb"></i>
+                        Try: "Computer Science", "Physics", "Accounting", "English", "Mathematics"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Cards -->
+        <section class="course-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Browse by Stream</h2>
+                    <p>Pick your course and explore all available subjects</p>
+                </div>
                 <div class="courses-grid">
-                    <div class="course-card">
-                        <i class="fas fa-flask"></i>
-                        <h3>BSc (Bachelor of Science)</h3>
-                        <p>Access question papers for Physics, Chemistry, Mathematics, Computer Science, and other science subjects.</p>
-                        <a href="bsc.html" class="course-button">Browse BSc Papers</a>
+                    <div class="course-card bsc">
+                        <div class="card-icon-wrap"><i class="fas fa-flask"></i></div>
+                        <h3>BSc — Bachelor of Science</h3>
+                        <p>Physics, Chemistry, Mathematics, Computer Science, Botany, Zoology, and 13 more subjects.</p>
+                        <div class="card-footer">
+                            <span class="card-count">19 subjects</span>
+                            <a href="bsc.html" class="card-btn">Browse <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
-                    
-                    <div class="course-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>BCom (Bachelor of Commerce)</h3>
-                        <p>Find papers for Accounting, Business Studies, Economics, Finance, and other commerce subjects.</p>
-                        <a href="bcom.html" class="course-button">Browse BCom Papers</a>
+                    <div class="course-card bcom">
+                        <div class="card-icon-wrap"><i class="fas fa-chart-line"></i></div>
+                        <h3>BCom — Bachelor of Commerce</h3>
+                        <p>Accounting, Finance, Marketing, Business Management, Economics, and Taxation.</p>
+                        <div class="card-footer">
+                            <span class="card-count">6 subjects</span>
+                            <a href="bcom.html" class="card-btn">Browse <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
-                    
-                    <div class="course-card">
-                        <i class="fas fa-book-open"></i>
-                        <h3>BA (Bachelor of Arts)</h3>
-                        <p>Explore papers for History, Political Science, Literature, Psychology, and other arts subjects.</p>
-                        <a href="ba.html" class="course-button">Browse BA Papers</a>
+                    <div class="course-card ba">
+                        <div class="card-icon-wrap"><i class="fas fa-book-open"></i></div>
+                        <h3>BA — Bachelor of Arts</h3>
+                        <p>English, History, Political Science, Economics, Sociology, and Philosophy.</p>
+                        <div class="card-footer">
+                            <span class="card-count">6 subjects</span>
+                            <a href="ba.html" class="card-btn">Browse <i class="fas fa-arrow-right"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -857,7 +686,6 @@
                     <h3>CU Archive</h3>
                     <p>Your trusted source for previous year question papers. Helping students prepare better since 2023.</p>
                 </div>
-                
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
@@ -867,215 +695,239 @@
                         <li><a href="contributr.html">Contribute</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-section">
                     <h3>Support</h3>
                     <ul class="footer-links">
                         <li><a href="report.html">Report Missing Paper</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
                         <li><a href="guidelines/faq.html">FAQ</a></li>
                         <li><a href="guidelines/privacy.html">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
-            
             <div class="copyright">
-                <p>&copy; 2023 CU Archive. All rights reserved. This is a demo website for educational purposes.</p>
+                <p>&copy; 2023 CU Archive. An unofficial, student-led initiative. Not affiliated with or endorsed by the University of Calcutta.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile Navigation Toggle
-        const mobileNavToggle = document.getElementById('mobileNavToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        
-        mobileNavToggle.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-            
-            // Change icon based on state
-            const icon = mobileNavToggle.querySelector('i');
-            if (mobileNav.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-                mobileNavToggle.setAttribute('aria-label', 'Close navigation menu');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
-            }
-        });
-        
-        // Dark Mode Toggle
-        const modeToggle = document.getElementById('modeToggle');
-        const modeIcon = modeToggle.querySelector('i');
-        
-        // Check for saved theme preference or default to light
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            modeIcon.classList.remove('fa-moon');
-            modeIcon.classList.add('fa-sun');
-        }
-        
-        modeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            
-            // Change icon based on mode
-            if (document.body.classList.contains('dark-mode')) {
-                modeIcon.classList.remove('fa-moon');
-                modeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-                modeToggle.setAttribute('aria-label', 'Switch to light mode');
-            } else {
-                modeIcon.classList.remove('fa-sun');
-                modeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-                modeToggle.setAttribute('aria-label', 'Switch to dark mode');
-            }
-        });
-        
-        // Close mobile menu when clicking on a link
-        const mobileLinks = document.querySelectorAll('.mobile-nav a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-                const icon = mobileNavToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
-            });
-        });
+        // ── SUBJECTS DATABASE ──
+        const SUBJECTS = [
+            // BSc
+            { name: 'Computer Science',      stream: 'BSc',  path: 'bsc/major/computer/computer.html',                          code: 'CMSM',    desc: 'Programming, algorithms, and software development',    icon: 'fa-laptop-code' },
+            { name: 'Physics',               stream: 'BSc',  path: 'bsc/major/physics/physics.html',                            code: 'MN-PHY',  desc: 'Mechanics, electromagnetism, quantum physics',         icon: 'fa-atom' },
+            { name: 'Chemistry',             stream: 'BSc',  path: 'bsc/major/chemistry/chemistry.html',                        code: 'MN-CHM',  desc: 'Organic, inorganic, and physical chemistry',          icon: 'fa-flask' },
+            { name: 'Mathematics',           stream: 'BSc',  path: 'bsc/major/maths/maths.html',                                code: 'MTMH',    desc: 'Calculus, algebra, geometry, and statistics',         icon: 'fa-square-root-alt' },
+            { name: 'Botany',                stream: 'BSc',  path: 'bsc/major/botany/botany.html',                              code: 'MN-BOT',  desc: 'Plant biology, taxonomy, and ecology',                icon: 'fa-leaf' },
+            { name: 'Zoology',               stream: 'BSc',  path: 'bsc/major/zoology/zoology.html',                            code: 'MN-ZOO',  desc: 'Animal biology, physiology, and evolution',           icon: 'fa-paw' },
+            { name: 'Microbiology',          stream: 'BSc',  path: 'bsc/major/microbiology/microbiology.html',                  code: 'MN-MCB',  desc: 'Bacteria, viruses, fungi, and microscopic life',      icon: 'fa-virus' },
+            { name: 'Biochemistry',          stream: 'BSc',  path: 'bsc/major/biochemistry/biochemistry.html',                  code: 'MN-BCH',  desc: 'Chemical processes in living organisms',              icon: 'fa-dna' },
+            { name: 'Electronics',           stream: 'BSc',  path: 'bsc/major/electronics/electronics.html',                    code: 'MN-ELC',  desc: 'Circuits, semiconductors, and digital systems',       icon: 'fa-microchip' },
+            { name: 'Environmental Science', stream: 'BSc',  path: 'bsc/major/environmental-science/environmental-science.html',code: 'MN-EVS',  desc: 'Ecology, pollution, and sustainability',              icon: 'fa-globe' },
+            { name: 'Geology',               stream: 'BSc',  path: 'bsc/major/geology/geology.html',                            code: 'MN-GEL',  desc: 'Earth structure, minerals, and rocks',                icon: 'fa-mountain' },
+            { name: 'Psychology',            stream: 'BSc',  path: 'bsc/major/psychology/psychology.html',                      code: 'MN-PSY',  desc: 'Human behavior, mind, and mental processes',          icon: 'fa-brain' },
+            { name: 'Statistics',            stream: 'BSc',  path: 'bsc/major/statistics/statistics.html',                      code: 'MN-STA',  desc: 'Data analysis, probability, and statistical methods', icon: 'fa-chart-bar' },
+            { name: 'Anthropology',          stream: 'BSc',  path: 'bsc/major/anthropology/anthropology.html',                  code: 'MN-ANT',  desc: 'Human evolution, culture, and society',               icon: 'fa-users' },
+            { name: 'Physiology',            stream: 'BSc',  path: 'bsc/major/physiology/physiology.html',                      code: 'MN-PHS',  desc: 'Body functions, organs, and systems',                 icon: 'fa-heartbeat' },
+            { name: 'Fisheries',             stream: 'BSc',  path: 'bsc/major/fisheries/fisheries.html',                        code: 'MN-FFF',  desc: 'Fish biology, aquaculture, and management',           icon: 'fa-fish' },
+            { name: 'Food & Nutrition',      stream: 'BSc',  path: 'bsc/major/food-nutrition/food-nutrition.html',              code: 'MN-FNT',  desc: 'Diet, health, and nutritional science',               icon: 'fa-apple-alt' },
+            { name: 'Geography',             stream: 'BSc',  path: 'bsc/major/geography/geography.html',                        code: 'MN-GEO',  desc: 'Physical landscapes and human-environment interaction',icon: 'fa-map' },
+            { name: 'Human Development',     stream: 'BSc',  path: 'bsc/major/human-development/human-development.html',        code: 'MN-HMD',  desc: 'Growth and development across the lifespan',          icon: 'fa-child' },
+            // BA
+            { name: 'English',               stream: 'BA',   path: 'ba/major/english/english.html',                             code: 'BA-ENG',  desc: 'Literature, language, and composition',               icon: 'fa-book' },
+            { name: 'History',               stream: 'BA',   path: 'ba/major/history/history.html',                             code: 'BA-HIS',  desc: 'World history, civilizations, and events',            icon: 'fa-landmark' },
+            { name: 'Political Science',     stream: 'BA',   path: 'ba/major/political-science/political-science.html',         code: 'BA-POL',  desc: 'Government, politics, and political theory',          icon: 'fa-balance-scale' },
+            { name: 'Economics',             stream: 'BA',   path: 'ba/major/economics/economics.html',                         code: 'BA-ECO',  desc: 'Microeconomics, macroeconomics, and development',     icon: 'fa-chart-line' },
+            { name: 'Sociology',             stream: 'BA',   path: 'ba/major/sociology/sociology.html',                         code: 'BA-SOC',  desc: 'Social structures, institutions, and relationships',  icon: 'fa-people-arrows' },
+            { name: 'Philosophy',            stream: 'BA',   path: 'ba/major/philosophy/philosophy.html',                       code: 'BA-PHI',  desc: 'Logic, ethics, and philosophical thought',           icon: 'fa-lightbulb' },
+            // BCom
+            { name: 'Accounting',            stream: 'BCom', path: 'bcom/major/accounting/accounting.html',                     code: 'COM-ACC', desc: 'Financial accounting, bookkeeping, and statements',   icon: 'fa-calculator' },
+            { name: 'Finance',               stream: 'BCom', path: 'bcom/major/finance/finance.html',                           code: 'COM-FIN', desc: 'Corporate finance, investments, and markets',         icon: 'fa-coins' },
+            { name: 'Marketing',             stream: 'BCom', path: 'bcom/major/marketing/marketing.html',                       code: 'COM-MKT', desc: 'Marketing principles, consumer behavior, and strategy',icon: 'fa-bullhorn' },
+            { name: 'Business Management',   stream: 'BCom', path: 'bcom/major/management/management.html',                     code: 'COM-MGT', desc: 'Organizational behavior and business administration',  icon: 'fa-briefcase' },
+            { name: 'Economics',             stream: 'BCom', path: 'bcom/major/economics/economics.html',                       code: 'COM-ECO', desc: 'Business economics and market analysis',              icon: 'fa-chart-pie' },
+            { name: 'Taxation',              stream: 'BCom', path: 'bcom/major/taxation/taxation.html',                         code: 'COM-TAX', desc: 'Income tax, GST, and tax planning',                  icon: 'fa-file-invoice-dollar' }
+        ];
 
-        // ===== GLOBAL SEARCH FUNCTIONALITY =====
-        document.addEventListener('DOMContentLoaded', function() {
-            const globalSearchInput = document.getElementById('globalSearchInput');
-            const globalSearchBtn = document.getElementById('globalSearchBtn');
-            const globalSearchResults = document.getElementById('globalSearchResults');
-            const globalClearBtn = document.getElementById('globalSearchClear');
-            
-            if (!globalSearchInput) return;
-            
-            // Define all subjects
-            const allSubjects = [
-                // BSc Subjects
-                { name: 'Computer Science', stream: 'BSc', path: 'bsc/major/computer/computer.html', code: 'CMSM', description: 'Programming, algorithms, and software development' },
-                { name: 'Physics', stream: 'BSc', path: 'bsc/major/physics/physics.html', code: 'MN-PHY', description: 'Mechanics, electromagnetism, quantum physics' },
-                { name: 'Chemistry', stream: 'BSc', path: 'bsc/major/chemistry/chemistry.html', code: 'MN-CHM', description: 'Organic, inorganic, and physical chemistry' },
-                { name: 'Mathematics', stream: 'BSc', path: 'bsc/major/maths/maths.html', code: 'MTMH', description: 'Calculus, algebra, geometry, and statistics' },
-                { name: 'Botany', stream: 'BSc', path: 'bsc/major/botany/botany.html', code: 'MN-BOT', description: 'Plant biology, taxonomy, and ecology' },
-                { name: 'Zoology', stream: 'BSc', path: 'bsc/major/zoology/zoology.html', code: 'MN-ZOO', description: 'Animal biology, physiology, and evolution' },
-                { name: 'Microbiology', stream: 'BSc', path: 'bsc/major/microbiology/microbiology.html', code: 'MN-MCB', description: 'Bacteria, viruses, fungi, and microscopic life' },
-                { name: 'Biochemistry', stream: 'BSc', path: 'bsc/major/biochemistry/biochemistry.html', code: 'MN-BCH', description: 'Chemical processes in living organisms' },
-                { name: 'Electronics', stream: 'BSc', path: 'bsc/major/electronics/electronics.html', code: 'MN-ELC', description: 'Circuits, semiconductors, and digital systems' },
-                { name: 'Environmental Science', stream: 'BSc', path: 'bsc/major/environmental-science/environmental-science.html', code: 'MN-EVS', description: 'Ecology, pollution, and sustainability' },
-                { name: 'Geology', stream: 'BSc', path: 'bsc/major/geology/geology.html', code: 'MN-GEL', description: 'Earth structure, minerals, and rocks' },
-                { name: 'Psychology', stream: 'BSc', path: 'bsc/major/psychology/psychology.html', code: 'MN-PSY', description: 'Human behavior, mind, and mental processes' },
-                { name: 'Statistics', stream: 'BSc', path: 'bsc/major/statistics/statistics.html', code: 'MN-STA', description: 'Data analysis, probability, and statistical methods' },
-                { name: 'Anthropology', stream: 'BSc', path: 'bsc/major/anthropology/anthropology.html', code: 'MN-ANT', description: 'Human evolution, culture, and society' },
-                { name: 'Physiology', stream: 'BSc', path: 'bsc/major/physiology/physiology.html', code: 'MN-PHS', description: 'Body functions, organs, and systems' },
-                { name: 'Fisheries', stream: 'BSc', path: 'bsc/major/fisheries/fisheries.html', code: 'MN-FFF', description: 'Fish biology, aquaculture, and management' },
-                { name: 'Food & Nutrition', stream: 'BSc', path: 'bsc/major/food-nutrition/food-nutrition.html', code: 'MN-FNT', description: 'Diet, health, and nutritional science' },
-                { name: 'Geography', stream: 'BSc', path: 'bsc/major/geography/geography.html', code: 'MN-GEO', description: 'Physical landscapes and human-environment interaction' },
-                { name: 'Human Development', stream: 'BSc', path: 'bsc/major/human-development/human-development.html', code: 'MN-HMD', description: 'Growth and development across the lifespan' },
-                
-                // BA Subjects
-                { name: 'English', stream: 'BA', path: 'ba/major/english/english.html', code: 'BA-ENG', description: 'Literature, language, and composition' },
-                { name: 'History', stream: 'BA', path: 'ba/major/history/history.html', code: 'BA-HIS', description: 'World history, civilizations, and events' },
-                { name: 'Political Science', stream: 'BA', path: 'ba/major/political-science/political-science.html', code: 'BA-POL', description: 'Government, politics, and political theory' },
-                { name: 'Economics', stream: 'BA', path: 'ba/major/economics/economics.html', code: 'BA-ECO', description: 'Microeconomics, macroeconomics, and development' },
-                { name: 'Sociology', stream: 'BA', path: 'ba/major/sociology/sociology.html', code: 'BA-SOC', description: 'Social structures, institutions, and relationships' },
-                { name: 'Philosophy', stream: 'BA', path: 'ba/major/philosophy/philosophy.html', code: 'BA-PHI', description: 'Logic, ethics, and philosophical thought' },
-                
-                // BCom Subjects
-                { name: 'Accounting', stream: 'BCom', path: 'bcom/major/accounting/accounting.html', code: 'COM-ACC', description: 'Financial accounting, bookkeeping, and statements' },
-                { name: 'Finance', stream: 'BCom', path: 'bcom/major/finance/finance.html', code: 'COM-FIN', description: 'Corporate finance, investments, and markets' },
-                { name: 'Marketing', stream: 'BCom', path: 'bcom/major/marketing/marketing.html', code: 'COM-MKT', description: 'Marketing principles, consumer behavior, and strategy' },
-                { name: 'Business Management', stream: 'BCom', path: 'bcom/major/management/management.html', code: 'COM-MGT', description: 'Organizational behavior and business administration' },
-                { name: 'Economics', stream: 'BCom', path: 'bcom/major/economics/economics.html', code: 'COM-ECO', description: 'Business economics and market analysis' },
-                { name: 'Taxation', stream: 'BCom', path: 'bcom/major/taxation/taxation.html', code: 'COM-TAX', description: 'Income tax, GST, and tax planning' }
-            ];
-            
-            function performSearch() {
-                const query = globalSearchInput.value.trim().toLowerCase();
-                
-                if (query.length < 2) {
-                    globalSearchResults.classList.remove('active');
-                    return;
-                }
-                
-                const matches = allSubjects.filter(subject => 
-                    subject.name.toLowerCase().includes(query) ||
-                    subject.code.toLowerCase().includes(query) ||
-                    subject.description.toLowerCase().includes(query)
-                );
-                
-                displayResults(matches, query);
+        const STREAM_ICONS = { BSc: 'fa-flask', BA: 'fa-book-open', BCom: 'fa-chart-line' };
+
+        // ── SEARCH ENGINE ──
+        let activeFilter = 'all';
+
+        function highlight(text, query) {
+            if (!query) return text;
+            const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark class="hl">$1</mark>');
+        }
+
+        function score(subject, q) {
+            const nameLower = subject.name.toLowerCase();
+            const codeLower = subject.code.toLowerCase();
+            const descLower = subject.desc.toLowerCase();
+            if (nameLower === q) return 100;
+            if (nameLower.startsWith(q)) return 80;
+            if (nameLower.includes(q)) return 60;
+            if (codeLower.includes(q)) return 40;
+            if (descLower.includes(q)) return 20;
+            return 0;
+        }
+
+        function search(query, filter) {
+            const q = query.trim().toLowerCase();
+            if (q.length < 2) return [];
+            return SUBJECTS
+                .filter(s => (filter === 'all' || s.stream === filter))
+                .map(s => ({ ...s, _score: score(s, q) }))
+                .filter(s => s._score > 0)
+                .sort((a, b) => b._score - a._score);
+        }
+
+        function streamClass(stream) {
+            return stream.toLowerCase();
+        }
+
+        function renderResults(results, query) {
+            const container = document.getElementById('searchResults');
+            if (results.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No results for "${query}"</h3>
+                        <p>Try a different keyword or browse by stream below</p>
+                    </div>
+                    <div class="search-suggestions">
+                        <div class="suggestion-label">Popular searches</div>
+                        <div class="suggestion-tags">
+                            ${['Physics','Computer Science','Accounting','English','Mathematics','Chemistry'].map(t =>
+                                `<button class="suggestion-tag" onclick="fillSearch('${t}')">${t}</button>`
+                            ).join('')}
+                        </div>
+                    </div>`;
+                container.classList.add('active');
+                return;
             }
-            
-            function displayResults(matches, query) {
-                if (matches.length === 0) {
-                    globalSearchResults.innerHTML = `
-                        <div class="no-results">
-                            <i class="fas fa-search"></i>
-                            <h3>No results found for "${query}"</h3>
-                            <p>Try different keywords or check spelling</p>
-                        </div>`;
-                    globalSearchResults.classList.add('active');
-                    return;
-                }
-                
-                let html = `<div class="results-header">📚 Found ${matches.length} subject${matches.length > 1 ? 's' : ''}</div>`;
-                
-                matches.forEach(subject => {
-                    const highlightedName = subject.name.replace(new RegExp(query, 'gi'), match => `<span class="highlight">${match}</span>`);
-                    const highlightedDesc = subject.description.replace(new RegExp(query, 'gi'), match => `<span class="highlight">${match}</span>`);
-                    
-                    html += `
-                        <a href="${subject.path}" style="text-decoration: none;" class="global-result-item">
-                            <div class="result-info">
-                                <h4>${highlightedName} <span class="result-badge">${subject.code}</span></h4>
-                                <p>${highlightedDesc}</p>
-                            </div>
-                            <span class="result-stream">${subject.stream}</span>
-                        </a>
-                    `;
+
+            const header = `
+                <div class="results-header">
+                    <span>Results</span>
+                    <span class="results-count">${results.length} subject${results.length !== 1 ? 's' : ''} found</span>
+                </div>`;
+
+            const items = results.map(s => `
+                <a href="${s.path}" class="result-item" role="option">
+                    <div class="result-icon ${streamClass(s.stream)}">
+                        <i class="fas ${s.icon}"></i>
+                    </div>
+                    <div class="result-body">
+                        <div class="result-name">${highlight(s.name, query.trim())}</div>
+                        <div class="result-desc">${highlight(s.desc, query.trim())}</div>
+                    </div>
+                    <div class="result-meta">
+                        <span class="badge badge-code">${s.code}</span>
+                        <span class="badge badge-stream-${streamClass(s.stream)}">${s.stream}</span>
+                    </div>
+                    <i class="fas fa-chevron-right result-arrow"></i>
+                </a>`).join('');
+
+            container.innerHTML = header + items;
+            container.classList.add('active');
+        }
+
+        function fillSearch(term) {
+            const input = document.getElementById('globalSearchInput');
+            input.value = term;
+            document.getElementById('globalSearchClear').style.display = 'block';
+            runSearch();
+            input.focus();
+        }
+
+        function runSearch() {
+            const input = document.getElementById('globalSearchInput');
+            const query = input.value;
+            const container = document.getElementById('searchResults');
+            if (query.trim().length < 2) {
+                container.classList.remove('active');
+                return;
+            }
+            const results = search(query, activeFilter);
+            renderResults(results, query);
+        }
+
+        // ── INIT ──
+        document.addEventListener('DOMContentLoaded', () => {
+            const input   = document.getElementById('globalSearchInput');
+            const clearBtn= document.getElementById('globalSearchClear');
+            const searchBtn=document.getElementById('globalSearchBtn');
+            const results = document.getElementById('searchResults');
+            const chips   = document.querySelectorAll('.chip[data-filter]');
+
+            // Input events
+            input.addEventListener('input', () => {
+                clearBtn.style.display = input.value.length > 0 ? 'block' : 'none';
+                runSearch();
+            });
+            input.addEventListener('keydown', e => {
+                if (e.key === 'Enter') runSearch();
+                if (e.key === 'Escape') { input.value = ''; clearBtn.style.display = 'none'; results.classList.remove('active'); }
+            });
+
+            searchBtn.addEventListener('click', runSearch);
+
+            clearBtn.addEventListener('click', () => {
+                input.value = '';
+                clearBtn.style.display = 'none';
+                results.classList.remove('active');
+                input.focus();
+            });
+
+            // Filter chips
+            chips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    chips.forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    activeFilter = chip.dataset.filter;
+                    if (input.value.trim().length >= 2) runSearch();
                 });
-                
-                globalSearchResults.innerHTML = html;
-                globalSearchResults.classList.add('active');
+            });
+
+            // Close on outside click
+            document.addEventListener('click', e => {
+                if (!e.target.closest('.search-section-inner')) {
+                    results.classList.remove('active');
+                }
+            });
+
+            // ── MOBILE NAV ──
+            const toggle = document.getElementById('mobileNavToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            toggle.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+                const icon = toggle.querySelector('i');
+                const open = mobileNav.classList.contains('active');
+                icon.classList.toggle('fa-bars', !open);
+                icon.classList.toggle('fa-times', open);
+                toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+            });
+            document.querySelectorAll('.mobile-nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    toggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                });
+            });
+
+            // ── DARK MODE ──
+            const modeToggle = document.getElementById('modeToggle');
+            const modeIcon = modeToggle.querySelector('i');
+            if ((localStorage.getItem('theme') || 'light') === 'dark') {
+                document.body.classList.add('dark-mode');
+                modeIcon.classList.replace('fa-moon', 'fa-sun');
             }
-            
-            // Event listeners
-            globalSearchBtn.addEventListener('click', performSearch);
-            globalSearchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') performSearch();
-            });
-            
-            globalSearchInput.addEventListener('input', (e) => {
-                globalClearBtn.style.display = e.target.value.length > 0 ? 'block' : 'none';
-                if (e.target.value.length >= 2) {
-                    performSearch();
-                } else {
-                    globalSearchResults.classList.remove('active');
-                }
-            });
-            
-            globalClearBtn.addEventListener('click', () => {
-                globalSearchInput.value = '';
-                globalSearchInput.focus();
-                globalClearBtn.style.display = 'none';
-                globalSearchResults.classList.remove('active');
-            });
-            
-            // Close results when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.global-search-wrapper') && 
-                    !e.target.closest('.global-search-results') &&
-                    !e.target.closest('.global-search-button')) {
-                    globalSearchResults.classList.remove('active');
-                }
+            modeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const dark = document.body.classList.contains('dark-mode');
+                modeIcon.classList.toggle('fa-moon', !dark);
+                modeIcon.classList.toggle('fa-sun', dark);
+                localStorage.setItem('theme', dark ? 'dark' : 'light');
             });
         });
     </script>
