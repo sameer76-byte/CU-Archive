@@ -353,3 +353,7 @@ If you found this project useful for your studies, please consider supporting it
     <sub>Last updated: March 2026 | Version 1.1.0</sub>
   </p>
 </div>
+
+--- 
+
+"© 2026 Sameer Prasad. All rights reserved for code structure"
