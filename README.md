@@ -9,6 +9,11 @@ A structured, web-based Question Bank Platform designed for undergraduate studen
 
 ---
 
+### ⚠️ Project Status: Under Construction
+Please note that this repository is **not yet complete**. We are actively adding new files and organizing the content. Check back frequently for updates!
+
+---
+
 ## 📌 Project Overview
 
 The Academic Question Bank System is a lightweight, static web project that allows students to browse, select, and view previous year question papers efficiently across multiple disciplines. The platform now features Supabase integration for handling user contributions and paper reporting, while leveraging Google Drive for fast and scalable PDF storage.
