@@ -7,7 +7,6 @@
     <title>Development Team | CU Archive</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* CSS Variables for Light/Dark Mode */
         :root {
             --primary-color: #1A374D;
             --secondary-color: #406882;
@@ -20,10 +19,9 @@
             --dev-card-bg: #FFFFFF;
             --social-bg: #F8F9FA;
             --social-hover: #E9ECEF;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --shadow-hover: rgba(0, 0, 0, 0.15);
+            --shadow: rgba(0,0,0,0.1);
+            --shadow-hover: rgba(0,0,0,0.15);
         }
-
         .dark-mode {
             --primary-color: #0d1c2a;
             --secondary-color: #2a4a62;
@@ -36,573 +34,144 @@
             --dev-card-bg: #252525;
             --social-bg: #2a2a2a;
             --social-hover: #3a3a3a;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --shadow-hover: rgba(0, 0, 0, 0.4);
+            --shadow: rgba(0,0,0,0.3);
+            --shadow-hover: rgba(0,0,0,0.4);
         }
+        *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; background-color:var(--background-color); color:var(--text-color); line-height:1.6; transition:all 0.3s ease; }
+        h1,h2,h3,h4 { font-weight:700; line-height:1.3; margin-bottom:1rem; color:var(--primary-color); }
+        .dark-mode h1,.dark-mode h2,.dark-mode h3,.dark-mode h4 { color:var(--accent-color); }
+        p { margin-bottom:1.2rem; }
+        a { text-decoration:none; color:var(--secondary-color); transition:color 0.2s; }
+        a:hover { color:var(--primary-color); }
+        .dark-mode a:hover { color:var(--accent-color); }
+        .container { width:100%; max-width:1200px; margin:0 auto; padding:0 20px; }
 
-        /* Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        header { background-color:var(--nav-color); box-shadow:0 2px 10px var(--shadow); position:sticky; top:0; z-index:1000; }
+        .nav-container { display:flex; justify-content:space-between; align-items:center; padding:1rem 20px; max-width:1200px; margin:0 auto; }
+        .logo { display:flex; align-items:center; font-weight:700; font-size:1.5rem; color:var(--primary-color); gap:10px; }
+        .logo i { color:var(--accent-color); }
+        .dark-mode .logo { color:var(--accent-color); }
+        .desktop-nav { display:flex; list-style:none; gap:1.5rem; }
+        .desktop-nav a { font-weight:600; font-size:1rem; color:var(--secondary-color); }
+        .desktop-nav a:hover { color:var(--accent-color); }
+        .desktop-nav a.active { color:var(--accent-color); border-bottom:2px solid var(--accent-color); padding-bottom:5px; }
+        .nav-right { display:flex; align-items:center; gap:0.5rem; }
+        .mode-toggle { background:none; border:none; font-size:1.2rem; color:var(--primary-color); cursor:pointer; margin-left:0.5rem; padding:0.4rem; border-radius:50%; transition:background 0.2s; }
+        .mode-toggle:hover { background:rgba(255,215,0,0.1); }
+        .dark-mode .mode-toggle { color:var(--accent-color); }
+        .mobile-nav-toggle { display:none; background:none; border:none; font-size:1.5rem; color:var(--primary-color); cursor:pointer; }
+        .dark-mode .mobile-nav-toggle { color:var(--accent-color); }
+        .mobile-nav { display:none; position:absolute; top:100%; left:0; width:100%; background-color:var(--nav-color); box-shadow:0 5px 10px var(--shadow); flex-direction:column; padding:1rem 0; }
+        .mobile-nav.active { display:flex; }
+        .mobile-nav li { list-style:none; padding:0.8rem 1.5rem; }
+        .mobile-nav a { display:block; font-weight:600; font-size:1.1rem; }
+        .mobile-nav a.active { color:var(--accent-color); }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            transition: all 0.3s ease;
-        }
+        .breadcrumb { padding:1.5rem 0; background-color:var(--card-color); margin-bottom:2rem; border-bottom:1px solid rgba(0,0,0,0.06); }
+        .breadcrumb ul { display:flex; list-style:none; flex-wrap:wrap; }
+        .breadcrumb li { margin-right:0.5rem; display:flex; align-items:center; color:var(--secondary-color); }
+        .breadcrumb li:not(:last-child)::after { content:"/"; margin-left:0.5rem; }
+        .breadcrumb a { color:var(--secondary-color); }
+        .breadcrumb a:hover { color:var(--accent-color); }
 
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
+        main { padding:2rem 0 4rem; }
 
-        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
-            color: var(--accent-color);
-        }
+        .page-header { text-align:center; margin-bottom:3rem; padding:2rem 0; }
+        .page-header h1 { font-size:2.8rem; margin-bottom:1rem; background:linear-gradient(90deg,var(--primary-color),var(--secondary-color)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .dark-mode .page-header h1 { background:linear-gradient(90deg,var(--accent-color),#FFED4E); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .page-header p { font-size:1.2rem; color:var(--secondary-color); max-width:700px; margin:0 auto; }
 
-        p {
-            margin-bottom: 1.2rem;
-        }
+        .mission-statement { background-color:var(--card-color); border-radius:15px; padding:2.5rem; margin-bottom:3rem; box-shadow:0 5px 15px var(--shadow); border-left:5px solid var(--accent-color); }
+        .mission-statement h2 { display:flex; align-items:center; gap:10px; margin-bottom:1.5rem; }
+        .mission-statement h2 i { color:var(--accent-color); }
 
-        a {
-            text-decoration: none;
-            color: var(--secondary-color);
-            transition: color 0.2s;
-        }
+        .developers-intro { text-align:center; margin-bottom:2.5rem; }
+        .developers-intro h2 { font-size:2.2rem; margin-bottom:1rem; }
 
-        a:hover {
-            color: var(--primary-color);
-        }
-
-        .dark-mode a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Container */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--nav-color);
-            box-shadow: 0 2px 10px var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .logo i {
-            margin-right: 10px;
-            color: var(--accent-color);
-        }
-
-        .dark-mode .logo {
-            color: var(--accent-color);
-        }
-
-        /* Desktop Navigation */
-        .desktop-nav {
-            display: flex;
-            list-style: none;
-        }
-
-        .desktop-nav li {
-            margin-left: 1.5rem;
-        }
-
-        .desktop-nav a {
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .desktop-nav a.active {
-            color: var(--accent-color);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 5px;
-        }
-
-        /* Mobile Navigation */
-        .mobile-nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-        }
-
-        .dark-mode .mobile-nav-toggle {
-            color: var(--accent-color);
-        }
-
-        .mobile-nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: var(--nav-color);
-            box-shadow: 0 5px 10px var(--shadow);
-            flex-direction: column;
-            padding: 1rem 0;
-        }
-
-        .mobile-nav.active {
-            display: flex;
-        }
-
-        .mobile-nav li {
-            list-style: none;
-            padding: 0.8rem 1.5rem;
-        }
-
-        .mobile-nav a {
-            display: block;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .mobile-nav a.active {
-            color: var(--accent-color);
-            background-color: var(--social-bg);
-        }
-
-        /* Mode Toggle */
-        .mode-toggle {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            margin-left: 1rem;
-        }
-
-        .dark-mode .mode-toggle {
-            color: var(--accent-color);
-        }
-
-        /* Breadcrumb */
-        .breadcrumb {
-            padding: 1.5rem 0;
-            background-color: var(--card-color);
-            margin-bottom: 2rem;
-        }
-
-        .breadcrumb ul {
-            display: flex;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        .breadcrumb li {
-            margin-right: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .breadcrumb li:not(:last-child)::after {
-            content: "/";
-            margin-left: 0.5rem;
-            color: var(--secondary-color);
-        }
-
-        /* Main Content */
-        main {
-            padding: 2rem 0 4rem;
-        }
-
-        /* Page Header */
-        .page-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-        }
-
-        .page-header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .dark-mode .page-header h1 {
-            background: linear-gradient(90deg, var(--accent-color), #FFED4E);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .page-header p {
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Mission Statement */
-        .mission-statement {
-            background-color: var(--card-color);
-            border-radius: 15px;
-            padding: 2.5rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 5px 15px var(--shadow);
-            border-left: 5px solid var(--accent-color);
-        }
-
-        .mission-statement h2 {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .mission-statement h2 i {
-            margin-right: 10px;
-            color: var(--accent-color);
-        }
-
-        /* Developers Section */
-        .developers-intro {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .developers-intro h2 {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Developers Grid */
+        /* 3 cols on wide, 2 on medium, 1 on mobile */
         .developers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
             margin-bottom: 4rem;
         }
 
-        /* Developer Card */
-        .developer-card {
-            background-color: var(--dev-card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .developer-card { background-color:var(--dev-card-bg); border-radius:15px; overflow:hidden; box-shadow:0 5px 15px var(--shadow); transition:transform 0.3s ease,box-shadow 0.3s ease; }
+        .developer-card:hover { transform:translateY(-10px); box-shadow:0 15px 30px var(--shadow-hover); }
+        .developer-header { background:linear-gradient(135deg,var(--primary-color),var(--secondary-color)); color:white; padding:2rem; text-align:center; }
+        .developer-avatar { width:110px; height:110px; border-radius:50%; border:4px solid var(--accent-color); margin:0 auto 1.2rem; display:flex; align-items:center; justify-content:center; font-size:3rem; background-color:rgba(255,255,255,0.1); color:white; }
+        .developer-name { font-size:1.6rem; font-weight:700; margin-bottom:0.4rem; }
+        .developer-role { font-size:1rem; opacity:0.9; font-weight:500; }
+        .developer-body { padding:1.75rem; }
+        .developer-bio { color:var(--text-color); margin-bottom:1.5rem; line-height:1.7; font-size:0.95rem; }
+        .contact-info { margin-bottom:1.5rem; }
+        .contact-item { display:flex; align-items:center; margin-bottom:0.85rem; gap:10px; }
+        .contact-item i { width:22px; color:var(--accent-color); font-size:1rem; flex-shrink:0; }
+        .contact-item a,.contact-item span { font-size:0.88rem; word-break:break-all; }
+        .social-links { display:flex; justify-content:center; gap:1rem; margin-top:1.5rem; flex-wrap:wrap; }
+        .social-link { display:flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:50%; background-color:var(--social-bg); color:var(--secondary-color); font-size:1.1rem; transition:all 0.2s ease; }
+        .social-link:hover { background-color:var(--accent-color); color:var(--primary-color); transform:scale(1.1); }
+
+        .github-stats { background-color:var(--card-color); border-radius:15px; padding:2.5rem; margin-top:3rem; box-shadow:0 5px 15px var(--shadow); text-align:center; }
+        .github-stats h3 { margin-bottom:1.5rem; display:flex; align-items:center; justify-content:center; gap:10px; }
+        .github-stats h3 i { color:var(--accent-color); }
+        .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1.5rem; margin-top:1.5rem; }
+        .stat-card { background-color:var(--social-bg); padding:1.5rem; border-radius:10px; transition:transform 0.2s ease; }
+        .stat-card:hover { transform:translateY(-5px); }
+        .stat-number { font-size:2rem; font-weight:700; color:var(--accent-color); margin-bottom:0.5rem; }
+        .stat-label { color:var(--secondary-color); font-weight:600; font-size:0.9rem; }
+
+        footer { background-color:var(--footer-color); color:#F4F4F2; padding:3rem 0 1.5rem; margin-top:3rem; }
+        .footer-content { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; margin-bottom:2rem; }
+        .footer-section h3 { color:var(--accent-color); margin-bottom:1.5rem; font-size:1.3rem; }
+        .footer-links { list-style:none; }
+        .footer-links li { margin-bottom:0.8rem; }
+        .footer-links a { color:#ddd; }
+        .footer-links a:hover { color:var(--accent-color); }
+        .copyright { text-align:center; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1); font-size:0.9rem; color:#aaa; }
+
+        @media (max-width:1024px) { .developers-grid { grid-template-columns:repeat(2,1fr); } }
+        @media (max-width:768px) {
+            .desktop-nav { display:none; }
+            .mobile-nav-toggle { display:block; }
+            .page-header h1 { font-size:2.2rem; }
+            .developers-grid { grid-template-columns:1fr; }
+            .mission-statement,.github-stats { padding:1.5rem; }
         }
-
-        .developer-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px var(--shadow-hover);
-        }
-
-        .developer-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .developer-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 5px solid var(--accent-color);
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .developer-name {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .developer-role {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-
-        .developer-body {
-            padding: 2rem;
-        }
-
-        .developer-bio {
-            color: var(--text-color);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        /* Contact Info */
-        .contact-info {
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .contact-item i {
-            width: 30px;
-            color: var(--accent-color);
-            font-size: 1.1rem;
-        }
-
-        .contact-item a {
-            word-break: break-all;
-        }
-
-        /* Social Links */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background-color: var(--social-bg);
-            color: var(--secondary-color);
-            font-size: 1.2rem;
-            transition: all 0.2s ease;
-        }
-
-        .social-link:hover {
-            background-color: var(--social-hover);
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
-
-        .dark-mode .social-link:hover {
-            color: var(--accent-color);
-        }
-
-        /* GitHub Stats (Optional Section) */
-        .github-stats {
-            background-color: var(--card-color);
-            border-radius: 15px;
-            padding: 2.5rem;
-            margin-top: 3rem;
-            box-shadow: 0 5px 15px var(--shadow);
-            text-align: center;
-        }
-
-        .github-stats h3 {
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .github-stats h3 i {
-            margin-right: 10px;
-            color: var(--accent-color);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .stat-card {
-            background-color: var(--social-bg);
-            padding: 1.5rem;
-            border-radius: 10px;
-            transition: transform 0.2s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--secondary-color);
-            font-weight: 600;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--footer-color);
-            color: #F4F4F2;
-            padding: 3rem 0 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: #ddd;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-
-            .mobile-nav-toggle {
-                display: block;
-            }
-
-            .page-header h1 {
-                font-size: 2.2rem;
-            }
-
-            .developers-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .developer-card {
-                max-width: 100%;
-            }
-
-            .mission-statement, .github-stats {
-                padding: 1.5rem;
-            }
-        }
-
-        /* Accessibility */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        :focus {
-            outline: 2px solid var(--accent-color);
-            outline-offset: 2px;
-        }
+        :focus-visible { outline:2px solid var(--accent-color); outline-offset:2px; }
     </style>
 </head>
 <body>
-    <!-- Header with Navigation -->
     <header>
-        <div class="container nav-container">
-            <div class="logo">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
                 <i class="fas fa-university"></i>
                 <span>CU Archive</span>
-            </div>
-            
-            <!-- Desktop Navigation -->
+            </a>
             <nav>
                 <ul class="desktop-nav">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="disclaimer.html">Disclaimer</a></li>
-                    <li><a href="#" class="active">Dev Team</a></li>
-                    <li><a href="contributr.html">Contribute</a></li>
+                    <li><a href="developers.html" class="active">Dev Team</a></li>
+                    <li><a href="contribute.html">Contribute</a></li>
                     <li><a href="report.html">Report Missing Paper</a></li>
                 </ul>
             </nav>
-            
             <div class="nav-right">
-                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu"><i class="fas fa-bars"></i></button>
             </div>
         </div>
-        
-        <!-- Mobile Navigation -->
         <ul class="mobile-nav" id="mobileNav">
             <li><a href="index.html">Home</a></li>
             <li><a href="disclaimer.html">Disclaimer</a></li>
-            <li><a href="#" class="active">Dev Team</a></li>
-            <li><a href="contributr.html">Contribute</a></li>
+            <li><a href="developers.html" class="active">Dev Team</a></li>
+            <li><a href="contribute.html">Contribute</a></li>
             <li><a href="report.html">Report Missing Paper</a></li>
-            <li><a href="#">Dark Mode</a></li>
         </ul>
     </header>
 
-    <!-- Breadcrumb Navigation -->
     <section class="breadcrumb">
         <div class="container">
             <ul>
@@ -612,140 +181,155 @@
         </div>
     </section>
 
-    <!-- Main Content -->
     <main>
         <div class="container">
-            <!-- Page Header -->
             <div class="page-header">
                 <h1>Meet Our Development Team</h1>
-                <p>The passionate students behind CU Archive - building tools to help fellow students succeed</p>
+                <p>The passionate students behind CU Archive — building tools to help fellow students succeed</p>
             </div>
 
-            <!-- Mission Statement -->
             <div class="mission-statement">
                 <h2><i class="fas fa-bullseye"></i> Our Mission</h2>
                 <p>CU Archive was created as a <strong>student-led initiative</strong> to address the challenges students face in accessing previous year question papers and study materials. Our goal is to make educational resources more accessible, organized, and useful for exam preparation.</p>
-                <p>We believe in <strong>open access to education</strong> and are committed to building tools that help students learn more effectively. This project is built with passion, late nights, and lots of coffee!</p>
+                <p style="margin-bottom:0;">We believe in <strong>open access to education</strong> and are committed to building tools that help students learn more effectively. This project is built with passion, late nights, and lots of coffee!</p>
             </div>
 
-            <!-- Developers Intro -->
             <div class="developers-intro">
                 <h2>The Developers</h2>
-                <p>Meet the talented students who designed, developed, and maintain the CU Archive platform.</p>
+                <p>Meet the 5 students who equally designed, developed, and maintain the CU Archive platform.</p>
             </div>
 
-            <!-- Developers Grid -->
             <div class="developers-grid">
-                <!-- Developer 1: Sameer Prasad -->
+
+                <!-- Sameer Prasad -->
                 <div class="developer-card">
                     <div class="developer-header">
-                        <div class="developer-avatar">
-                            <i class="fas fa-code"></i>
-                        </div>
+                        <div class="developer-avatar"><i class="fas fa-code"></i></div>
                         <h3 class="developer-name">Sameer Prasad</h3>
-                        <p class="developer-role">Lead Developer & Backend Specialist</p>
+                        <p class="developer-role">Developer &amp; Contributor</p>
                     </div>
                     <div class="developer-body">
-                        <p class="developer-bio">
-                            A passionate full-stack developer with expertise in creating scalable web applications. Sameer handles the backend architecture, database design, and server-side logic for CU Archive. When not coding, he enjoys contributing to open-source projects and learning new technologies.
-                        </p>
-                        
+                        <p class="developer-bio">A passionate developer who has equally contributed to building and maintaining CU Archive — from architecture and database design to frontend implementation.</p>
                         <div class="contact-info">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <a href="mailto:sameerprasad980@gmail.com">sameerprasad980@gmail.com</a>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Kolkata, West Bengal</span>
-                            </div>
+                            <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:sameerprasad980@gmail.com">sameerprasad980@gmail.com</a></div>
+                            <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Kolkata, West Bengal</span></div>
                         </div>
-
                         <div class="social-links">
-                            <a href="https://github.com/sameer76-byte" class="social-link" target="_blank" aria-label="GitHub Profile">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/sameerprasad-" class="social-link" target="_blank" aria-label="LinkedIn Profile">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="mailto:sameerprasad980@gmail.com" class="social-link" aria-label="Send Email">
-                                <i class="fas fa-envelope"></i>
-                            </a>
+                            <a href="https://github.com/sameer76-byte" class="social-link" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/sameerprasad-" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="mailto:sameerprasad980@gmail.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Developer 2: Debanjan Biswas -->
+                <!-- Debanjan Biswas -->
                 <div class="developer-card">
                     <div class="developer-header">
-                        <div class="developer-avatar">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
+                        <div class="developer-avatar"><i class="fas fa-laptop-code"></i></div>
                         <h3 class="developer-name">Debanjan Biswas</h3>
-                        <p class="developer-role">Frontend Developer & UI/UX Designer</p>
+                        <p class="developer-role">Developer &amp; Contributor</p>
                     </div>
                     <div class="developer-body">
-                        <p class="developer-bio">
-                            A creative frontend developer with an eye for design and user experience. Debanjan focuses on creating intuitive, responsive interfaces that make CU Archive accessible on all devices. He combines functionality with aesthetics to deliver a seamless user experience.
-                        </p>
-                        
+                        <p class="developer-bio">A dedicated developer who has equally contributed to CU Archive — focusing on intuitive interfaces and ensuring the platform is accessible and responsive across all devices.</p>
                         <div class="contact-info">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <a href="mailto:debanjanbiswas79@gmail.com">debanjanbiswas79@gmail.com</a>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Kolkata, West Bengal</span>
-                            </div>
+                            <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:debanjanbiswas79@gmail.com">debanjanbiswas79@gmail.com</a></div>
+                            <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Kolkata, West Bengal</span></div>
                         </div>
-
                         <div class="social-links">
-                            <a href="https://github.com/Bebogit12" class="social-link" target="_blank" aria-label="GitHub Profile">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/debanjan-biswas-412ab2312/" class="social-link" target="_blank" aria-label="LinkedIn Profile">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="mailto:debanjanbiswas79@gmail.com" class="social-link" aria-label="Send Email">
-                                <i class="fas fa-envelope"></i>
-                            </a>
+                            <a href="https://github.com/Bebogit12" class="social-link" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/debanjan-biswas-412ab2312/" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="mailto:debanjanbiswas79@gmail.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
                         </div>
                     </div>
                 </div>
+
+                <!-- Riya Singh -->
+                <div class="developer-card">
+                    <div class="developer-header">
+                        <div class="developer-avatar"><i class="fas fa-star"></i></div>
+                        <h3 class="developer-name">Riya Singh</h3>
+                        <p class="developer-role">Developer &amp; Contributor</p>
+                    </div>
+                    <div class="developer-body">
+                        <p class="developer-bio">An equal contributor to CU Archive, helping build and expand the platform so every student has access to the resources they need for effective exam preparation.</p>
+                        <div class="contact-info">
+                            <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:riya54321singh428160@gmail.com">riya54321singh428160@gmail.com</a></div>
+                            <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Kolkata, West Bengal</span></div>
+                        </div>
+                        <div class="social-links">
+                            <a href="https://github.com/cuarchive01-ship-it" class="social-link" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/riya-singh-17899b272" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="mailto:riya54321singh428160@gmail.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Priya Bhowmik -->
+                <div class="developer-card">
+                    <div class="developer-header">
+                        <div class="developer-avatar"><i class="fas fa-star"></i></div>
+                        <h3 class="developer-name">Priya Bhowmik</h3>
+                        <p class="developer-role">Developer &amp; Contributor</p>
+                    </div>
+                    <div class="developer-body">
+                        <p class="developer-bio">An equal contributor to CU Archive, helping build and expand the platform so every student has access to the resources they need for effective exam preparation.</p>
+                        <div class="contact-info">
+                            <!-- TODO: Replace with Priya's email -->
+                            <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:priya@example.com">priya@example.com</a></div>
+                            <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Kolkata, West Bengal</span></div>
+                        </div>
+                        <div class="social-links">
+                            <!-- TODO: Replace with Priya's GitHub and LinkedIn -->
+                            <a href="https://github.com/cuarchive01-ship-it" class="social-link" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="mailto:priya@example.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mouli Nag -->
+                <div class="developer-card">
+                    <div class="developer-header">
+                        <div class="developer-avatar"><i class="fas fa-star"></i></div>
+                        <h3 class="developer-name">Mouli Nag</h3>
+                        <p class="developer-role">Developer &amp; Contributor</p>
+                    </div>
+                    <div class="developer-body">
+                        <p class="developer-bio">An equal contributor to CU Archive, helping build and expand the platform so every student has access to the resources they need for effective exam preparation.</p>
+                        <div class="contact-info">
+                            <!-- TODO: Replace with Mouli's email -->
+                            <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:mouli@example.com">mouli@example.com</a></div>
+                            <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Kolkata, West Bengal</span></div>
+                        </div>
+                        <div class="social-links">
+                            <!-- TODO: Replace with Mouli's GitHub and LinkedIn -->
+                            <a href="https://github.com/cuarchive01-ship-it" class="social-link" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="mailto:mouli@example.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- GitHub Stats Section -->
+            <!-- Stats -->
             <div class="github-stats">
                 <h3><i class="fab fa-github"></i> Project Development Stats</h3>
                 <p>CU Archive is built with modern web technologies and follows best practices in software development.</p>
-                
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">2</div>
-                        <div class="stat-label">Developers</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Open Source</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Availability</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">Student-Led</div>
-                        <div class="stat-label">Initiative</div>
-                    </div>
+                    <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">Developers</div></div>
+                    <div class="stat-card"><div class="stat-number">100%</div><div class="stat-label">Open Source</div></div>
+                    <div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label">Availability</div></div>
+                    <div class="stat-card"><div class="stat-number">Student-Led</div><div class="stat-label">Initiative</div></div>
                 </div>
             </div>
 
-            <!-- Call to Action -->
-            <div class="mission-statement" style="text-align: center; margin-top: 3rem;">
+            <!-- CTA -->
+            <div class="mission-statement" style="text-align:center;margin-top:3rem;">
                 <h2><i class="fas fa-hands-helping"></i> Want to Contribute?</h2>
-                <p>CU Archive is an open project, and we welcome contributions from fellow students and developers. Whether you want to report bugs, suggest features, or contribute code, we'd love to have you on board!</p>
-                <p style="margin-top: 1.5rem;">
-                    <a href="contributr.html" style="background-color: var(--accent-color); color: var(--primary-color); padding: 0.8rem 1.5rem; border-radius: 5px; font-weight: 600; display: inline-block;">
+                <p>CU Archive is an open project and we welcome contributions from fellow students and developers. Whether you want to report bugs, suggest features, or contribute papers — we'd love to have you on board!</p>
+                <p style="margin-top:1.5rem;margin-bottom:0;">
+                    <a href="contribute.html" style="background-color:var(--accent-color);color:var(--primary-color);padding:0.8rem 1.5rem;border-radius:5px;font-weight:600;display:inline-block;">
                         <i class="fas fa-code-branch"></i> Contribute to the Project
                     </a>
                 </p>
@@ -753,7 +337,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -761,120 +344,72 @@
                     <h3>CU Archive</h3>
                     <p>A student-led initiative for educational resources. Made with ❤️ by students, for students.</p>
                 </div>
-                
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="disclaimer.html">Disclaimer</a></li>
                         <li><a href="developers.html">Dev Team</a></li>
-                        <li><a href="contributr.html">Contribute</a></li>
+                        <li><a href="contribute.html">Contribute</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-section">
-                    <h3>Connect With Developers</h3>
+                    <h3>The Team</h3>
                     <ul class="footer-links">
                         <li><a href="mailto:sameerprasad980@gmail.com">Sameer Prasad</a></li>
                         <li><a href="mailto:debanjanbiswas79@gmail.com">Debanjan Biswas</a></li>
-                        <li><a href="#">GitHub Repository</a></li>
-                        <li><a href="#">Issue Tracker</a></li>
+                        <li><a href="mailto:riya54321singh428160@gmail.com">Riya Singh</a></li>
+                        <li><a href="mailto:priya@example.com">Priya Bhowmik</a></li>
+                        <li><a href="mailto:mouli@example.com">Mouli Nag</a></li>
                     </ul>
                 </div>
             </div>
-            
             <div class="copyright">
-                <p>&copy; 2023 CU Archive. An unofficial, student-led initiative. Not affiliated with or endorsed by the University of Calcutta.</p>
-                <p style="margin-top: 0.5rem; font-size: 0.8rem;">Developed with passion by Sameer Prasad & Debanjan Biswas</p>
+                <p>&copy; 2025 CU Archive. An unofficial, student-led initiative. Not affiliated with or endorsed by the University of Calcutta.</p>
+                <p style="margin-top:0.5rem;font-size:0.8rem;">Developed with equal passion by Sameer, Debanjan, Riya, Priya &amp; Mouli</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile Navigation Toggle
-        const mobileNavToggle = document.getElementById('mobileNavToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        
-        mobileNavToggle.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-            
-            // Change icon based on state
-            const icon = mobileNavToggle.querySelector('i');
-            if (mobileNav.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-                mobileNavToggle.setAttribute('aria-label', 'Close navigation menu');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
-            }
-        });
-        
-        // Dark Mode Toggle
+        // THEME
         const modeToggle = document.getElementById('modeToggle');
         const modeIcon = modeToggle.querySelector('i');
-        
-        // Check for saved theme preference or default to light
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        
-        if (savedTheme === 'dark') {
+        if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
-            modeIcon.classList.remove('fa-moon');
-            modeIcon.classList.add('fa-sun');
+            modeIcon.classList.replace('fa-moon', 'fa-sun');
         }
-        
         modeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-            
-            // Change icon based on mode
-            if (document.body.classList.contains('dark-mode')) {
-                modeIcon.classList.remove('fa-moon');
-                modeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-                modeToggle.setAttribute('aria-label', 'Switch to light mode');
-            } else {
-                modeIcon.classList.remove('fa-sun');
-                modeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-                modeToggle.setAttribute('aria-label', 'Switch to dark mode');
-            }
+            const dark = document.body.classList.contains('dark-mode');
+            modeIcon.classList.toggle('fa-moon', !dark);
+            modeIcon.classList.toggle('fa-sun', dark);
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+            modeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
         });
-        
-        // Close mobile menu when clicking on a link
-        const mobileLinks = document.querySelectorAll('.mobile-nav a');
-        mobileLinks.forEach(link => {
+
+        // MOBILE NAV
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            const open = mobileNav.classList.contains('active');
+            mobileNavToggle.querySelector('i').classList.toggle('fa-bars', !open);
+            mobileNavToggle.querySelector('i').classList.toggle('fa-times', open);
+            mobileNavToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+        });
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileNav.classList.remove('active');
-                const icon = mobileNavToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                mobileNavToggle.setAttribute('aria-label', 'Open navigation menu');
+                mobileNavToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
             });
         });
-        
-        // Highlight current page in navigation
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const navLinks = document.querySelectorAll('nav a');
-        navLinks.forEach(link => {
-            const linkHref = link.getAttribute('href');
-            if (linkHref === currentPage || (currentPage === '' && linkHref === 'index.html')) {
-                link.classList.add('active');
-            }
-        });
-        
-        // Add subtle hover effect to developer cards
-        const developerCards = document.querySelectorAll('.developer-card');
-        developerCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                const header = this.querySelector('.developer-header');
-                header.style.background = 'linear-gradient(135deg, var(--secondary-color), var(--primary-color))';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                const header = this.querySelector('.developer-header');
-                header.style.background = 'linear-gradient(135deg, var(--primary-color), var(--secondary-color))';
-            });
+
+        // Card hover gradient flip
+        document.querySelectorAll('.developer-card').forEach(card => {
+            const header = card.querySelector('.developer-header');
+            card.addEventListener('mouseenter', () => header.style.background = 'linear-gradient(135deg,var(--secondary-color),var(--primary-color))');
+            card.addEventListener('mouseleave', () => header.style.background = 'linear-gradient(135deg,var(--primary-color),var(--secondary-color))');
         });
     </script>
 </body>

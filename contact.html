@@ -5,665 +5,418 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | CU Archive</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* CSS Variables for Light/Dark Mode */
         :root {
-            --primary-color: #1A374D;
-            --secondary-color: #406882;
-            --accent-color: #FFD700;
-            --background-color: #F4F4F2;
-            --text-color: #333333;
-            --card-color: #FFFFFF;
-            --nav-color: #FFFFFF;
-            --footer-color: #1A374D;
-            --border-color: #E0E0E0;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --shadow-hover: rgba(0, 0, 0, 0.15);
-            --success-color: #28a745;
-            --error-color: #dc3545;
-            --info-color: #17a2b8;
+            --primary: #1A374D;
+            --secondary: #406882;
+            --accent: #FFD700;
+            --accent-dim: rgba(255,215,0,0.12);
+            --bg: #F0F2F5;
+            --surface: #FFFFFF;
+            --nav-bg: #FFFFFF;
+            --footer-bg: #1A374D;
+            --text: #1e2d3d;
+            --text-muted: #5a7080;
+            --border: #e2e8ef;
+            --shadow-sm: 0 2px 8px rgba(26,55,77,0.08);
+            --shadow-md: 0 8px 24px rgba(26,55,77,0.12);
+            --shadow-lg: 0 20px 48px rgba(26,55,77,0.16);
+            --success: #16a34a;
+            --error: #dc2626;
+            --radius: 16px;
+            --radius-sm: 10px;
         }
-
         .dark-mode {
-            --primary-color: #0d1c2a;
-            --secondary-color: #2a4a62;
-            --accent-color: #FFD700;
-            --background-color: #121212;
-            --text-color: #F4F4F2;
-            --card-color: #1e1e1e;
-            --nav-color: #1e1e1e;
-            --footer-color: #0d1c2a;
-            --border-color: #333333;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --shadow-hover: rgba(0, 0, 0, 0.4);
-            --success-color: #218838;
-            --error-color: #c82333;
-            --info-color: #138496;
+            --primary: #0d1c2a;
+            --secondary: #2a4a62;
+            --accent: #FFD700;
+            --accent-dim: rgba(255,215,0,0.08);
+            --bg: #0a0f14;
+            --surface: #111920;
+            --nav-bg: #111920;
+            --footer-bg: #0d1c2a;
+            --text: #e8f0f7;
+            --text-muted: #7a9ab0;
+            --border: #1e3040;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.4);
+            --shadow-lg: 0 20px 48px rgba(0,0,0,0.5);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
+        h1,h2,h3,h4 { font-family: 'Poppins', sans-serif; font-weight: 700; line-height: 1.3; color: var(--primary); margin-bottom: 0.75rem; }
+        .dark-mode h1,.dark-mode h2,.dark-mode h3,.dark-mode h4 { color: var(--accent); }
+        p { margin-bottom: 0.9rem; color: var(--text-muted); }
+        a { text-decoration: none; color: var(--secondary); transition: color 0.2s; }
+        a:hover { color: var(--accent); }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
-            color: var(--accent-color);
-        }
-
-        p {
-            margin-bottom: 1rem;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--secondary-color);
-            transition: color 0.2s;
-        }
-
-        a:hover {
-            color: var(--primary-color);
-        }
-
-        .dark-mode a:hover {
-            color: var(--accent-color);
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Navigation */
+        /* ── HEADER ── */
         header {
-            background-color: var(--nav-color);
-            box-shadow: 0 2px 10px var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 1000;
+            backdrop-filter: blur(12px);
         }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 1rem 24px; max-width: 1200px; margin: 0 auto; }
+        .logo { display: flex; align-items: center; gap: 10px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--primary); }
+        .logo i { color: var(--accent); font-size: 1.3rem; }
+        .dark-mode .logo { color: var(--accent); }
+        .desktop-nav { display: flex; list-style: none; gap: 0.25rem; }
+        .desktop-nav a { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); padding: 0.4rem 0.9rem; border-radius: 8px; transition: all 0.2s; }
+        .desktop-nav a:hover { color: var(--text); background: var(--accent-dim); }
+        .desktop-nav a.active { color: var(--primary); background: var(--accent-dim); font-weight: 600; }
+        .dark-mode .desktop-nav a.active { color: var(--accent); }
+        .nav-right { display: flex; align-items: center; gap: 0.5rem; }
+        .icon-btn { background: none; border: 1px solid var(--border); font-size: 1rem; color: var(--text-muted); cursor: pointer; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .icon-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+        .mobile-nav-toggle { display: none; }
+        .mobile-nav { display: none; flex-direction: column; border-top: 1px solid var(--border); background: var(--nav-bg); }
+        .mobile-nav.active { display: flex; }
+        .mobile-nav li { list-style: none; }
+        .mobile-nav a { display: block; padding: 0.9rem 24px; font-weight: 500; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+        .mobile-nav a.active { color: var(--accent); background: var(--accent-dim); }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .logo i {
-            margin-right: 10px;
-            color: var(--accent-color);
-        }
-
-        .dark-mode .logo {
-            color: var(--accent-color);
-        }
-
-        .desktop-nav {
-            display: flex;
-            list-style: none;
-        }
-
-        .desktop-nav li {
-            margin-left: 1.5rem;
-        }
-
-        .desktop-nav a {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--secondary-color);
-        }
-
-        .desktop-nav a:hover {
-            color: var(--accent-color);
-        }
-
-        .desktop-nav a.active {
-            color: var(--accent-color);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 5px;
-        }
-
-        .mobile-nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-        }
-
-        .dark-mode .mobile-nav-toggle {
-            color: var(--accent-color);
-        }
-
-        .mobile-nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: var(--nav-color);
-            box-shadow: 0 5px 10px var(--shadow);
-            flex-direction: column;
-            padding: 1rem 0;
-        }
-
-        .mobile-nav.active {
-            display: flex;
-        }
-
-        .mobile-nav li {
-            list-style: none;
-            padding: 0.8rem 1.5rem;
-        }
-
-        .mobile-nav a {
-            display: block;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .mode-toggle {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            cursor: pointer;
-            margin-left: 1rem;
-        }
-
-        .dark-mode .mode-toggle {
-            color: var(--accent-color);
-        }
-
-        /* Breadcrumb */
-        .breadcrumb {
-            padding: 1.5rem 0;
-            background-color: var(--card-color);
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .breadcrumb ul {
-            display: flex;
-            list-style: none;
-            flex-wrap: wrap;
-        }
-
-        .breadcrumb li {
-            margin-right: 0.5rem;
-            display: flex;
-            align-items: center;
-            color: var(--secondary-color);
-        }
-
-        .breadcrumb li:not(:last-child)::after {
-            content: "/";
-            margin-left: 0.5rem;
-            color: var(--secondary-color);
-        }
-
-        .breadcrumb a {
-            color: var(--secondary-color);
-        }
-
-        .breadcrumb a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Page Header */
-        .page-header {
+        /* ── HERO BANNER ── */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 4rem 24px;
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0 1rem;
+            position: relative;
+            overflow: hidden;
         }
-
-        .page-header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .hero-banner::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(255,215,0,0.12) 0%, transparent 65%);
         }
-
-        .dark-mode .page-header h1 {
-            background: linear-gradient(90deg, var(--accent-color), #FFED4E);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .hero-banner h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: #fff;
+            -webkit-text-fill-color: #fff;
+            background: none;
+            margin-bottom: 0.75rem;
+            position: relative;
         }
-
-        .page-header p {
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-            max-width: 700px;
+        .dark-mode .hero-banner h1 { color: #fff; -webkit-text-fill-color: #fff; }
+        .hero-banner p {
+            color: rgba(255,255,255,0.75);
+            font-size: 1.1rem;
+            max-width: 560px;
             margin: 0 auto;
+            position: relative;
+        }
+        .hero-accent-line {
+            width: 60px; height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+            margin: 1.25rem auto 0;
         }
 
-        /* Contact Grid */
+        /* ── BREADCRUMB ── */
+        .breadcrumb { padding: 1rem 0; border-bottom: 1px solid var(--border); background: var(--surface); }
+        .breadcrumb ul { display: flex; list-style: none; gap: 0.5rem; align-items: center; }
+        .breadcrumb li { color: var(--text-muted); font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; }
+        .breadcrumb li:not(:last-child)::after { content: '/'; color: var(--border); }
+        .breadcrumb a { color: var(--text-muted); }
+        .breadcrumb a:hover { color: var(--accent); }
+
+        /* ── MAIN LAYOUT ── */
+        main { padding: 3rem 0 5rem; }
+
         .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 2.5rem;
-            margin: 3rem 0;
+            grid-template-columns: 380px 1fr;
+            gap: 2rem;
+            align-items: start;
         }
 
-        /* Contact Info Cards */
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
+        /* ── LEFT SIDEBAR ── */
+        .sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
 
         .info-card {
-            background-color: var(--card-color);
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 20px var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-left: 5px solid var(--accent-color);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.3s, transform 0.3s;
         }
+        .info-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
 
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px var(--shadow-hover);
+        .card-icon-row { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1.25rem; }
+        .card-icon {
+            width: 46px; height: 46px; border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
         }
+        .card-icon i { color: var(--accent); font-size: 1.15rem; }
+        .card-icon-row h3 { font-size: 1.1rem; margin: 0; }
 
-        .info-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .info-icon i {
-            font-size: 1.8rem;
-            color: white;
-        }
-
-        .info-card h3 {
-            font-size: 1.3rem;
+        .email-address {
+            display: flex; align-items: center; gap: 0.6rem;
+            padding: 0.75rem 1rem;
+            background: var(--accent-dim);
+            border: 1px solid rgba(255,215,0,0.2);
+            border-radius: var(--radius-sm);
             margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
         }
+        .email-address i { color: var(--accent); }
+        .dark-mode .email-address { color: var(--text); }
 
-        .info-card p {
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .info-card .contact-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--accent-color);
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            border: 1.5px solid var(--accent);
+            color: var(--primary);
+            background: transparent;
+            padding: 0.55rem 1.1rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
             font-weight: 600;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            background-color: var(--background-color);
-            border-radius: 5px;
+            font-family: inherit;
+            cursor: pointer;
             transition: all 0.2s;
         }
+        .btn-outline:hover { background: var(--accent); color: var(--primary); }
+        .dark-mode .btn-outline { color: var(--accent); }
+        .dark-mode .btn-outline:hover { color: var(--primary); }
 
-        .info-card .contact-link:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
+        /* Team list */
+        .team-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 0.25rem; }
+        .team-member {
+            display: flex; align-items: center; gap: 0.9rem;
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--bg);
+            transition: border-color 0.2s;
         }
-
-        /* Social Links */
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+        .team-member:hover { border-color: var(--accent); }
+        .member-avatar {
+            width: 38px; height: 38px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700; font-size: 0.85rem; color: var(--accent);
         }
-
-        .social-link {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background-color: var(--background-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--secondary-color);
-            font-size: 1.3rem;
+        .member-info { flex: 1; min-width: 0; }
+        .member-info strong { display: block; font-size: 0.88rem; color: var(--text); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .member-info span { font-size: 0.75rem; color: var(--text-muted); }
+        .member-links { display: flex; gap: 0.4rem; }
+        .member-link {
+            width: 28px; height: 28px; border-radius: 6px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); font-size: 0.75rem;
             transition: all 0.2s;
         }
+        .member-link:hover { background: var(--accent); border-color: var(--accent); color: var(--primary); }
 
-        .social-link:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            transform: scale(1.1);
+        .view-team-btn {
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.65rem;
+            border-radius: var(--radius-sm);
+            background: var(--accent-dim);
+            border: 1px dashed rgba(255,215,0,0.4);
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
         }
+        .view-team-btn:hover { background: var(--accent); color: var(--primary); border-color: var(--accent); }
+        .dark-mode .view-team-btn { color: var(--accent); }
 
-        /* Contact Form */
-        .contact-form-container {
-            background-color: var(--card-color);
-            border-radius: 15px;
+        /* Social */
+        .social-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.75rem; }
+        .social-btn {
+            width: 38px; height: 38px; border-radius: 10px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .social-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--primary); transform: translateY(-2px); }
+
+        /* ── FORM CARD ── */
+        .form-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             padding: 2.5rem;
-            box-shadow: 0 5px 20px var(--shadow);
+            box-shadow: var(--shadow-sm);
         }
 
-        .form-header {
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--accent-color);
+        .form-card-header { margin-bottom: 2rem; }
+        .form-card-header h2 { font-size: 1.7rem; margin-bottom: 0.35rem; }
+        .form-card-header p { margin: 0; font-size: 0.95rem; }
+
+        .form-divider {
+            height: 3px; width: 48px;
+            background: linear-gradient(90deg, var(--accent), rgba(255,215,0,0.3));
+            border-radius: 2px;
+            margin: 0.75rem 0 1.5rem;
         }
 
-        .form-header h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
+        .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 
-        .form-header p {
-            color: var(--secondary-color);
-        }
+        label { font-size: 0.85rem; font-weight: 600; color: var(--text); letter-spacing: 0.01em; }
+        label .req { color: var(--error); margin-left: 2px; }
 
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-
-        label span {
-            color: var(--error-color);
-            margin-left: 0.2rem;
-        }
+        .input-wrap { position: relative; }
+        .input-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem; pointer-events: none; }
+        .input-wrap.textarea-wrap i { top: 16px; transform: none; }
 
         input, select, textarea {
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            transition: all 0.2s;
-        }
-
-        input:focus, select:focus, textarea:focus {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.75rem;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: var(--bg);
+            color: var(--text);
+            transition: border-color 0.2s, box-shadow 0.2s;
             outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
         }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255,215,0,0.15);
+            background: var(--surface);
         }
+        input.no-icon, select.no-icon { padding-left: 1rem; }
+        textarea { padding-left: 2.75rem; resize: vertical; min-height: 130px; }
+        select { appearance: none; cursor: pointer; }
 
         .submit-btn {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            border: none; border-radius: var(--radius-sm);
+            padding: 0.9rem 2rem;
+            font-size: 1rem; font-weight: 600; font-family: inherit;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
+            position: relative; overflow: hidden;
         }
-
-        .submit-btn:hover {
-            background-color: #e6c200;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        .submit-btn::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), transparent);
+            opacity: 0; transition: opacity 0.3s;
         }
+        .submit-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,55,77,0.3); }
+        .submit-btn:hover:not(:disabled)::after { opacity: 1; }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        .submit-btn:disabled {
-            background-color: var(--border-color);
-            cursor: not-allowed;
-            transform: none;
-        }
+        .alert { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem 1.25rem; border-radius: var(--radius-sm); margin-top: 1rem; font-size: 0.9rem; font-weight: 500; }
+        .alert i { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+        .alert-success { background: rgba(22,163,74,0.08); border: 1.5px solid rgba(22,163,74,0.3); color: var(--success); }
+        .alert-error { background: rgba(220,38,38,0.08); border: 1.5px solid rgba(220,38,38,0.3); color: var(--error); }
 
-        /* Success Message */
-        .success-message {
-            background-color: rgba(40, 167, 69, 0.1);
-            border: 2px solid var(--success-color);
-            color: var(--success-color);
-            padding: 1rem;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
+        /* ── FAQ ── */
+        .section-title { text-align: center; margin: 4rem 0 2rem; }
+        .section-title h2 { font-size: 1.9rem; margin-bottom: 0.5rem; }
+        .section-title p { max-width: 500px; margin: 0 auto; font-size: 0.95rem; }
+        .title-bar { width: 48px; height: 3px; background: var(--accent); border-radius: 2px; margin: 0.75rem auto 0; }
 
-        .success-message i {
-            font-size: 1.5rem;
-        }
-
-        /* FAQ Section */
-        .faq-section {
-            margin-top: 4rem;
-        }
-
-        .faq-section h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
+        .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
         .faq-item {
-            background-color: var(--card-color);
-            border-radius: 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
             padding: 1.5rem;
-            box-shadow: 0 5px 15px var(--shadow);
+            box-shadow: var(--shadow-sm);
             transition: all 0.3s;
+            display: flex; gap: 1rem;
         }
+        .faq-item:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: rgba(255,215,0,0.3); }
+        .faq-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .faq-icon i { color: var(--accent); font-size: 1rem; }
+        .faq-content h4 { font-size: 0.95rem; margin-bottom: 0.35rem; color: var(--text); }
+        .faq-content p { font-size: 0.88rem; margin: 0; }
 
-        .faq-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px var(--shadow-hover);
-        }
-
-        .faq-item h4 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .faq-item h4 i {
-            color: var(--accent-color);
-        }
-
-        .faq-item p {
-            color: var(--secondary-color);
-            font-size: 0.95rem;
-        }
-
-        /* Map Section */
-        .map-section {
-            margin-top: 4rem;
-            background-color: var(--card-color);
-            border-radius: 15px;
+        /* ── LOCATION ── */
+        .location-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             padding: 2rem;
-            box-shadow: 0 5px 20px var(--shadow);
-        }
-
-        .map-section h3 {
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .map-section h3 i {
-            color: var(--accent-color);
-        }
-
-        .map-placeholder {
-            background-color: var(--background-color);
-            border-radius: 10px;
-            padding: 3rem;
-            text-align: center;
-            color: var(--secondary-color);
-            border: 2px dashed var(--border-color);
-        }
-
-        .map-placeholder i {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--footer-color);
-            color: #F4F4F2;
-            padding: 3rem 0 1.5rem;
+            box-shadow: var(--shadow-sm);
             margin-top: 4rem;
+            display: flex; align-items: center; gap: 2rem;
+        }
+        .location-icon { width: 64px; height: 64px; border-radius: var(--radius-sm); background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .location-icon i { color: var(--accent); font-size: 1.6rem; }
+        .location-text h3 { font-size: 1.2rem; margin-bottom: 0.35rem; }
+        .location-text p { margin: 0; font-size: 0.9rem; }
+        .location-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--accent-dim); border: 1px solid rgba(255,215,0,0.2); border-radius: 20px; padding: 0.3rem 0.8rem; font-size: 0.8rem; font-weight: 600; color: var(--secondary); margin-top: 0.6rem; }
+        .dark-mode .location-badge { color: var(--accent); }
+        .location-badge i { color: var(--accent); }
+
+        /* ── FOOTER ── */
+        footer { background: var(--footer-bg); color: #c8d8e4; padding: 3rem 0 1.5rem; margin-top: 5rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-bottom: 2rem; }
+        .footer-col h4 { color: var(--accent); font-family: 'Poppins', sans-serif; font-size: 1rem; margin-bottom: 1.25rem; letter-spacing: 0.03em; text-transform: uppercase; }
+        .footer-col p { color: #8aaabb; font-size: 0.88rem; line-height: 1.7; margin: 0; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+        .footer-links a { color: #8aaabb; font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-links i { width: 14px; }
+        .footer-bottom { padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); text-align: center; color: #5a7888; font-size: 0.82rem; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .contact-grid { grid-template-columns: 1fr; }
+            .faq-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 640px) {
+            .desktop-nav { display: none; }
+            .mobile-nav-toggle { display: flex; }
+            .form-row { grid-template-columns: 1fr; }
+            .location-card { flex-direction: column; text-align: center; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero-banner { padding: 3rem 24px; }
         }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: #ddd;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #aaa;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-
-            .mobile-nav-toggle {
-                display: block;
-            }
-
-            .page-header h1 {
-                font-size: 2.2rem;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .faq-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .info-card, .contact-form-container, .faq-item {
-            animation: fadeIn 0.5s ease forwards;
-        }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+        .info-card, .form-card, .faq-item { animation: fadeUp 0.5s ease both; }
+        .info-card:nth-child(2) { animation-delay: 0.1s; }
+        .info-card:nth-child(3) { animation-delay: 0.2s; }
     </style>
 </head>
 <body>
+    <!-- HEADER -->
     <header>
-        <div class="container nav-container">
-            <div class="logo">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">
                 <i class="fas fa-university"></i>
                 <span>CU Archive</span>
-            </div>
-            
+            </a>
             <nav>
                 <ul class="desktop-nav">
                     <li><a href="index.html">Home</a></li>
@@ -671,319 +424,399 @@
                     <li><a href="developers.html">Dev Team</a></li>
                     <li><a href="contribute.html">Contribute</a></li>
                     <li><a href="report.html">Report</a></li>
-                    <li><a href="guidelines/">Guidelines</a></li>
                     <li><a href="contact.html" class="active">Contact</a></li>
                 </ul>
             </nav>
-            
             <div class="nav-right">
-                <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <button class="icon-btn" id="modeToggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+                <button class="icon-btn mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
             </div>
         </div>
-        
         <ul class="mobile-nav" id="mobileNav">
             <li><a href="index.html">Home</a></li>
             <li><a href="disclaimer.html">Disclaimer</a></li>
             <li><a href="developers.html">Dev Team</a></li>
             <li><a href="contribute.html">Contribute</a></li>
             <li><a href="report.html">Report</a></li>
-            <li><a href="guidelines/">Guidelines</a></li>
             <li><a href="contact.html" class="active">Contact</a></li>
-            <li><a href="#">Dark Mode</a></li>
         </ul>
     </header>
 
-    <section class="breadcrumb">
+    <!-- HERO -->
+    <div class="hero-banner">
+        <h1>Get in Touch</h1>
+        <p>Have questions, suggestions, or want to contribute? We'd love to hear from you.</p>
+        <div class="hero-accent-line"></div>
+    </div>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
         <div class="container">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><span>Contact Us</span></li>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li>Contact Us</li>
             </ul>
         </div>
-    </section>
+    </div>
 
     <main>
         <div class="container">
-            <!-- Page Header -->
-            <div class="page-header">
-                <h1>Contact Us</h1>
-                <p>Have questions? We're here to help. Reach out to us through any of the following channels.</p>
-            </div>
-
-            <!-- Contact Grid - Left: Info Cards, Right: Form -->
             <div class="contact-grid">
-                <!-- Left Side - Contact Information -->
-                <div class="contact-info">
-                    <!-- Email Card -->
+
+                <!-- ── LEFT SIDEBAR ── -->
+                <div class="sidebar">
+
+                    <!-- Email card -->
                     <div class="info-card">
-                        <div class="info-icon">
-                            <i class="fas fa-envelope"></i>
+                        <div class="card-icon-row">
+                            <div class="card-icon"><i class="fas fa-envelope"></i></div>
+                            <h3>Email Us</h3>
                         </div>
-                        <h3>Email Us</h3>
-                        <p>For general inquiries and support</p>
-                        <p><strong>support@cuarchive.com</strong></p>
-                        <p>For contributions</p>
-                        <p><strong>contribute@cuarchive.com</strong></p>
-                        <a href="mailto:support@cuarchive.com" class="contact-link">
+                        <p>For general inquiries, feedback, or support — we read every message.</p>
+                        <div class="email-address">
+                            <i class="fas fa-at"></i>
+                            cu.archive.0.1@gmail.com
+                        </div>
+                        <a href="mailto:cu.archive.0.1@gmail.com" class="btn-outline">
                             <i class="fas fa-paper-plane"></i> Send Email
                         </a>
                     </div>
 
-                    <!-- Developers Card -->
+                    <!-- Dev Team card -->
                     <div class="info-card">
-                        <div class="info-icon">
-                            <i class="fas fa-code"></i>
+                        <div class="card-icon-row">
+                            <div class="card-icon"><i class="fas fa-code"></i></div>
+                            <h3>Development Team</h3>
                         </div>
-                        <h3>Development Team</h3>
-                        <p><strong>Sameer Prasad</strong></p>
-                        <p>sameerprasad980@gmail.com</p>
-                        <div class="social-links">
-                            <a href="https://github.com/sameer76-byte" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
-                            <a href="https://www.linkedin.com/in/sameerprasad-" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <p>Meet the 5 students who built CU Archive.</p>
+
+                        <div class="team-list">
+                            <!-- Sameer -->
+                            <div class="team-member">
+                                <div class="member-avatar">SP</div>
+                                <div class="member-info">
+                                    <strong>Sameer Prasad</strong>
+                                    <span>Developer &amp; Contributor</span>
+                                </div>
+                                <div class="member-links">
+                                    <a href="https://github.com/sameer76-byte" class="member-link" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+                                    <a href="https://www.linkedin.com/in/sameerprasad-" class="member-link" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="mailto:sameerprasad980@gmail.com" class="member-link" title="Email"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                            <!-- Debanjan -->
+                            <div class="team-member">
+                                <div class="member-avatar">DB</div>
+                                <div class="member-info">
+                                    <strong>Debanjan Biswas</strong>
+                                    <span>Developer &amp; Contributor</span>
+                                </div>
+                                <div class="member-links">
+                                    <a href="https://github.com/Bebogit12" class="member-link" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+                                    <a href="https://www.linkedin.com/in/debanjan-biswas-412ab2312/" class="member-link" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="mailto:debanjanbiswas79@gmail.com" class="member-link" title="Email"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                            <!-- Riya -->
+                            <div class="team-member">
+                                <div class="member-avatar">RS</div>
+                                <div class="member-info">
+                                    <strong>Riya Singh</strong>
+                                    <span>Developer &amp; Contributor</span>
+                                </div>
+                                <div class="member-links">
+                                    <a href="https://github.com/cuarchive01-ship-it" class="member-link" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+                                    <a href="https://www.linkedin.com/in/riya-singh-17899b272" class="member-link" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="mailto:riya54321singh428160@gmail.com" class="member-link" title="Email"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                            <!-- Priya -->
+                            <div class="team-member">
+                                <div class="member-avatar">PB</div>
+                                <div class="member-info">
+                                    <strong>Priya Bhowmik</strong>
+                                    <span>Developer &amp; Contributor</span>
+                                </div>
+                                <div class="member-links">
+                                    <a href="https://github.com/cuarchive01-ship-it" class="member-link" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="member-link" title="LinkedIn"><!-- TODO --><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="mailto:priya@example.com" class="member-link" title="Email"><!-- TODO --><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                            <!-- Mouli -->
+                            <div class="team-member">
+                                <div class="member-avatar">MN</div>
+                                <div class="member-info">
+                                    <strong>Mouli Nag</strong>
+                                    <span>Developer &amp; Contributor</span>
+                                </div>
+                                <div class="member-links">
+                                    <a href="https://github.com/cuarchive01-ship-it" class="member-link" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="member-link" title="LinkedIn"><!-- TODO --><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="mailto:mouli@example.com" class="member-link" title="Email"><!-- TODO --><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <p style="margin-top: 1rem;"><strong>Debanjan Biswas</strong></p>
-                        <p>debanjanbiswas79@gmail.com</p>
-                        <div class="social-links">
-                            <a href="https://github.com/Bebogit12" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
-                            <a href="https://www.linkedin.com/in/debanjan-biswas-412ab2312/" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+
+                        <a href="developers.html" class="view-team-btn">
+                            <i class="fas fa-users"></i> View Full Team Page
+                        </a>
+                    </div>
+
+                    <!-- Follow Us -->
+                    <div class="info-card">
+                        <div class="card-icon-row">
+                            <div class="card-icon"><i class="fas fa-share-alt"></i></div>
+                            <h3>Follow Us</h3>
+                        </div>
+                        <p>Stay updated with new papers and features.</p>
+                        <div class="social-row">
+                            <a href="#" class="social-btn" title="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-btn" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="#" class="social-btn" title="Discord"><i class="fab fa-discord"></i></a>
                         </div>
                     </div>
 
-                    <!-- Social Media Card -->
-                    <div class="info-card">
-                        <div class="info-icon">
-                            <i class="fas fa-share-alt"></i>
-                        </div>
-                        <h3>Follow Us</h3>
-                        <p>Stay updated with new papers and features</p>
-                        <div class="social-links" style="margin-top: 1.5rem;">
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-telegram-plane"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- Right Side - Contact Form -->
-                <div class="contact-form-container">
-                    <div class="form-header">
+                <!-- ── FORM ── -->
+                <div class="form-card">
+                    <div class="form-card-header">
                         <h2>Send a Message</h2>
-                        <p>We'll get back to you within 24-48 hours</p>
+                        <p>We'll get back to you within 24–48 hours.</p>
+                        <div class="form-divider"></div>
                     </div>
 
-                    <form id="contactForm" class="contact-form">
+                    <form id="contactForm" class="contact-form" novalidate>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="firstName">First Name <span>*</span></label>
-                                <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                                <label for="firstName">First Name <span class="req">*</span></label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="firstName" placeholder="John" required>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name</label>
-                                <input type="text" id="lastName" name="lastName" placeholder="Doe">
+                                <div class="input-wrap">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="lastName" placeholder="Doe">
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Email Address <span>*</span></label>
-                            <input type="email" id="email" name="email" placeholder="john.doe@example.com" required>
+                            <label for="email">Email Address <span class="req">*</span></label>
+                            <div class="input-wrap">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="email" placeholder="john.doe@example.com" required>
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="subject">Subject <span>*</span></label>
-                            <select id="subject" name="subject" required>
-                                <option value="">Select a subject</option>
-                                <option value="general">General Inquiry</option>
-                                <option value="contribution">Paper Contribution</option>
-                                <option value="report">Report Missing Paper</option>
-                                <option value="technical">Technical Issue</option>
-                                <option value="feedback">Feedback/Suggestion</option>
-                                <option value="other">Other</option>
-                            </select>
+                            <label for="subject">Subject <span class="req">*</span></label>
+                            <div class="input-wrap">
+                                <i class="fas fa-tag"></i>
+                                <select id="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="contribution">Paper Contribution</option>
+                                    <option value="report">Report Missing Paper</option>
+                                    <option value="technical">Technical Issue</option>
+                                    <option value="feedback">Feedback / Suggestion</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="message">Message <span>*</span></label>
-                            <textarea id="message" name="message" placeholder="Type your message here..." required></textarea>
+                            <label for="message">Message <span class="req">*</span></label>
+                            <div class="input-wrap textarea-wrap">
+                                <i class="fas fa-comment-alt"></i>
+                                <textarea id="message" placeholder="Type your message here..." required></textarea>
+                            </div>
                         </div>
 
                         <button type="submit" class="submit-btn" id="submitBtn">
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
 
-                        <div id="successMessage" class="success-message" style="display: none;">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Thank you! Your message has been sent. We'll get back to you soon.</span>
-                        </div>
+                        <div id="formAlert" style="display:none;"></div>
                     </form>
                 </div>
+
             </div>
 
-            <!-- FAQ Section -->
-            <div class="faq-section">
+            <!-- FAQ -->
+            <div class="section-title">
                 <h2>Frequently Asked Questions</h2>
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <h4><i class="fas fa-clock"></i> Response Time?</h4>
-                        <p>We typically respond within 24-48 hours during weekdays.</p>
+                <p>Quick answers to the most common questions.</p>
+                <div class="title-bar"></div>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-icon"><i class="fas fa-clock"></i></div>
+                    <div class="faq-content">
+                        <h4>Response Time?</h4>
+                        <p>We typically respond within 24–48 hours during weekdays.</p>
                     </div>
-                    <div class="faq-item">
-                        <h4><i class="fas fa-file-pdf"></i> How to contribute?</h4>
-                        <p>Visit our <a href="contribute.html">Contribute page</a> or email us at contribute@cuarchive.com</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-icon"><i class="fas fa-file-upload"></i></div>
+                    <div class="faq-content">
+                        <h4>How to contribute a paper?</h4>
+                        <p>Visit our <a href="contribute.html">Contribute page</a> or email cu.archive.0.1@gmail.com</p>
                     </div>
-                    <div class="faq-item">
-                        <h4><i class="fas fa-bug"></i> Found an issue?</h4>
-                        <p>Report it through our form or email support@cuarchive.com</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-icon"><i class="fas fa-bug"></i></div>
+                    <div class="faq-content">
+                        <h4>Found a bug or issue?</h4>
+                        <p>Use the form above or email us directly. We fix issues as quickly as possible.</p>
                     </div>
-                    <div class="faq-item">
-                        <h4><i class="fas fa-handshake"></i> Partnerships?</h4>
-                        <p>Interested in collaborating? Email us at partnerships@cuarchive.com</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-icon"><i class="fas fa-handshake"></i></div>
+                    <div class="faq-content">
+                        <h4>Partnerships?</h4>
+                        <p>Interested in collaborating with CU Archive? Send us a message via the form above.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Map Section (Placeholder) -->
-            <div class="map-section">
-                <h3><i class="fas fa-map-marker-alt"></i> Our Location</h3>
-                <div class="map-placeholder">
-                    <i class="fas fa-map"></i>
-                    <p>Kolkata, West Bengal, India</p>
-                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Virtual team • Available online</p>
+            <!-- Location -->
+            <div class="location-card">
+                <div class="location-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="location-text">
+                    <h3>Our Location</h3>
+                    <p>We are a virtual team of students based in Kolkata, West Bengal, India — available online around the clock.</p>
+                    <span class="location-badge"><i class="fas fa-circle" style="font-size:0.5rem;"></i> Online · Available 24/7</span>
                 </div>
             </div>
+
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>CU Archive</h3>
-                    <p>An unofficial student-led initiative providing educational resources to help students succeed.</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>CU Archive</h4>
+                    <p>An unofficial student-led initiative providing free access to educational resources for university students.</p>
                 </div>
-                
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="disclaimer.html">Disclaimer</a></li>
-                        <li><a href="developers.html">Dev Team</a></li>
-                        <li><a href="contributr.html">Contribute</a></li>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="disclaimer.html"><i class="fas fa-file-alt"></i> Disclaimer</a></li>
+                        <li><a href="developers.html"><i class="fas fa-code"></i> Dev Team</a></li>
+                        <li><a href="contribute.html"><i class="fas fa-upload"></i> Contribute</a></li>
+                        <li><a href="report.html"><i class="fas fa-flag"></i> Report</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
+                <div class="footer-col">
+                    <h4>Contact</h4>
                     <ul class="footer-links">
-                        <li><i class="fas fa-envelope"></i> support@cuarchive.com</li>
-                        <li><i class="fas fa-phone"></i> +91 12345 67890</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Kolkata, India</li>
+                        <li><i class="fas fa-envelope"></i> cu.archive.0.1@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Kolkata, West Bengal</li>
+                        <li><i class="fas fa-users"></i> 5-member student team</li>
                     </ul>
                 </div>
             </div>
-            
-            <div class="copyright">
-                <p>&copy; 2025 CU Archive. An unofficial, student-led initiative.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CU Archive — An unofficial, student-led initiative. Not affiliated with the University of Calcutta.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile Navigation Toggle
-        const mobileNavToggle = document.getElementById('mobileNavToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        
-        mobileNavToggle.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-            const icon = mobileNavToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-        
-        // Dark Mode Toggle
+        // ── SUPABASE ──
+        const SUPABASE_URL = 'https://kakbskkrbvzlzszwnfef.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtha2Jza2tyYnZ6bHpzenduZmVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NTg1MTksImV4cCI6MjA4ODAzNDUxOX0.S_KGRqdyOfYdB3UF8v7IauY03OTpxAGrwZT47CNbSwM';
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ── THEME ──
         const modeToggle = document.getElementById('modeToggle');
         const modeIcon = modeToggle.querySelector('i');
-        
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        if (savedTheme === 'dark') {
+        if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
-            modeIcon.classList.remove('fa-moon');
-            modeIcon.classList.add('fa-sun');
+            modeIcon.classList.replace('fa-moon', 'fa-sun');
         }
-        
         modeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-            if (document.body.classList.contains('dark-mode')) {
-                modeIcon.classList.remove('fa-moon');
-                modeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                modeIcon.classList.remove('fa-sun');
-                modeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
+            const dark = document.body.classList.contains('dark-mode');
+            modeIcon.classList.toggle('fa-moon', !dark);
+            modeIcon.classList.toggle('fa-sun', dark);
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
         });
 
-        // Close mobile menu
-        const mobileLinks = document.querySelectorAll('.mobile-nav a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-                const icon = mobileNavToggle.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
+        // ── MOBILE NAV ──
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            const open = mobileNav.classList.contains('active');
+            mobileNavToggle.querySelector('i').classList.toggle('fa-bars', !open);
+            mobileNavToggle.querySelector('i').classList.toggle('fa-times', open);
         });
+        document.querySelectorAll('.mobile-nav a').forEach(l => l.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            mobileNavToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        }));
 
-        // Form submission
-        const contactForm = document.getElementById('contactForm');
+        // ── FORM ──
+        const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
-        const successMessage = document.getElementById('successMessage');
+        const formAlert = document.getElementById('formAlert');
 
-        contactForm.addEventListener('submit', (e) => {
+        function showAlert(type, msg) {
+            formAlert.className = `alert alert-${type}`;
+            formAlert.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i><span>${msg}</span>`;
+            formAlert.style.display = 'flex';
+            if (type === 'success') setTimeout(() => formAlert.style.display = 'none', 6000);
+        }
+
+        form.querySelectorAll('input, select, textarea').forEach(el => {
+            el.addEventListener('input', () => el.style.borderColor = '');
+        });
+
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Disable button and show loading state
+            formAlert.style.display = 'none';
+
+            const firstName = document.getElementById('firstName').value.trim();
+            const email    = document.getElementById('email').value.trim();
+            const subject  = document.getElementById('subject').value;
+            const message  = document.getElementById('message').value.trim();
+
+            if (!firstName || !email || !subject || !message) {
+                showAlert('error', 'Please fill in all required fields.');
+                return;
+            }
+
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-            // Simulate form submission (replace with actual API call)
-            setTimeout(() => {
-                // Hide loading state
+            try {
+                const { error } = await supabaseClient.from('contact_messages').insert([{
+                    first_name: firstName,
+                    last_name: document.getElementById('lastName').value.trim() || null,
+                    email, subject, message,
+                    submitted_at: new Date().toISOString()
+                }]);
+                if (error) throw error;
+                showAlert('success', "Thank you! Your message has been sent. We'll get back to you within 24–48 hours.");
+                form.reset();
+            } catch (err) {
+                console.error(err);
+                showAlert('error', 'Something went wrong. Please email us directly at cu.archive.0.1@gmail.com');
+            } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-                
-                // Show success message
-                successMessage.style.display = 'flex';
-                
-                // Reset form
-                contactForm.reset();
-                
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 5000);
-            }, 1500);
-        });
-
-        // Form validation
-        const inputs = contactForm.querySelectorAll('input, select, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('invalid', (e) => {
-                e.preventDefault();
-                input.style.borderColor = 'var(--error-color)';
-            });
-            
-            input.addEventListener('input', () => {
-                input.style.borderColor = 'var(--border-color)';
-            });
+            }
         });
     </script>
 </body>
